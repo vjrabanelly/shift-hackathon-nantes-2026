@@ -20,7 +20,7 @@
 
 ### Price given by AI agent:
 
-🧨 **RAIdio** (hack of radio receptors): RAIDIO turns a classic radio into an active voice-powered survival assistant, usable without network during natural disasters (earthquakes, tsunamis, hurricanes).
+🏴‍☠️ **RAIdio** (hack of radio receptors): RAIDIO turns a classic radio into an active voice-powered survival assistant, usable without network during natural disasters (earthquakes, tsunamis, hurricanes).
 
 ### Other projects
 
