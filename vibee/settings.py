@@ -1,0 +1,32 @@
+import os
+import tempfile
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent
+MEDIA_ROOT = Path(os.environ.get("PARTYJAM_MEDIA_ROOT") or (Path(tempfile.gettempdir()) / "partyjam"))
+DATA_DIR = MEDIA_ROOT / "transitions"
+DOWNLOAD_DIR = DATA_DIR / "downloads"
+PREVIEW_DIR = DATA_DIR / "previews"
+WEB_DIR = DATA_DIR / "web"
+
+SAMPLE_RATE = 22050
+HOP_LENGTH = 512
+BEAT_SAMPLE_RATE = 11025
+BEAT_HOP_LENGTH = 512
+FEATURE_SAMPLE_RATE = 11025
+FEATURE_HOP_LENGTH = 1024
+FEATURE_N_FFT = 2048
+BEATS_PER_BAR = 4
+MAX_BPM_STRETCH_RATIO = 1.08
+PREVIEW_COUNT = 1
+DEFAULT_CROSSFADE_BARS = 8
+WINDOW_BAR_OPTIONS = (4, 8, 16)
+WINDOW_BAR_STEP = 2
+MAX_WINDOWS_PER_TRACK = 32
+SOURCE_ANALYSIS_SECONDS = 100
+TARGET_ANALYSIS_SECONDS = 80
+PYCROSSFADE_SEGMENT_BARS = 16
+
+for directory in (MEDIA_ROOT, DATA_DIR, DOWNLOAD_DIR, PREVIEW_DIR, WEB_DIR):
+    directory.mkdir(parents=True, exist_ok=True)

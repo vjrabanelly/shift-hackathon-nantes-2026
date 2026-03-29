@@ -1,0 +1,13 @@
+{
+  "name": "partyjam",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel --filter './apps/api' --filter './apps/web' dev",
+    "build": "pnpm --recursive build",
+    "test": "pnpm --recursive test"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  }
+}

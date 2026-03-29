@@ -1,0 +1,5 @@
+{
+  "deploy": {
+    "dockerfile": "apps/api/Dockerfile"
+  }
+}
