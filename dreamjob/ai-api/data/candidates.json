@@ -1,0 +1,138 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "cand_001",
+      "identity": {
+        "full_name": "Jane Doe",
+        "headline": "Product Designer",
+        "email": "jane@example.com",
+        "phone": "+33 6 00 00 00 00",
+        "location": "Paris",
+        "links": {
+          "linkedin": "https://linkedin.com/in/janedoe",
+          "portfolio": "https://janedoe.com"
+        }
+      },
+      "target_roles": [
+        "Senior Product Designer",
+        "Lead Product Designer"
+      ],
+      "professional_summary_master": "Product Designer with strong B2B SaaS experience, design systems practice and measurable product impact.",
+      "skills": [
+        {
+          "name": "Figma",
+          "category": "tool",
+          "level": "advanced",
+          "years": 6,
+          "evidence_refs": [
+            "exp_01"
+          ]
+        },
+        {
+          "name": "Design System",
+          "category": "product_design",
+          "level": "advanced",
+          "years": 5,
+          "evidence_refs": [
+            "exp_01"
+          ]
+        },
+        {
+          "name": "UX Research",
+          "category": "research",
+          "level": "intermediate",
+          "years": 4,
+          "evidence_refs": [
+            "exp_01"
+          ]
+        },
+        {
+          "name": "Stakeholder Management",
+          "category": "collaboration",
+          "level": "advanced",
+          "years": 5,
+          "evidence_refs": [
+            "exp_01",
+            "exp_02"
+          ]
+        }
+      ],
+      "experiences": [
+        {
+          "experience_id": "exp_01",
+          "company": "Company A",
+          "title": "Senior Product Designer",
+          "start_date": "2021-01",
+          "end_date": "2024-02",
+          "location": "Paris",
+          "summary": "Owned onboarding, billing and collaboration journeys for a B2B SaaS product.",
+          "achievements": [
+            {
+              "text": "Improved activation by 18%",
+              "metric": "18%",
+              "proof_level": "strong"
+            },
+            {
+              "text": "Reduced design delivery time by 25% through a shared design system",
+              "metric": "25%",
+              "proof_level": "strong"
+            }
+          ],
+          "skills_used": [
+            "Figma",
+            "Design System",
+            "UX Research",
+            "Stakeholder Management"
+          ]
+        },
+        {
+          "experience_id": "exp_02",
+          "company": "Company B",
+          "title": "Product Designer",
+          "start_date": "2018-03",
+          "end_date": "2020-12",
+          "location": "Lyon",
+          "summary": "Designed end-to-end user flows with PM and engineering stakeholders.",
+          "achievements": [
+            {
+              "text": "Raised trial-to-paid conversion by 9%",
+              "metric": "9%",
+              "proof_level": "medium"
+            }
+          ],
+          "skills_used": [
+            "Figma",
+            "UX Research",
+            "Stakeholder Management"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "school": "School X",
+          "degree": "Master in Design",
+          "year": "2020"
+        }
+      ],
+      "certifications": [],
+      "languages": [
+        {
+          "name": "French",
+          "level": "native"
+        },
+        {
+          "name": "English",
+          "level": "professional"
+        }
+      ],
+      "constraints": {
+        "must_not_claim": [
+          "Team management if not proven"
+        ],
+        "preferred_cv_language": "fr",
+        "max_cv_pages": 1
+      },
+      "free_text_notes": "Strong at B2B SaaS, activation, onboarding and design systems."
+    }
+  ]
+}

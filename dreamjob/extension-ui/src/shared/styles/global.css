@@ -1,0 +1,149 @@
+:root {
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  color: #132238;
+  background:
+    radial-gradient(circle at top left, rgba(227, 246, 255, 0.95), transparent 35%),
+    linear-gradient(180deg, #f8fcff 0%, #eef5f9 100%);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+  min-height: 100vh;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(19, 34, 56, 0.14);
+  border-radius: 16px;
+  padding: 0.8rem 0.9rem;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.9);
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.75rem;
+  color: #0d6b88;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.primary-button,
+.secondary-button {
+  border-radius: 999px;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.primary-button {
+  color: white;
+  background: linear-gradient(135deg, #0d6b88, #1a8fb1);
+  box-shadow: 0 12px 24px rgba(26, 143, 177, 0.24);
+}
+
+.secondary-button {
+  color: #0d6b88;
+  background: rgba(13, 107, 136, 0.1);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.panel,
+.hero-card {
+  border: 1px solid rgba(19, 34, 56, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(10px);
+}
+
+.panel {
+  padding: 1.1rem;
+}
+
+.hero-card {
+  padding: 1.4rem;
+}
+
+.hero-card.compact {
+  padding-bottom: 1.2rem;
+}
+
+.hero-card h1 {
+  margin-bottom: 0.45rem;
+  font-size: 1.65rem;
+  line-height: 1.1;
+}
+
+.panel h2 {
+  margin-bottom: 0.8rem;
+  font-size: 0.98rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.two-col {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.page-stack,
+.action-stack,
+.simple-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.simple-list {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tag,
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  background: rgba(19, 34, 56, 0.08);
+  font-size: 0.84rem;
+  font-weight: 600;
+}

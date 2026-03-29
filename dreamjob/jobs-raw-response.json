@@ -1,0 +1,82 @@
+{
+    "raw": {
+        "id": "raw_04",
+        "source": "manual-test",
+        "sourceUrl": "https://example.com/jobs/senior-backend-typescript",
+        "capturedAt": "2026-03-28T23:11:24.967Z",
+        "rawText": "Senior Backend Engineer. Company: DreamCorp. Location: Paris hybrid. We are looking for 5+ years of experience in Node.js, TypeScript, REST APIs, PostgreSQL, Docker, AWS, and system design. You will collaborate with product and frontend teams, build scalable backend services, improve API performance, and maintain CI/CD pipelines. Nice to have: Kubernetes, Terraform, mentoring experience, and fintech domain knowledge. English required.",
+        "rawFields": {
+            "title": "Senior Backend Engineer",
+            "company": "DreamCorp",
+            "location": "Paris / Hybrid",
+            "employment_type": "full_time",
+            "description": "Build scalable backend services in Node.js and TypeScript with PostgreSQL, Docker, AWS and CI/CD.",
+            "requirements": "5+ years Node.js/TypeScript, PostgreSQL, Docker, AWS, REST APIs, system design",
+            "posted_date": "2026-03-28"
+        }
+    },
+    "normalized": {
+        "id": "job_04",
+        "jobOfferRawId": "raw_04",
+        "title": "Senior Backend Engineer",
+        "company": "DreamCorp",
+        "description": "Senior Backend Engineer. Company: DreamCorp. Location: Paris hybrid. We are looking for 5+ years of experience in Node.js, TypeScript, REST APIs, PostgreSQL, Docker, AWS, and system design. You will collaborate with product and frontend teams, build scalable backend services, improve API performance, and maintain CI/CD pipelines. Nice to have: Kubernetes, Terraform, mentoring experience, and fintech domain knowledge. English required.",
+        "url": "https://example.com/jobs/senior-backend-typescript",
+        "location": "Paris",
+        "remoteMode": "hybrid",
+        "employmentType": "full_time",
+        "seniority": "senior",
+        "jobSummary": "DreamCorp is seeking a Senior Backend Engineer with over 5 years of experience to build scalable backend services and improve API performance. The role involves collaboration with product and frontend teams and maintaining CI/CD pipelines.",
+        "responsibilities": [
+            "Collaborate with product and frontend teams",
+            "Build scalable backend services",
+            "Improve API performance",
+            "Maintain CI/CD pipelines"
+        ],
+        "requirementsMustHave": [
+            "5+ years of experience in Node.js",
+            "Experience with TypeScript",
+            "Experience with REST APIs",
+            "Experience with PostgreSQL",
+            "Experience with Docker",
+            "Experience with AWS",
+            "Experience in system design",
+            "English proficiency"
+        ],
+        "requirementsNiceToHave": [
+            "Experience with Kubernetes",
+            "Experience with Terraform",
+            "Mentoring experience",
+            "Fintech domain knowledge"
+        ],
+        "keywords": [
+            "Backend Engineer",
+            "Node.js",
+            "TypeScript",
+            "REST APIs",
+            "PostgreSQL",
+            "Docker",
+            "AWS",
+            "System Design",
+            "CI/CD",
+            "Kubernetes",
+            "Terraform",
+            "Fintech"
+        ],
+        "tools": [
+            "Node.js",
+            "TypeScript",
+            "REST APIs",
+            "PostgreSQL",
+            "Docker",
+            "AWS",
+            "Kubernetes",
+            "Terraform"
+        ],
+        "languages": [
+            "English"
+        ],
+        "yearsExperienceMin": 5,
+        "postedDate": "2026-03-28"
+    }
+}

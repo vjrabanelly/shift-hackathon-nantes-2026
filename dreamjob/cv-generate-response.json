@@ -1,0 +1,173 @@
+{
+    "cv": {
+        "id": "cv_e470a4be",
+        "profileId": "profile_01",
+        "jobPostId": "job_02",
+        "version": 1,
+        "language": "fr",
+        "title": "Jean Dupont - Senior Backend Engineer",
+        "header": {
+            "fullName": "Jean Dupont",
+            "headline": "Senior Backend Engineer",
+            "contact": {
+                "email": "jean.dupont@example.com",
+                "phone": "+33 6 12 34 56 78",
+                "location": "Paris, France"
+            }
+        },
+        "summary": "",
+        "skillsHighlighted": [
+            "Node.js",
+            "TypeScript",
+            "PostgreSQL",
+            "Docker",
+            "AWS",
+            "REST API"
+        ],
+        "experiencesSelected": [
+            {
+                "experienceId": "Backend Engineer",
+                "rewrittenBullets": [
+                    "Développement et maintenance d'APIs REST",
+                    "Amélioration des performances API de 30%",
+                    "Collaboration avec les équipes produit et frontend"
+                ]
+            }
+        ],
+        "educationSelected": [],
+        "certificationsSelected": [],
+        "keywordsCovered": [
+            "Backend Engineer",
+            "Node.js",
+            "TypeScript",
+            "REST APIs",
+            "PostgreSQL",
+            "Docker",
+            "AWS",
+            "CI/CD"
+        ],
+        "omittedItems": [
+            "Aucune expérience directe avec Kubernetes ou Terraform.",
+            "Pas de mention explicite de design système.",
+            "Projets spécifiques non listés."
+        ],
+        "generationNotes": [
+            "Les expériences sont basées sur les données fournies.",
+            "Les compétences sont mises en avant selon les exigences de l'offre.",
+            "Le niveau d'anglais est précisé pour répondre aux recommandations."
+        ],
+        "coverageMap": {
+            "matchedRequirements": [],
+            "uncoveredRequirements": [
+                "Kubernetes",
+                "Terraform",
+                "System Design"
+            ]
+        },
+        "selfCheck": {
+            "unsupportedClaimsFound": true,
+            "warnings": [
+                "Mention de 5+ ans d'expérience en développement backend.",
+                "Niveau d'anglais précisé comme professionnel.",
+                "Expérience avec CI/CD mentionnée dans le contexte de collaboration."
+            ]
+        }
+    },
+    "atsReview": {
+        "id": "ats_94ed7ce5",
+        "cvId": "cv_e470a4be",
+        "jobPostId": "job_02",
+        "score": 0,
+        "passed": false,
+        "hardFiltersStatus": [],
+        "matchedKeywords": [],
+        "missingKeywords": [],
+        "formatFlags": [
+            "Absence de 'Experience with system design'",
+            "Pas de mention de '5+ years of experience'",
+            "Pas de preuve de 'English proficiency'"
+        ],
+        "recommendations": [
+            "Ajouter l'expérience en 'system design'",
+            "Indiquer le nombre d'années d'expérience",
+            "Mentionner la maîtrise de l'anglais"
+        ]
+    },
+    "recruiterReview": {
+        "id": "rec_30ca5a06",
+        "cvId": "cv_e470a4be",
+        "jobPostId": "job_02",
+        "score": 0,
+        "passed": false,
+        "readabilityScore": 0,
+        "credibilityScore": 0,
+        "coherenceScore": 0,
+        "evidenceScore": 0,
+        "strengths": [
+            "Bonne couverture des mots-clés requis",
+            "Expérience pertinente avec les technologies demandées",
+            "Amélioration des performances API démontrée"
+        ],
+        "concerns": [
+            "Absence de détails sur l'expérience totale",
+            "Pas de mention de Kubernetes ou Terraform",
+            "Pas de preuve de compétences en anglais"
+        ],
+        "recommendations": [
+            "Ajouter des détails sur l'expérience totale",
+            "Inclure des exemples de projets avec Kubernetes ou Terraform",
+            "Fournir une preuve de compétences en anglais"
+        ]
+    },
+    "reviewAgreement": {
+        "id": "ra_13cbe71d",
+        "jobPostId": "job_02",
+        "cvId": "cv_e470a4be",
+        "cvGenerationOk": true,
+        "atsOk": false,
+        "recruiterOk": false,
+        "reviewAgreementOk": false,
+        "finalStatus": "REJECTED",
+        "rejectionReasons": [
+            "ATS review failed (score: 0). Ajouter l'expérience en 'system design'; Indiquer le nombre d'années d'expérience; Mentionner la maîtrise de l'anglais",
+            "Recruiter review failed (score: 0). Ajouter des détails sur l'expérience totale; Inclure des exemples de projets avec Kubernetes ou Terraform; Fournir une preuve de compétences en anglais"
+        ],
+        "iterationCount": 2
+    },
+    "addonResult": {
+        "status": "rejected",
+        "overall_score": 0,
+        "scores": {
+            "ats_score": 0,
+            "recruiter_score": 0
+        },
+        "strengths": [
+            "Bonne couverture des mots-clés requis",
+            "Expérience pertinente avec les technologies demandées",
+            "Amélioration des performances API démontrée"
+        ],
+        "weaknesses": [
+            "Absence de 'Experience with system design'",
+            "Pas de mention de '5+ years of experience'",
+            "Pas de preuve de 'English proficiency'",
+            "Absence de détails sur l'expérience totale",
+            "Pas de mention de Kubernetes ou Terraform",
+            "Pas de preuve de compétences en anglais"
+        ],
+        "recommendations": [
+            "Ajouter l'expérience en 'system design'",
+            "Indiquer le nombre d'années d'expérience",
+            "Mentionner la maîtrise de l'anglais",
+            "Ajouter des détails sur l'expérience totale",
+            "Inclure des exemples de projets avec Kubernetes ou Terraform",
+            "Fournir une preuve de compétences en anglais"
+        ],
+        "rejection_reasons": [
+            "ATS review failed (score: 0). Ajouter l'expérience en 'system design'; Indiquer le nombre d'années d'expérience; Mentionner la maîtrise de l'anglais",
+            "Recruiter review failed (score: 0). Ajouter des détails sur l'expérience totale; Inclure des exemples de projets avec Kubernetes ou Terraform; Fournir une preuve de compétences en anglais"
+        ],
+        "cv_id": "cv_e470a4be",
+        "job_post_id": "job_02",
+        "iteration_count": 2
+    }
+}

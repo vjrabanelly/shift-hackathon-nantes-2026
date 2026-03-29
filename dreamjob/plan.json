@@ -1,0 +1,772 @@
+[
+  {
+    "category": "Project Scaffolding",
+    "description": "Initialize Node.js/TypeScript backend project with package.json, tsconfig, and directory structure",
+    "steps": [
+      "1. Create root-level package.json with name 'dreamjob-backend', scripts (dev, build, start, seed), and TypeScript/Fastify dependencies",
+      "2. Create tsconfig.json targeting ES2022, module NodeNext, strict mode, outDir dist/",
+      "3. Create src/ directory with subdirectories: routes/, services/, services/ai/",
+      "4. Create .env.example with OPENAI_API_KEY and PORT=3000",
+      "5. Verify: npm install completes without errors"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Project Scaffolding",
+    "description": "Install all required dependencies: Fastify, TypeBox, pdf-parse, @fastify/multipart, OpenAI SDK, tsx",
+    "steps": [
+      "1. Install production deps: fastify, @sinclair/typebox, pdf-parse, @fastify/multipart, @fastify/cors, openai",
+      "2. Install dev deps: typescript, tsx, @types/node",
+      "3. Verify: all dependencies resolve and tsc --noEmit passes on an empty project"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Project Scaffolding",
+    "description": "Create the data/ directory structure with .gitkeep files and add data/ to .gitignore",
+    "steps": [
+      "1. Create data/ directory and data/uploads/ subdirectory",
+      "2. Add data/ to .gitignore (except .gitkeep if needed)",
+      "3. Ensure data/ is auto-created on first run if missing"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Server Setup",
+    "description": "Create Fastify app entry point (src/server.ts) with plugin registration and startup",
+    "steps": [
+      "1. Create src/server.ts that initializes Fastify with logger enabled",
+      "2. Register @fastify/multipart plugin for file uploads",
+      "3. Register all route plugins under /api prefix",
+      "4. Add CORS support for extension-ui origin (localhost:5173)",
+      "5. Listen on PORT from env (default 3000)",
+      "6. Verify: npm run dev starts server, GET / returns 404 or root response"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Server Setup",
+    "description": "Configure npm scripts: dev (tsx watch), build (tsc), start (node dist/server.js), seed",
+    "steps": [
+      "1. Add 'dev' script: tsx watch src/server.ts",
+      "2. Add 'build' script: tsc",
+      "3. Add 'start' script: node dist/server.js",
+      "4. Add 'seed' script: tsx src/seed.ts",
+      "5. Verify: npm run dev starts with hot reload, npm run build compiles to dist/"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Storage Layer",
+    "description": "Implement JSON file store service (src/services/store.ts) for reading/writing data files",
+    "steps": [
+      "1. Create src/services/store.ts with generic read/write functions over JSON files using fs/promises",
+      "2. Implement readJSON<T>(filePath): reads and parses a JSON file, returns null if not found",
+      "3. Implement writeJSON<T>(filePath, data): writes data as formatted JSON to file",
+      "4. Implement readCollection<T>(filePath): reads a JSON array file, returns [] if not found",
+      "5. Implement writeCollection<T>(filePath, data): writes an array as JSON to file",
+      "6. Auto-create data/ and data/uploads/ directories if they don't exist on first write",
+      "7. Verify: unit test or manual test that read/write round-trips data correctly"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Storage Layer",
+    "description": "Define file path constants for all data files",
+    "steps": [
+      "1. Define constants for all data file paths: profile.json, resume-upload.json, extraction.json, jobs-raw.json, jobs.json, cvs.json, ats-reviews.json, recruiter-reviews.json, review-agreements.json",
+      "2. Define uploads directory path constant (data/uploads/)",
+      "3. Export all path constants from store.ts or a dedicated paths module"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas for Profile core identity types (Identity, Constraints, targetRoles, professionalSummaryMaster)",
+    "steps": [
+      "1. Define Identity schema: name, headline, email, phone, location, links (linkedin, portfolio, github)",
+      "2. Define Constraints schema: preferredCvLanguage, maxCvPages, mustNotClaim array",
+      "3. Define targetRoles (string array) and professionalSummaryMaster (string) fields",
+      "4. Verify: schemas produce correct JSON Schema output"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schema for Experience with achievements and skillsUsed",
+    "steps": [
+      "1. Define Achievement sub-schema: text, metric, proofLevel",
+      "2. Define Experience schema: experienceId, title, company, location, startDate, endDate, description, achievements array, skillsUsed array",
+      "3. Verify: schema validates sample experience data"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas for supporting Profile types (Education, Skill, Certification, Language, Project, Reference)",
+    "steps": [
+      "1. Define Education schema: school, degree, field, year",
+      "2. Define Skill schema: name, category, level, years, evidenceRefs array",
+      "3. Define Certification schema: name, issuer, date",
+      "4. Define Language schema: name, level",
+      "5. Define Project schema: name, description, url, technologies array",
+      "6. Define Reference schema: name, title, company, email, phone, relationship",
+      "7. Verify: schemas validate sample data"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Compose full Profile schema wrapping all sub-schemas with id, data, createdAt, updatedAt",
+    "steps": [
+      "1. Compose Profile data object containing: identity, targetRoles, professionalSummaryMaster, experiences, education, skills, certifications, languages, projects, references, constraints",
+      "2. Wrap in full Profile schema with id, data, createdAt, updatedAt",
+      "3. Export static TypeScript type",
+      "4. Verify: full Profile schema validates complete sample profile"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for ResumeUpload model",
+    "steps": [
+      "1. Define ResumeUpload schema: id, originalFilename, storagePath, uploadedAt, status (enum: uploaded/extracting/extracted/confirmed/failed), error (optional)",
+      "2. Export static TypeScript type from schema",
+      "3. Verify: schema validates sample data correctly"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for ExtractionResult model with confidence and review status",
+    "steps": [
+      "1. Define ConfidenceEntry schema: score (0.0-1.0), source (extracted/inferred/missing)",
+      "2. Define confidence map structure mirroring Profile shape with ConfidenceEntry leaves",
+      "3. Define ReviewStatus schema with per-section/item reviewed boolean tracking",
+      "4. Define completionStatus: markedComplete boolean, markedCompleteAt nullable datetime",
+      "5. Define full ExtractionResult schema: id, resumeUploadId, extractedAt, rawText, data (Profile shape), confidence, reviewStatus",
+      "6. Verify: schema validates sample extraction result"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for JobOfferRaw model",
+    "steps": [
+      "1. Define JobOfferRaw schema: id, source, sourceUrl, capturedAt, htmlSnapshotRef (optional), rawText, rawFields object (title, company, location, employment_type, etc.)",
+      "2. Export static TypeScript type",
+      "3. Verify: schema validates sample raw job data"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for JobPost (normalized) model",
+    "steps": [
+      "1. Define JobPost schema with all fields: id, jobOfferRawId, title, company, description, url, salary (optional), location, remoteMode (enum: onsite/hybrid/remote), employmentType (enum: full_time/part_time/contract/internship), seniority (enum: entry/mid/senior/lead/executive), jobSummary (string, not array)",
+      "2. Add array fields: responsibilities, requirementsMustHave, requirementsNiceToHave, keywords, tools, languages",
+      "3. Add optional fields: yearsExperienceMin, postedDate",
+      "4. Export static TypeScript type",
+      "5. Verify: schema validates sample normalized job post"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for GeneratedCV model",
+    "steps": [
+      "1. Define GeneratedCV schema: id, profileId, jobPostId, version, language, title",
+      "2. Add header object: fullName, headline, contact, links",
+      "3. Add summary string, skillsHighlighted array, experiencesSelected array (experienceId, rewrittenBullets[]), educationSelected array, certificationsSelected array",
+      "4. Add keywordsCovered, omittedItems, generationNotes arrays",
+      "5. Export static TypeScript type"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for ATSReview model",
+    "steps": [
+      "1. Define ATSReview schema: id, cvId, jobPostId, score (0-100), passed boolean",
+      "2. Add hardFiltersStatus array (filter, status, evidence objects), matchedKeywords, missingKeywords, formatFlags, recommendations arrays",
+      "3. Export static TypeScript type"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for RecruiterReview model",
+    "steps": [
+      "1. Define RecruiterReview schema: id, cvId, jobPostId, score (0-100), passed boolean",
+      "2. Add sub-scores: readabilityScore, credibilityScore, coherenceScore, evidenceScore (all 0-100)",
+      "3. Add strengths, concerns, recommendations arrays",
+      "4. Export static TypeScript type"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Type Definitions",
+    "description": "Define TypeBox schemas and TypeScript types for ReviewAgreement model",
+    "steps": [
+      "1. Define ReviewAgreement schema: id, jobPostId, cvId, cvGenerationOk, atsOk, recruiterOk, reviewAgreementOk booleans",
+      "2. Add finalStatus enum: FINAL_APPROVED / REJECTED / NEEDS_REVISION",
+      "3. Add rejectionReasons array, iterationCount integer",
+      "4. Export static TypeScript type"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Profile Routes",
+    "description": "Implement GET /api/profile endpoint to retrieve the full profile document",
+    "steps": [
+      "1. Create src/routes/profile.ts as a Fastify plugin",
+      "2. Implement GET /api/profile handler: read data/profile.json via store service",
+      "3. Return 200 with profile data, or 404 if no profile exists",
+      "4. Verify: curl GET /api/profile returns profile data after seeding"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Profile Routes",
+    "description": "Implement PUT /api/profile endpoint to replace the full profile document",
+    "steps": [
+      "1. Define request body JSON Schema using TypeBox Profile schema",
+      "2. Implement PUT /api/profile handler: validate body, write to data/profile.json via store service",
+      "3. Set updatedAt to current ISO-8601 timestamp",
+      "4. Return 200 with updated profile",
+      "5. Verify: curl PUT /api/profile with valid JSON updates the file, invalid JSON returns 400"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement POST /api/resume/upload file handling: accept multipart, validate PDF and size, save to uploads/",
+    "steps": [
+      "1. Create src/routes/resume.ts as a Fastify plugin",
+      "2. Implement POST /api/resume/upload: accept multipart/form-data with single 'file' field",
+      "3. Validate file is PDF (check mimetype), reject non-PDF with 400",
+      "4. Validate file size <= 10MB, reject oversized files with 400",
+      "5. Save file to data/uploads/resume.pdf (overwrite if exists)",
+      "6. Verify: upload a PDF via curl, check file saved to data/uploads/"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement ResumeUpload document management: create/update resume-upload.json with status tracking",
+    "steps": [
+      "1. Create/update ResumeUpload document in data/resume-upload.json with status 'uploaded'",
+      "2. Set id, originalFilename, storagePath, uploadedAt fields",
+      "3. Verify: after upload, resume-upload.json contains correct document with status 'uploaded'"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement extraction pipeline trigger and response assembly in POST /api/resume/upload",
+    "steps": [
+      "1. After file save and document creation, trigger extraction pipeline synchronously",
+      "2. On success: return { id, status, extractedData }",
+      "3. On failure: update resume-upload.json status to 'failed' with error, return error response",
+      "4. Verify: upload a PDF, confirm extraction triggers and response includes extracted data"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement GET /api/resume/status endpoint",
+    "steps": [
+      "1. Implement GET /api/resume/status: read data/resume-upload.json via store",
+      "2. Return 200 with ResumeUpload document (status, timestamps, error if any)",
+      "3. Return 404 if no resume has been uploaded",
+      "4. Verify: returns correct status after upload, shows error if extraction failed"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement GET /api/resume/extraction endpoint",
+    "steps": [
+      "1. Implement GET /api/resume/extraction: read data/extraction.json via store",
+      "2. Return 200 with full ExtractionResult (extracted data, confidence map, review status)",
+      "3. Return 404 if no extraction exists",
+      "4. Verify: returns extraction data after successful upload+extraction"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement POST /api/resume/extraction/confirm endpoint",
+    "steps": [
+      "1. Implement POST /api/resume/extraction/confirm: read extraction.json, copy ExtractionResult.data into data/profile.json as the Profile",
+      "2. Update ResumeUpload status to 'confirmed'",
+      "3. Return 200 with the new Profile document",
+      "4. Return 404 if no extraction exists, 409 if already confirmed",
+      "5. Verify: confirming writes profile.json correctly, subsequent GET /api/profile returns extraction data"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement PUT /api/resume/extraction/review endpoint for updating review status",
+    "steps": [
+      "1. Define request body schema: section (string, required), itemId (string, optional), reviewed (boolean, required)",
+      "2. Implement handler: read extraction.json, find matching section/item in reviewStatus, update reviewed flag",
+      "3. Handle scalar sections (identity) where itemId is omitted",
+      "4. Handle array sections (experiences, education, skills) where itemId identifies the item",
+      "5. Write updated extraction.json back",
+      "6. Return 200 with updated reviewStatus",
+      "7. Return 404 if no extraction exists, 400 if section/item not found",
+      "8. Verify: mark identity as reviewed, mark a specific experience as reviewed, check persistence"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Resume Upload & Extraction Routes",
+    "description": "Implement GET /api/resume/completeness computed endpoint",
+    "steps": [
+      "1. Implement GET /api/resume/completeness: read extraction.json, compute progress/strength/checklist",
+      "2. Call completeness service to compute all values",
+      "3. Return { progress, strengthScore, missingSections, unresolvedSections, checklist, canMarkComplete }",
+      "4. Return 404 if no extraction exists",
+      "5. Verify: returns accurate progress percentage, canMarkComplete is false until all sections reviewed"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Extraction Service",
+    "description": "Implement PDF text extraction using pdf-parse (src/services/extraction.ts)",
+    "steps": [
+      "1. Create src/services/extraction.ts",
+      "2. Implement extractTextFromPDF(filePath): read PDF file, use pdf-parse to extract plain text",
+      "3. Return raw text string",
+      "4. Handle errors (corrupt PDF, empty PDF) gracefully with descriptive error messages",
+      "5. Verify: extract text from a sample PDF, confirm output contains expected content"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Extraction Service",
+    "description": "Implement AI structured extraction via OpenAI (extractProfileFromText)",
+    "steps": [
+      "1. Create function extractProfileFromText(text: string) in src/services/ai/openai.ts",
+      "2. Construct prompt instructing the model to extract data into exact Profile JSON shape",
+      "3. Include instructions for parallel confidence object with 0.0-1.0 scores and source labels",
+      "4. Use OpenAI structured output / JSON mode for reliable parsing",
+      "5. Return { data: ProfileDraft, confidence: ConfidenceMap }",
+      "6. Handle API errors, return meaningful error messages",
+      "7. Verify: send sample resume text, confirm output matches Profile schema with confidence scores"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Extraction Service",
+    "description": "Implement extraction post-processing: ID assignment, review status init, date normalization",
+    "steps": [
+      "1. Assign experienceId values (exp_01, exp_02, ...) to extracted experiences",
+      "2. Initialize all reviewStatus entries to reviewed: false",
+      "3. Normalize date formats to ISO partial format (YYYY-MM)",
+      "4. Write data/extraction.json with full ExtractionResult",
+      "5. Update data/resume-upload.json status to 'extracted'",
+      "6. On failure, set resume-upload status to 'failed' with error message",
+      "7. Verify: post-processed extraction has valid IDs, all review statuses are false"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Completeness Service",
+    "description": "Implement completeness scoring pure function (src/services/completeness.ts)",
+    "steps": [
+      "1. Create src/services/completeness.ts",
+      "2. Implement progress calculation: reviewed items / total items * 100",
+      "3. Implement strength score with exact point allocation: identity (15), 1+ exp (15), 2+ exp (25), exp with 2+ achievements (5 each, max 15), 1+ education (10), 5+ skills (10), 10+ skills (15), certifications (5), projects (5), languages (5), summary (5)",
+      "4. Implement missingSections: list sections with no data",
+      "5. Implement unresolvedSections: list sections with unreviewed items",
+      "6. Build checklist array with label/met pairs",
+      "7. Implement canMarkComplete logic: identity reviewed AND all experiences reviewed AND all education reviewed AND all skills reviewed",
+      "8. Verify: test with empty profile (0 progress, low strength), test with complete profile (100 progress, high strength)"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Job Posts - Raw Routes",
+    "description": "Implement POST /api/jobs/raw endpoint for extension to submit scraped job data",
+    "steps": [
+      "1. Create src/routes/jobs.ts as a Fastify plugin",
+      "2. Define request body schema matching JobOfferRaw rawFields shape",
+      "3. Implement POST /api/jobs/raw: validate body, assign auto-generated id (raw_1, raw_2...), set capturedAt",
+      "4. Append to data/jobs-raw.json collection",
+      "5. Auto-trigger normalization into a JobPost (call normalize service)",
+      "6. Return 201 with created JobOfferRaw and normalized JobPost",
+      "7. Verify: POST raw job data, confirm both raw and normalized entries created"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Job Posts - Raw Routes",
+    "description": "Implement GET /api/jobs/raw and GET /api/jobs/raw/:id endpoints",
+    "steps": [
+      "1. Implement GET /api/jobs/raw: read data/jobs-raw.json, return full array",
+      "2. Implement GET /api/jobs/raw/:id: find by id in collection, return 200 or 404",
+      "3. Define :id param schema (non-empty string)",
+      "4. Verify: list returns all raw captures, get by id returns correct one"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Job Posts - Normalized Routes",
+    "description": "Implement GET /api/jobs and GET /api/jobs/:id endpoints for normalized job posts",
+    "steps": [
+      "1. Implement GET /api/jobs: read data/jobs.json, return full array",
+      "2. Implement GET /api/jobs/:id: find by id, return 200 or 404",
+      "3. Verify: list returns normalized jobs, get by id returns correct one"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Job Posts - Normalized Routes",
+    "description": "Implement PUT /api/jobs/:id endpoint to update a normalized job post",
+    "steps": [
+      "1. Define request body schema using TypeBox JobPost schema",
+      "2. Implement PUT /api/jobs/:id: find by id, merge updates, write back to collection",
+      "3. Set updatedAt timestamp",
+      "4. Return 200 with updated job post, or 404 if not found",
+      "5. Verify: update a job post field, confirm persistence"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Job Posts - Normalized Routes",
+    "description": "Implement DELETE /api/jobs/:id endpoint",
+    "steps": [
+      "1. Implement DELETE /api/jobs/:id: find by id, remove from collection, write back",
+      "2. Return 204 on success, 404 if not found",
+      "3. Verify: delete a job, confirm it no longer appears in GET /api/jobs"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Job Normalization Service",
+    "description": "Implement job normalization service (src/services/normalize.ts) using OpenAI",
+    "steps": [
+      "1. Create src/services/normalize.ts",
+      "2. Implement normalizeJobOffer(raw: JobOfferRaw): Promise<JobPost>",
+      "3. Send raw text and fields to OpenAI with prompt to extract structured JobPost fields",
+      "4. Map response to JobPost schema: title, company, description, location, remoteMode, employmentType, seniority, responsibilities, requirements, keywords, tools, languages",
+      "5. Assign auto-generated id (job_1, job_2...) and link jobOfferRawId",
+      "6. Append normalized job to data/jobs.json",
+      "7. Verify: normalize a raw LinkedIn job capture, confirm all fields populated correctly"
+    ],
+    "passes": true
+  },
+  {
+    "category": "CV Generation Routes",
+    "description": "Implement POST /api/cvs/generate endpoint to kick off the full agent pipeline",
+    "steps": [
+      "1. Create src/routes/cvs.ts as a Fastify plugin",
+      "2. Define request body schema: { jobPostId: string, language: string }",
+      "3. Implement handler: load Profile and JobPost by IDs",
+      "4. Return 404 if profile or job post not found",
+      "5. Call cv-generator orchestrator service with profile + job post + language",
+      "6. Store GeneratedCV, ATSReview, RecruiterReview, ReviewAgreement results",
+      "7. Return 200 with generated CV and review results",
+      "8. Verify: generate a CV for a seeded profile and job, confirm all artifacts stored"
+    ],
+    "passes": true
+  },
+  {
+    "category": "CV Generation Routes",
+    "description": "Implement GET /api/cvs and GET /api/cvs/:id endpoints",
+    "steps": [
+      "1. Implement GET /api/cvs: read data/cvs.json, return full array",
+      "2. Implement GET /api/cvs/:id: find by id, return 200 or 404",
+      "3. Verify: list returns generated CVs, get by id returns correct one"
+    ],
+    "passes": true
+  },
+  {
+    "category": "CV Generation Routes",
+    "description": "Implement DELETE /api/cvs/:id endpoint",
+    "steps": [
+      "1. Implement DELETE /api/cvs/:id: remove CV from data/cvs.json",
+      "2. Also clean up associated ats-reviews, recruiter-reviews, review-agreements",
+      "3. Return 204 on success, 404 if not found",
+      "4. Verify: delete a CV, confirm associated reviews also removed"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Review Routes",
+    "description": "Implement GET /api/cvs/:id/ats-review endpoint",
+    "steps": [
+      "1. Implement GET /api/cvs/:id/ats-review: find ATS review by cvId in data/ats-reviews.json",
+      "2. Return 200 with ATSReview, or 404 if not found",
+      "3. Verify: returns correct ATS review for a generated CV"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Review Routes",
+    "description": "Implement GET /api/cvs/:id/recruiter-review endpoint",
+    "steps": [
+      "1. Implement GET /api/cvs/:id/recruiter-review: find RecruiterReview by cvId in data/recruiter-reviews.json",
+      "2. Return 200 with RecruiterReview, or 404 if not found",
+      "3. Verify: returns correct recruiter review for a generated CV"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer",
+    "description": "Set up OpenAI SDK client (src/services/ai/openai.ts) with API key configuration",
+    "steps": [
+      "1. Create src/services/ai/openai.ts",
+      "2. Initialize OpenAI client using OPENAI_API_KEY from environment",
+      "3. Export client instance and helper functions for chat completions",
+      "4. Add error handling for missing API key (throw descriptive error at startup)",
+      "5. Verify: client initializes without error when API key is set"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer - Candidate Agent",
+    "description": "Implement core generateTargetedCV: prompt construction and structured output returning GeneratedCV shape",
+    "steps": [
+      "1. Implement generateTargetedCV function in a dedicated agent file (src/services/ai/candidate-agent.ts)",
+      "2. Accept input: job_offer (JobPost), candidate_master_profile (Profile), generation_rules (language, max_pages, tone, truthfulness_mode)",
+      "3. Construct prompt enforcing business rules: never invent experience/skills, prioritize evidence-backed items, optimize for target job",
+      "4. Use OpenAI structured output to return GeneratedCV shape",
+      "5. Verify: generates valid CV structure from sample profile+job"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer - Candidate Agent",
+    "description": "Implement coverage map: match job requirements to profile evidence refs and list uncovered requirements",
+    "steps": [
+      "1. Extend generateTargetedCV output to include coverage_map",
+      "2. coverage_map.matched_requirements: array of { requirement, evidence_ref } linking job requirements to profile items",
+      "3. coverage_map.uncovered_requirements: array of requirements not addressed by the CV",
+      "4. Verify: coverage map accurately reflects which job requirements are covered"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer - Candidate Agent",
+    "description": "Implement self-check: detect unsupported claims and generate warnings",
+    "steps": [
+      "1. Extend generateTargetedCV output to include self_check",
+      "2. self_check.unsupported_claims_found: boolean flag",
+      "3. self_check.warnings: array of warning strings for any claims not backed by profile evidence",
+      "4. Verify: self-check flags when CV contains claims not in the master profile"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer - Candidate Agent",
+    "description": "Implement revision support: accept previous ATS/Recruiter reviews as revision_context",
+    "steps": [
+      "1. Add optional revision_context parameter: { previous_ats_review, previous_recruiter_review }",
+      "2. When revision_context is provided, include review feedback in the prompt for the agent to address",
+      "3. Ensure revised CV addresses specific blocking issues and missing keywords from prior reviews",
+      "4. Verify: passing a failing ATS review as context produces a revised CV that addresses the feedback"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer - ATS Agent",
+    "description": "Implement ATS Agent: scores CV for machine/ATS compatibility",
+    "steps": [
+      "1. Implement ATS Agent function accepting job_offer (JobPost), generated_cv (GeneratedCV), scoring_rules",
+      "2. Default scoring_rules: passing_score 75, weight_keywords 0.5, weight_hard_filters 0.3, weight_structure 0.2",
+      "3. Construct prompt for ATS evaluation: keyword presence, hard filter coverage, clear job titles, no vague wording",
+      "4. Return ATSReview with score (0-100), passed boolean, hardFiltersStatus array, matchedKeywords, missingKeywords, formatFlags, recommendations",
+      "5. Return decision: status (pass/fail) and blocking_issues array",
+      "6. Score formula: 50% keywords + 30% hard filters + 20% structure",
+      "7. Thresholds: 0-49 low, 50-74 partial, 75-100 pass",
+      "8. Verify: review a sample CV against a job, confirm score and keyword analysis are reasonable"
+    ],
+    "passes": true
+  },
+  {
+    "category": "AI Layer - Recruiter Agent",
+    "description": "Implement Recruiter Agent: evaluates CV credibility, readability, and persuasiveness",
+    "steps": [
+      "1. Implement Recruiter Agent function accepting job_offer (JobPost), generated_cv (GeneratedCV), review_rules",
+      "2. Default review_rules: passing_score 75, weight_readability 0.25, weight_credibility 0.35, weight_evidence 0.2, weight_coherence 0.2",
+      "3. Construct prompt for recruiter evaluation: readability, career-to-role coherence, concrete proof, no over-promising, density vs clarity",
+      "4. Return RecruiterReview with score (0-100), passed boolean, sub-scores (readability, credibility, coherence, evidence)",
+      "5. Return strengths, concerns, recommendations arrays",
+      "6. Return decision: status (pass/fail) and blocking_issues array",
+      "7. Score formula: 35% credibility + 25% readability + 20% coherence + 20% evidence",
+      "8. Thresholds: 0-49 low credibility, 50-74 credible but weak, 75-100 pass",
+      "9. Verify: review a sample CV, confirm sub-scores and feedback are meaningful"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Orchestration",
+    "description": "Implement single-pass orchestrator: call Candidate → ATS → Recruiter agents sequentially, store artifacts",
+    "steps": [
+      "1. Create src/services/cv-generator.ts",
+      "2. Implement orchestrate(profile, jobPost, language) function",
+      "3. Call Candidate Agent to generate initial CV",
+      "4. Call ATS Agent to review the generated CV",
+      "5. Call Recruiter Agent to review the generated CV",
+      "6. Store all artifacts: GeneratedCV in cvs.json, ATSReview in ats-reviews.json, RecruiterReview in recruiter-reviews.json",
+      "7. Verify: single-pass pipeline runs end-to-end with sample data, all artifacts stored"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Orchestration",
+    "description": "Implement decision evaluation: pass/fail logic based on agent results",
+    "steps": [
+      "1. After all agents run, evaluate: cvGenerationOk (CV produced), atsOk (ATS passed), recruiterOk (Recruiter passed)",
+      "2. FINAL_APPROVED when all three are true",
+      "3. Otherwise mark as needing revision or rejection",
+      "4. Verify: passing scores produce FINAL_APPROVED, any failure prevents approval"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Orchestration",
+    "description": "Implement revision loop: retry with feedback when ATS or Recruiter fails (max 2 iterations)",
+    "steps": [
+      "1. If ATS fails: feed ATS review back to Candidate Agent as revision_context",
+      "2. If Recruiter fails: feed Recruiter review back to Candidate Agent as revision_context",
+      "3. If both fail: consolidate both reviews into single feedback for Candidate Agent",
+      "4. Track iteration count, maximum 2 revision iterations",
+      "5. After 2 failures: end with REJECTED_FOR_REVIEW status",
+      "6. Verify: simulate a failing ATS score, confirm revision triggers and re-evaluates"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Orchestration",
+    "description": "Implement ReviewAgreement construction: build and store final decision document",
+    "steps": [
+      "1. Build ReviewAgreement with: id, jobPostId, cvId, cvGenerationOk, atsOk, recruiterOk, reviewAgreementOk",
+      "2. Set finalStatus: FINAL_APPROVED, REJECTED, or NEEDS_REVISION",
+      "3. Populate rejectionReasons array from blocking issues",
+      "4. Set iterationCount from the orchestrator loop counter",
+      "5. Store in data/review-agreements.json",
+      "6. Verify: approved pipeline stores ReviewAgreement with FINAL_APPROVED, rejected stores with reasons"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Orchestration",
+    "description": "Implement AddonResult construction for returning results to the extension",
+    "steps": [
+      "1. Map FINAL_APPROVED to status 'accepted', REJECTED_FOR_REVIEW to 'rejected'",
+      "2. Compute overall_score from ATS and Recruiter scores",
+      "3. Include scores object: { ats_score, recruiter_score }",
+      "4. Aggregate strengths, weaknesses, recommendations from both reviews",
+      "5. Return complete AddonResult regardless of outcome",
+      "6. Verify: accepted result has correct scores and aggregated feedback, rejected result includes rejection reasons"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Validation",
+    "description": "Add shared enum and constraint definitions for reuse across route validation schemas",
+    "steps": [
+      "1. Define enum schemas: employmentType, seniority, remoteMode, level, finalStatus",
+      "2. Define shared maxLength constraints (name <= 200, description <= 10000)",
+      "3. Define shared :id param schema (non-empty string) for all parameterized routes",
+      "4. Verify: shared schemas export correctly and can be referenced by route files"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Validation",
+    "description": "Add request validation schema to Profile routes (PUT body)",
+    "steps": [
+      "1. Add body schema to PUT /api/profile with required fields (identity.name, identity.email) and string limits",
+      "2. Verify: invalid PUT /api/profile returns 400 with descriptive error"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Validation",
+    "description": "Add request validation schemas to Resume routes (upload multipart, review body, params)",
+    "steps": [
+      "1. Add body schema to POST /api/resume/upload (multipart validation)",
+      "2. Add body schema to PUT /api/resume/extraction/review (section required, itemId optional, reviewed required)",
+      "3. Verify: invalid resume requests return 400 with descriptive errors"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Validation",
+    "description": "Add request validation schemas to Jobs routes (POST raw body, PUT body, :id params)",
+    "steps": [
+      "1. Add body schema to POST /api/jobs/raw with rawText required and rawFields object",
+      "2. Add body schema to PUT /api/jobs/:id using JobPost schema with enum validation",
+      "3. Add params schema to /api/jobs/raw/:id and /api/jobs/:id routes",
+      "4. Verify: invalid jobs requests return 400 with descriptive errors"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Validation",
+    "description": "Add request validation schemas to CVs routes (POST generate body, :id params)",
+    "steps": [
+      "1. Add body schema to POST /api/cvs/generate (jobPostId required, language required)",
+      "2. Add params schema to /api/cvs/:id, /api/cvs/:id/ats-review, /api/cvs/:id/recruiter-review",
+      "3. Verify: invalid CVs requests return 400 with descriptive errors"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Error Handling",
+    "description": "Differentiate extraction error types and return appropriate HTTP status codes",
+    "steps": [
+      "1. On PDF parse failure (corrupt/empty PDF): return 400 Bad Request",
+      "2. On AI extraction failure (OpenAI error): return 500 with OpenAI error message",
+      "3. On post-processing failure: return 500 with descriptive error",
+      "4. Ensure each error type stores a distinct error message in resume-upload.json (basic failure path handled by pipeline trigger task)",
+      "5. Verify: upload a corrupt file returns 400, simulate AI failure returns 500, both store distinct error messages"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Error Handling",
+    "description": "Handle missing OpenAI API key and AI service errors gracefully",
+    "steps": [
+      "1. Check for OPENAI_API_KEY at startup, log warning if missing",
+      "2. Return 503 with descriptive message when AI endpoints are called without API key",
+      "3. Handle OpenAI rate limits and transient errors with descriptive error responses",
+      "4. Verify: start server without API key, confirm AI endpoints return 503 not crash"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Integration",
+    "description": "Ensure CORS is configured for the Chrome extension to communicate with the backend",
+    "steps": [
+      "1. Verify @fastify/cors is registered in server.ts (installed in scaffolding, registered in server setup)",
+      "2. Verify origin allows chrome-extension:// and localhost:5173 (Vite dev server)",
+      "3. Verify allowed methods: GET, POST, PUT, DELETE, OPTIONS",
+      "4. Verify allowed headers: Content-Type, Authorization",
+      "5. Verify: extension can make API calls to backend without CORS errors"
+    ],
+    "passes": true
+  },
+  {
+    "category": "Integration",
+    "description": "End-to-end flow: upload resume -> extract -> review -> confirm -> generate CV",
+    "steps": [
+      "1. Seed demo profile via npm run seed",
+      "2. Upload a sample PDF resume via POST /api/resume/upload",
+      "3. Check extraction result via GET /api/resume/extraction",
+      "4. Review all sections via PUT /api/resume/extraction/review",
+      "5. Confirm extraction via POST /api/resume/extraction/confirm",
+      "6. Submit a raw job offer via POST /api/jobs/raw",
+      "7. Generate a CV via POST /api/cvs/generate with the job post ID",
+      "8. Retrieve generated CV and reviews via GET endpoints",
+      "9. Verify: all data flows through correctly, all JSON files are populated"
+    ],
+    "passes": true
+  }
+]

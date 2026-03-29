@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="24 24 464 464" fill="none">
+    <defs>
+      <linearGradient id="bgGrad" x1="56" y1="56" x2="456" y2="456" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#6D5DF6"/>
+        <stop offset="100%" stop-color="#18C4FF"/>
+      </linearGradient>
+      <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#0F172A" flood-opacity="0.18"/>
+      </filter>
+    </defs>
+    
+      <g filter="url(#softShadow)">
+        <rect x="56" y="56" width="400" height="400" rx="100" fill="url(#bgGrad)"/>
+      </g>
+      <rect x="136" y="234" width="240" height="148" rx="36" fill="#FFFFFF" fill-opacity="0.97"/>
+      <rect x="216" y="170" width="88" height="64" rx="28" stroke="#FFFFFF" stroke-width="26"/>
+      <line x1="172" y1="286" x2="340" y2="286" stroke="#6D5DF6" stroke-opacity="0.14" stroke-width="12" stroke-linecap="round"/>
+      <polygon points="318.0,172.0 329.9,196.1 354.0,208.0 329.9,219.9 318.0,244.0 306.1,219.9 282.0,208.0 306.1,196.1" fill="#FFD166"/>
+      <polygon points="366.0,138.0 371.9,150.1 384.0,156.0 371.9,161.9 366.0,174.0 360.1,161.9 348.0,156.0 360.1,150.1" fill="#FFFFFF" fill-opacity="0.9"/>
+    </svg>
