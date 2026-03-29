@@ -1,0 +1,42 @@
+{
+    "source": "Les Echos",
+    "title": "620.000 bitcoins créés par erreur : « On nous avait dit que la planche à billets, avec le bitcoin, c'est impossible »",
+    "authors": ["Charles Cuvelliez", "Jean-Jacques Quisquater"],
+    "sections": [
+        {
+            "paragraphs": [
+                "On nous avait dit que la planche à bitcoin n'existe pas, qu'un bitcoin reste un bitcoin, pour toujours, une fois créé « légalement » par l'algorithme de Satoshi.",
+                "C'est pourtant l'inverse qui s'est passé avec la plateforme Bithumb en Corée. A la suite d'une erreur humaine, 620.000 bitcoins (soit 34 milliards d'euros) ont été créés à partir de rien et distribués à 249 clients dans le cadre d'un programme de fidélité.",
+                "Cela devait être 620.000 wons (360 euros), ce qui n'est pas vraiment le même montant. Quelques clients, au vu de la bonne surprise, ont immédiatement vendu ces bitcoins (1.800) tombés du ciel, ce qui a contribué au mouvement baissier du bitcoin, le 6 février dernier. C'eût pu dégénérer."
+            ]
+        },
+        {
+            "heading": "Un surplus subitement mis en vente",
+            "paragraphs": [
+                "Bithumb fonctionne comme une plateforme de change centralisée pour crypto-monnaies. Les utilisateurs déposent des wons coréens ou des actifs virtuels sur la plateforme : les transactions s'effectuent d'abord à l'intérieur de la plateforme : formation des prix, exécution des ordres et garde des actifs, tout cela se concentre en un seul lieu. Ce n'est qu'ensuite que la blockchain du bitcoin est sollicitée.",
+                "C'est le modèle dominant car tout va vite, c'est simple pour les novices et il y a des services annexes comme les changes et les retraits en monnaie réelle ou un support client, tout ce que ne fait pas la blockchain du bitcoin. En fait, trop d'étapes peuvent avoir lieu avant de passer sur la blockchain.",
+                "C'est ainsi que des bitcoins ont été créés mais ils n'étaient ni reliés à de vrais bitcoins dans la blockchain, ni endossés par de vrais actifs, des dépôts de client par exemple. Bref, c'est une vraie planche à bitcoin qui a fonctionné.",
+                "Au sein de Bithumb, du fait de ce surplus en bitcoins subitement mis en vente, le cours du bitcoin s'est effondré pour les clients de Bithumb, chutant temporairement en dessous des taux du marché. Les écarts de prix avec les autres plateformes de cryptomonnaies ont semé la confusion sur le marché."
+            ]
+        },
+        {
+            "heading": "Un fossé de sécurité",
+            "paragraphs": [
+                "L'incident de Bithumb révèle le fossé de sécurité élémentaire qui sépare les plateformes de cryptomonnaie des banques : comment Bithumb a-t-il pu permettre des paiements massifs en bitcoin excédant largement les avoirs réels, pourquoi cette absence de procédure d'approbation qui a permis à une erreur humaine sur un clavier (des BTC, acronyme du bitcoin sur les marchés financiers, au lieu de KRW, acronyme des wons) de presque dégénérer en catastrophe.",
+                "Il y a l'efficacité du registre interne qui a propagé l'erreur à une vitesse fulgurante car la plupart des transactions chez Bithumb sont traitées en un trait dans ce registre, sans aucune validation, dirait-on. Dès que des chiffres erronés pénètrent le registre, ils contaminent instantanément l'ensemble du système.",
+                "Les opérations s'exécutent uniquement via les mécanismes propriétaires de la plateforme, lesquelles diffèrent des autres plateformes (difficiles à comparer si on y a accès) sans le consensus via les noeuds de la blockchain bitcoin (qui aurait joué le rôle de contrôle externe en voyant tout à coup une tentative d'imposer 620.000 bitcoins supplémentaires).",
+                "L'incident de Bithumb a créé une distorsion de marché parmi les utilisateurs, qui ont saisi ou subi l'occasion pour acheter (tant mieux) ou vendre (tant pis) du bitcoin à des prix anormalement bas. La suspension immédiate des transactions a infligé des pertes aux traders légitimes souhaitant simplement opérer ou retirer leurs fonds, tandis que l'incertitude planait sur une éventuelle annulation ou correction des opérations pendant la phase de récupération.",
+                "La confiance envers les plateformes centralisées s'est effondrée de manière spectaculaire. Les utilisateurs, échaudés, vont remettre en cause la stabilité même des plateformes, multipliant les doutes sur leur fiabilité technique. L'anxiété va grandir quant à la sécurité des avoirs conservés sur ces plateformes, poussant certains vers des solutions décentralisées."
+            ]
+        },
+        {
+            "heading": "L'alternative décentralisée",
+            "paragraphs": [
+                "Car oui, à l'opposé, les plateformes décentralisées permettent des échanges directs sur la blockchain, sans intermédiaire : plus transparents, mais plus lents et complexes à utiliser, ils ne sont pas sans risque pour les novices.",
+                "Les régulateurs coréens, saisissant l'ampleur du problème, ont lancé une inspection approfondie pour imposer des réformes urgentes. Il y a bien une loi en vigueur pour protéger les clients : elle impose la séparation des actifs des utilisateurs de ceux du prestataire. Elle interdit et sanctionne les pratiques commerciales déloyales. Elle exige une couverture d'assurance ou des réserves pour les actifs des clients.",
+                "Les discussions sur la révision future de la loi renforceront la responsabilité des plateformes comme indemniser systématiquement les dommages subis par les utilisateurs en cas d'erreur système. Bithumb n'est pourtant pas un amateur : il s'y négocie jusqu'à 2 milliards de dollars par jour mais ce n'est pas la première fois qu'une erreur « fat finger » se produit.",
+                "Les banques ont un rôle à jouer : elles ont toutes ces protections qui manquaient à Bithumb. Et si c'était aux banques d'être le point de passage obligé pour les bitcoins. C'est ce qui désormais prévaut comme leçon à en tirer en Corée."
+            ]
+        }
+    ]
+}
