@@ -1,0 +1,220 @@
+# ── Scrollout GitLab CI/CD Pipeline ────────────────────────
+# Stages: lint → test → build APK → analyze → publish → pages
+
+stages:
+  - lint
+  - test
+  - build
+  - analyze
+  - publish
+  - pages
+
+variables:
+  NODE_IMAGE: "node:22-bookworm"
+  ANDROID_COMPILE_SDK: "36"
+  ANDROID_BUILD_TOOLS: "36.0.0"
+  ANDROID_SDK_TOOLS: "11076708"
+  GRADLE_USER_HOME: "${CI_PROJECT_DIR}/.gradle"
+  APK_NAME: "scrollout-${CI_COMMIT_SHORT_SHA}.apk"
+
+# ── Templates ──────────────────────────────────────────────
+
+.node-job:
+  image: ${NODE_IMAGE}
+  tags: [docker]
+  cache:
+    key: node-${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - echa-app/node_modules/
+    policy: pull-push
+  before_script:
+    - npm ci
+    - cd echa-app && npm ci && cd ..
+
+# ── Stage: lint ────────────────────────────────────────────
+
+lint:eslint:
+  extends: .node-job
+  stage: lint
+  script:
+    - npx eslint . --max-warnings 50
+  artifacts:
+    when: on_failure
+    paths:
+      - ci-logs/
+    expire_in: 7 days
+  after_script:
+    - mkdir -p ci-logs
+    - npx eslint . --format json -o ci-logs/eslint-report.json || true
+
+lint:typecheck:
+  extends: .node-job
+  stage: lint
+  allow_failure: true  # TODO: fix existing TS errors in server.ts
+  script:
+    - npx tsc --noEmit
+  artifacts:
+    when: on_failure
+    paths:
+      - ci-logs/
+    expire_in: 7 days
+  after_script:
+    - mkdir -p ci-logs
+    - npx tsc --noEmit > ci-logs/tsc-output.log 2>&1 || true
+
+# ── Stage: test ────────────────────────────────────────────
+
+test:vitest:
+  extends: .node-job
+  stage: test
+  script:
+    - npm test -- --reporter=verbose
+  artifacts:
+    when: always
+    paths:
+      - ci-logs/
+    reports:
+      junit: ci-logs/junit-report.xml
+    expire_in: 7 days
+  after_script:
+    - mkdir -p ci-logs
+    - npm test -- --reporter=junit --outputFile=ci-logs/junit-report.xml || true
+
+# ── Stage: build ───────────────────────────────────────────
+
+build:apk:
+  image: eclipse-temurin:21-jdk-jammy
+  tags: [docker]
+  stage: build
+  cache:
+    key: gradle-${CI_COMMIT_REF_SLUG}
+    paths:
+      - .gradle/caches/
+      - .gradle/wrapper/
+      - echa-app/android/.gradle/
+    policy: pull-push
+  before_script:
+    # Android SDK
+    - apt-get update -qq && apt-get install -y -qq wget unzip nodejs npm > /dev/null
+    - export ANDROID_HOME="${CI_PROJECT_DIR}/android-sdk"
+    - mkdir -p ${ANDROID_HOME}/cmdline-tools
+    - wget -q "https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip" -O sdk.zip
+    - unzip -q sdk.zip -d ${ANDROID_HOME}/cmdline-tools
+    - mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest
+    - export PATH="${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${PATH}"
+    - yes | sdkmanager --licenses > /dev/null 2>&1 || true
+    - sdkmanager "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" > /dev/null
+    # Node deps + Capacitor sync
+    - npm ci
+    - cd echa-app && npm ci && npm run sync && cd ..
+    # Signing (si configuré)
+    - |
+      if [ -n "${KEYSTORE_BASE64}" ]; then
+        echo "${KEYSTORE_BASE64}" | base64 -d > ${CI_PROJECT_DIR}/release.keystore
+        cat >> echa-app/android/app/build.gradle <<SIGN
+
+      android {
+          signingConfigs {
+              release {
+                  storeFile file("${CI_PROJECT_DIR}/release.keystore")
+                  storePassword "${KEYSTORE_PASSWORD}"
+                  keyAlias "${KEY_ALIAS}"
+                  keyPassword "${KEY_PASSWORD}"
+              }
+          }
+          buildTypes {
+              release {
+                  signingConfig signingConfigs.release
+              }
+          }
+      }
+      SIGN
+      fi
+  script:
+    - mkdir -p ci-logs
+    - cd echa-app/android
+    - chmod +x gradlew
+    - ./gradlew assembleRelease --no-daemon --stacktrace 2>&1 | tee ${CI_PROJECT_DIR}/ci-logs/gradle-build.log
+    - cp app/build/outputs/apk/release/app-*-release*.apk ${CI_PROJECT_DIR}/${APK_NAME} || cp app/build/outputs/apk/release/app-release*.apk ${CI_PROJECT_DIR}/${APK_NAME}
+  artifacts:
+    paths:
+      - "${APK_NAME}"
+      - ci-logs/
+    expire_in: 30 days
+
+# ── Stage: analyze (auto-diagnostic si échec) ─────────────
+
+analyze:logs:
+  extends: .node-job
+  stage: analyze
+  when: on_failure
+  needs:
+    - job: lint:eslint
+      optional: true
+    - job: lint:typecheck
+      optional: true
+    - job: test:vitest
+      optional: true
+    - job: build:apk
+      optional: true
+  script:
+    - echo "── Analyzing CI failure logs ──"
+    - |
+      for logfile in ci-logs/*.log ci-logs/*.json; do
+        if [ -f "$logfile" ]; then
+          echo ""
+          echo "=== Analyzing: $logfile ==="
+          npx tsx scripts/ci-analyze-logs.ts "$logfile" || true
+        fi
+      done
+  artifacts:
+    paths:
+      - ci-logs/
+    expire_in: 7 days
+
+# ── Stage: publish (Generic Package Registry) ─────────────
+
+publish:registry:
+  stage: publish
+  tags: [docker]
+  image: curlimages/curl:latest
+  needs:
+    - job: build:apk
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - |
+      VERSION="${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA}}"
+      echo "Publishing APK v${VERSION} to GitLab Package Registry..."
+      # Upload versioned APK
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+           --upload-file "${APK_NAME}" \
+           "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/scrollout-apk/${VERSION}/${APK_NAME}"
+      # Upload as "latest" with stable filename (overwrite previous)
+      echo "Publishing as latest..."
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+           --upload-file "${APK_NAME}" \
+           "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/scrollout-apk/latest/scrollout-latest.apk"
+      echo ""
+      echo "Download: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/scrollout-apk/latest/scrollout-latest.apk"
+
+# ── Stage: pages (site Astro + APK download) ──────────────
+
+pages:
+  stage: pages
+  tags: [docker]
+  image: ${NODE_IMAGE}
+  needs: []
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - cd scrollout-site
+    - npm ci
+    - npx astro build
+    - mv dist ../public
+  artifacts:
+    paths:
+      - public

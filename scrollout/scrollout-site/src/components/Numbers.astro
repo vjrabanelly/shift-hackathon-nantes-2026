@@ -1,0 +1,117 @@
+---
+const stats = [
+  { value: 51, label: 'dimensions sémantiques', color: 'var(--color-bleu-indigo)', glow: 'rgba(107, 107, 255, 0.1)' },
+  { value: 24, label: 'thèmes détectés', color: 'var(--color-jaune)', glow: 'rgba(255, 233, 74, 0.1)' },
+  { value: 15, label: 'types de narratifs', color: 'var(--color-rose)', glow: 'rgba(232, 139, 232, 0.1)' },
+  { value: 4, label: 'axes politiques', color: 'var(--color-orange)', glow: 'rgba(255, 123, 51, 0.1)' },
+  { value: 9, label: 'émotions détectées', color: 'var(--color-violet)', glow: 'rgba(139, 68, 232, 0.1)' },
+  { value: 8, label: 'profils utilisateur', color: 'var(--color-vert-menthe)', glow: 'rgba(107, 232, 139, 0.1)' },
+];
+---
+
+<div class="numbers-band">
+  <div class="numbers-row" data-stagger>
+    {stats.map((s) => (
+      <div class="number-item">
+        <div class="number-ring" style={`background: ${s.glow}; border-color: ${s.color}`}>
+          <h3 data-count={s.value} style={`color: ${s.color}`}>0</h3>
+        </div>
+        <p class="mono">{s.label}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .numbers-band {
+    background: var(--bg-grey-light);
+    padding: 100px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .numbers-band::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #DDD, transparent);
+  }
+
+  .numbers-band::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #DDD, transparent);
+  }
+
+  .numbers-row {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .number-item {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .number-ring {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    transition: transform 0.4s var(--ease-out-back), box-shadow 0.4s ease;
+  }
+
+  .number-item:hover .number-ring {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--card-glow, rgba(0,0,0,0.05));
+  }
+
+  .number-item h3 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+
+  .number-item p {
+    margin-top: 0;
+    color: var(--text-grey);
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 640px) {
+    .numbers-band { padding: 60px 16px; }
+    .numbers-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .number-item { min-width: auto; }
+    .number-ring {
+      width: 80px;
+      height: 80px;
+    }
+    .number-item h3 {
+      font-size: 2rem;
+    }
+  }
+</style>

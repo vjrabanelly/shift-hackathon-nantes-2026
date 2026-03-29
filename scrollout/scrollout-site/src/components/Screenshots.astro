@@ -1,0 +1,377 @@
+---
+const screens = [
+  {
+    label: 'Accueil',
+    desc: 'Ton profil et ta persona',
+    home: true,
+  },
+  {
+    label: 'Posts capturés',
+    desc: 'Chaque contenu analysé',
+    posts: [
+      { user: '@lemonde', cat: 'Actualité', pol: 2, polar: 0.3 },
+      { user: '@hugodecrypte', cat: 'Politique', pol: 3, polar: 0.6 },
+      { user: '@mcdonalds', cat: 'Pub', pol: 0, polar: 0.0 },
+    ],
+  },
+  {
+    label: 'Enrichissement',
+    desc: 'Ton profil d\'exposition',
+    axes: true,
+  },
+  {
+    label: 'Cognition',
+    desc: 'Ta carte cognitive en bulles',
+    cognition: true,
+  },
+  {
+    label: 'Détail post',
+    desc: '51 dimensions par post',
+    detail: true,
+  },
+  {
+    label: 'Wrapped',
+    desc: 'Ton récap façon Spotify',
+    wrapped: true,
+  },
+];
+---
+
+<section data-reveal>
+  <span class="section-label mono">L'app</span>
+  <p class="screens-intro">Tout se passe sur ton téléphone. Zero cloud, zero compte, zero collecte.</p>
+  <div class="screenshots-scroll">
+    {screens.map((s, i) => (
+      <div class="screenshot-item" style={`animation-delay: ${i * 120}ms`}>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            {s.home && (
+              <div class="mock-home">
+                <div class="mock-app-bar">
+                  <svg class="mock-logo" width="16" height="16" viewBox="0 0 540 540"><circle cx="270" cy="270" r="240" fill="none" stroke="currentColor" stroke-width="28"/><circle cx="370" cy="180" r="18" fill="#8B44E8"/><circle cx="200" cy="260" r="14" fill="#FF7B33"/></svg>
+                  <span class="mock-title-sm">Scrollout</span>
+                </div>
+                <div class="mock-persona">
+                  <div class="mock-persona-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </div>
+                  <div class="mock-persona-label">Le Vigilant</div>
+                </div>
+                <div class="mock-stats">
+                  <div class="mock-stat">
+                    <div class="mock-stat-val" style="color: var(--color-bleu-indigo);">12</div>
+                    <div class="mock-stat-label">Sessions</div>
+                  </div>
+                  <div class="mock-stat">
+                    <div class="mock-stat-val" style="color: var(--color-vert-menthe);">847</div>
+                    <div class="mock-stat-label">Posts</div>
+                  </div>
+                  <div class="mock-stat">
+                    <div class="mock-stat-val" style="color: var(--color-jaune);">82%</div>
+                    <div class="mock-stat-label">Enrichis</div>
+                  </div>
+                </div>
+                <div class="mock-dna">
+                  <div class="mock-dna-label">ADN de contenu</div>
+                  <div class="mock-dna-tags">
+                    <span style="background: rgba(255,123,51,0.1); color: var(--color-orange);">politique</span>
+                    <span style="background: rgba(107,232,139,0.1); color: #2a9d4e;">société</span>
+                    <span style="background: rgba(107,107,255,0.1); color: var(--color-bleu-indigo);">humour</span>
+                  </div>
+                </div>
+                <div class="mock-btn">Ouvrir Instagram</div>
+              </div>
+            )}
+            {s.posts && (
+              <div class="mock-posts">
+                <div class="mock-section-title">Posts capturés</div>
+                {s.posts.map((p) => (
+                  <div class="mock-post-card">
+                    <div class="mock-post-header">
+                      <span class="mock-user">{p.user}</span>
+                      <span class="mock-pol" style={`background: ${p.pol >= 3 ? 'var(--color-orange)' : p.pol >= 1 ? 'var(--color-jaune)' : '#E0E0E0'}`}>{p.pol}</span>
+                    </div>
+                    <div class="mock-post-meta">
+                      <span class="mock-cat">{p.cat}</span>
+                      <span class="mock-polar-mini">
+                        <span class="polar-bar-mini" style={`width: ${p.polar * 100}%`}></span>
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {s.axes && (
+              <div class="mock-enrich">
+                <div class="mock-section-title">Enrichissement</div>
+                <div class="mock-stats" style="margin-bottom: 12px;">
+                  <div class="mock-stat"><div class="mock-stat-val" style="color: var(--color-vert-menthe); font-size: 1rem;">82%</div><div class="mock-stat-label">Enrichi</div></div>
+                  <div class="mock-stat"><div class="mock-stat-val" style="color: var(--color-violet); font-size: 1rem;">0.38</div><div class="mock-stat-label">Polarisation</div></div>
+                  <div class="mock-stat"><div class="mock-stat-val" style="color: var(--color-orange); font-size: 1rem;">1.7</div><div class="mock-stat-label">Moy. politique</div></div>
+                </div>
+                <div class="mock-axis"><span>Gauche</span><div class="mock-ax-track"><div class="mock-ax-fill" style="left: 50%; width: 12%;"></div></div><span>Droite</span></div>
+                <div class="mock-axis"><span>Progrès</span><div class="mock-ax-track"><div class="mock-ax-fill" style="right: 50%; width: 20%; background: var(--color-bleu-indigo);"></div></div><span>Conserv.</span></div>
+                <div class="mock-bar-section">
+                  <div class="mock-bar-row"><span>Politique</span><div class="mock-hbar" style="width: 40%; background: var(--color-orange);"></div></div>
+                  <div class="mock-bar-row"><span>Humour</span><div class="mock-hbar" style="width: 25%; background: var(--color-jaune);"></div></div>
+                  <div class="mock-bar-row"><span>Lifestyle</span><div class="mock-hbar" style="width: 18%; background: var(--color-rose);"></div></div>
+                </div>
+              </div>
+            )}
+            {s.cognition && (
+              <div class="mock-cognition">
+                <div class="mock-section-title">Carte cognitive</div>
+                <div class="mock-bubbles">
+                  <div class="mock-bubble" style="width: 68px; height: 68px; background: rgba(255,123,51,0.15); color: var(--color-orange); left: 28%; top: 15%;">politique</div>
+                  <div class="mock-bubble" style="width: 52px; height: 52px; background: rgba(107,232,139,0.15); color: #2a9d4e; left: 55%; top: 25%;">société</div>
+                  <div class="mock-bubble" style="width: 44px; height: 44px; background: rgba(107,107,255,0.15); color: var(--color-bleu-indigo); left: 12%; top: 48%;">humour</div>
+                  <div class="mock-bubble" style="width: 36px; height: 36px; background: rgba(232,139,232,0.12); color: var(--color-rose); left: 60%; top: 55%;">lifestyle</div>
+                  <div class="mock-bubble" style="width: 30px; height: 30px; background: rgba(255,233,74,0.2); color: #a89200; left: 38%; top: 68%;">sport</div>
+                </div>
+                <div class="mock-modes">
+                  <span class="mock-mode active">Bulles</span>
+                  <span class="mock-mode">Barres</span>
+                  <span class="mock-mode">Radar</span>
+                </div>
+              </div>
+            )}
+            {s.detail && (
+              <div class="mock-detail">
+                <div class="mock-drag-handle"></div>
+                <div class="mock-detail-user">@mediapart</div>
+                <div class="mock-detail-caption">Réforme des retraites : les syndicats appellent à une nouvelle journée de mobilisation...</div>
+                <div class="mock-detail-grid">
+                  <div><span class="mock-label">Politique</span><span class="mock-val" style="color: var(--color-orange);">3/4</span></div>
+                  <div><span class="mock-label">Polarisation</span><span class="mock-val" style="color: var(--color-violet);">0.61</span></div>
+                  <div><span class="mock-label">Narratif</span><span class="mock-val">mobilisation</span></div>
+                  <div><span class="mock-label">Confiance</span><span class="mock-val" style="color: var(--color-vert-menthe);">87%</span></div>
+                </div>
+                <div class="mock-tags">
+                  <span style="background: rgba(255,123,51,0.1); color: var(--color-orange);">politique</span>
+                  <span style="background: rgba(107,107,255,0.1); color: var(--color-bleu-indigo);">société</span>
+                  <span style="background: rgba(232,139,232,0.1); color: var(--color-rose);">économie</span>
+                </div>
+              </div>
+            )}
+            {s.wrapped && (
+              <div class="mock-wrapped">
+                <div class="mock-wrapped-slide">
+                  <div class="mock-wrapped-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </div>
+                  <div class="mock-wrapped-persona">Le Vigilant</div>
+                  <div class="mock-wrapped-desc">Tu scrolles avec un oeil critique. L'algo te sert du politique, et tu le consommes sans ciller.</div>
+                  <div class="mock-wrapped-metrics">
+                    <div><span class="mock-wm-val">847</span><span class="mock-wm-label">posts</span></div>
+                    <div><span class="mock-wm-val">4h12</span><span class="mock-wm-label">scroll</span></div>
+                    <div><span class="mock-wm-val">0.38</span><span class="mock-wm-label">polar.</span></div>
+                  </div>
+                </div>
+                <div class="mock-wrapped-dots">
+                  <span class="wd active"></span><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="wd"></span><span class="wd"></span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div class="screen-caption">
+          <strong>{s.label}</strong>
+          <span>{s.desc}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .screens-intro {
+    font-size: 1.05rem;
+    color: var(--text-grey);
+    margin-bottom: 8px;
+  }
+
+  .screenshots-scroll {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    padding: 40px 0 20px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .screenshots-scroll::-webkit-scrollbar { display: none; }
+
+  .screenshot-item {
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+    animation: float-in 0.6s var(--ease-out-expo) both;
+  }
+
+  @keyframes float-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 560px;
+    background: #FAFAFA;
+    border: 6px solid #1a1a1a;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0,0,0,0.04);
+    transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s ease;
+  }
+
+  .screenshot-item:hover .phone-frame {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0,0,0,0.04);
+  }
+
+  .phone-notch {
+    width: 100px;
+    height: 24px;
+    background: #1a1a1a;
+    border-radius: 0 0 16px 16px;
+    margin: 0 auto;
+  }
+
+  .phone-screen {
+    padding: 16px;
+    height: calc(100% - 24px);
+    overflow: hidden;
+    font-size: 0.7rem;
+  }
+
+  .screen-caption {
+    text-align: center;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .screen-caption strong { font-size: 0.95rem; }
+  .screen-caption span { font-size: 0.8rem; color: var(--text-grey); }
+
+  /* --- Mock UI --- */
+  .mock-app-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    padding-top: 8px;
+  }
+
+  .mock-logo { color: #333; }
+  .mock-title-sm { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 0.85rem; }
+
+  .mock-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.4rem; text-align: center; margin: 24px 0 20px; }
+  .mock-section-title { font-weight: 700; font-size: 0.8rem; margin-bottom: 12px; letter-spacing: 0.02em; }
+
+  .mock-stats { display: flex; gap: 8px; }
+  .mock-stat { flex: 1; background: white; border-radius: 12px; padding: 10px 6px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .mock-stat-val { font-weight: 800; font-size: 1.2rem; }
+  .mock-stat-label { font-size: 0.45rem; text-transform: uppercase; color: var(--text-grey); letter-spacing: 0.05em; margin-top: 2px; }
+
+  .mock-btn { background: var(--color-bleu-indigo); color: white; text-align: center; padding: 10px; border-radius: 12px; font-weight: 600; font-size: 0.7rem; margin-top: 20px; }
+
+  .mock-post-card { background: white; border-radius: 12px; padding: 10px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .mock-post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .mock-user { font-weight: 700; color: var(--color-bleu-indigo); font-size: 0.65rem; }
+  .mock-pol { width: 18px; height: 18px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; font-weight: 800; }
+  .mock-post-meta { display: flex; justify-content: space-between; align-items: center; }
+  .mock-cat { font-size: 0.55rem; color: var(--text-grey); }
+  .mock-polar-mini { width: 40px; height: 4px; background: #EEE; border-radius: 2px; overflow: hidden; }
+  .polar-bar-mini { display: block; height: 100%; background: var(--color-violet); border-radius: 2px; }
+
+  .mock-axis { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; font-size: 0.5rem; color: var(--text-grey); }
+  .mock-ax-track { flex: 1; height: 6px; background: #EEE; border-radius: 3px; position: relative; overflow: hidden; }
+  .mock-ax-fill { position: absolute; height: 100%; background: var(--color-orange); border-radius: 3px; }
+
+  .mock-bar-section { margin-top: 12px; }
+  .mock-bar-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 0.5rem; color: var(--text-grey); }
+  .mock-bar-row span { width: 50px; text-align: right; }
+  .mock-hbar { height: 8px; border-radius: 4px; }
+
+  .mock-detail { padding-top: 8px; }
+  .mock-drag-handle { width: 36px; height: 4px; background: #DDD; border-radius: 2px; margin: 0 auto 16px; }
+  .mock-detail-user { font-weight: 700; color: var(--color-bleu-indigo); margin-bottom: 8px; }
+  .mock-detail-caption { font-size: 0.65rem; color: var(--text-grey); margin-bottom: 16px; line-height: 1.5; }
+  .mock-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .mock-detail-grid > div { background: white; border-radius: 10px; padding: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .mock-label { display: block; font-size: 0.45rem; text-transform: uppercase; color: var(--text-grey); margin-bottom: 2px; }
+  .mock-val { display: block; font-weight: 800; font-size: 0.75rem; }
+  .mock-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .mock-tags span { padding: 3px 8px; border-radius: 6px; font-size: 0.5rem; font-weight: 600; }
+
+  .mock-persona { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+  .mock-persona-icon { width: 32px; height: 32px; border-radius: 10px; background: var(--color-bleu-indigo); color: white; display: flex; align-items: center; justify-content: center; }
+  .mock-persona-label { font-weight: 700; font-size: 0.75rem; }
+
+  .mock-dna { margin-top: 12px; }
+  .mock-dna-label { font-size: 0.5rem; text-transform: uppercase; color: var(--text-grey); letter-spacing: 0.04em; margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; }
+  .mock-dna-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .mock-dna-tags span { padding: 2px 7px; border-radius: 6px; font-size: 0.48rem; font-weight: 600; }
+
+  .mock-cognition { padding-top: 4px; }
+  .mock-bubbles { position: relative; height: 220px; margin: 12px 0; }
+  .mock-bubble { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.4rem; font-weight: 700; text-align: center; line-height: 1.1; animation: bubble-float 3s ease-in-out infinite; }
+  .mock-bubble:nth-child(2) { animation-delay: -0.5s; }
+  .mock-bubble:nth-child(3) { animation-delay: -1s; }
+  .mock-bubble:nth-child(4) { animation-delay: -1.5s; }
+  .mock-bubble:nth-child(5) { animation-delay: -2s; }
+
+  @keyframes bubble-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .mock-modes { display: flex; gap: 4px; justify-content: center; }
+  .mock-mode { font-size: 0.5rem; padding: 3px 8px; border-radius: 8px; background: #EEE; color: var(--text-grey); }
+  .mock-mode.active { background: var(--color-bleu-indigo); color: white; }
+
+  .mock-wrapped { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 12px 0; }
+  .mock-wrapped-slide { text-align: center; background: linear-gradient(135deg, #1a1a1a 0%, #2a2040 50%, #1a1030 100%); border-radius: 16px; padding: 24px 16px; width: 100%; }
+  .mock-wrapped-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--color-bleu-indigo); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+  .mock-wrapped-persona { font-weight: 800; font-size: 0.9rem; color: white; margin-bottom: 6px; }
+  .mock-wrapped-desc { font-size: 0.55rem; color: #888; line-height: 1.5; margin-bottom: 14px; }
+  .mock-wrapped-metrics { display: flex; justify-content: center; gap: 14px; }
+  .mock-wrapped-metrics > div { text-align: center; }
+  .mock-wm-val { display: block; font-weight: 800; font-size: 0.8rem; color: white; font-family: 'JetBrains Mono', monospace; }
+  .mock-wm-label { display: block; font-size: 0.4rem; color: #666; text-transform: uppercase; margin-top: 2px; }
+  .mock-wrapped-dots { display: flex; gap: 4px; justify-content: center; margin-top: 12px; }
+  .wd { width: 6px; height: 6px; border-radius: 50%; background: #DDD; }
+  .wd.active { background: var(--color-bleu-indigo); }
+
+  @media (max-width: 640px) {
+    .screenshot-item {
+      flex: 0 0 220px;
+    }
+
+    .phone-frame {
+      width: 220px;
+      height: 440px;
+      border-width: 5px;
+      border-radius: 32px;
+    }
+
+    .phone-notch {
+      width: 80px;
+      height: 18px;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .phone-screen {
+      padding: 10px;
+      font-size: 0.6rem;
+    }
+
+    .mock-title { font-size: 1rem; margin: 12px 0; }
+    .mock-stat-val { font-size: 0.9rem; }
+    .mock-btn { padding: 8px; font-size: 0.6rem; margin-top: 12px; }
+    .screenshots-scroll { gap: 16px; }
+  }
+</style>

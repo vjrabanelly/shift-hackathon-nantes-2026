@@ -1,0 +1,259 @@
+---
+import Dots from './Dots.astro';
+---
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-top-label mono">open source / android / gratuit</div>
+
+    <h1 class="logo-text">
+      <span class="logo-s">S</span><span class="logo-c">c</span><span class="logo-r">r</span><span class="logo-o1">o</span><span class="logo-l">l</span><span class="logo-l2">l</span><span class="logo-o2">o</span><span class="logo-u">u</span><span class="logo-t">t</span>
+    </h1>
+
+    <Dots animated={true} size="lg" />
+
+    <h2 class="hero-hook">
+      <span class="hook-line">Tu scrolles.</span>
+      <span class="hook-line">L'algorithme choisit.</span>
+      <span class="hook-line highlight">Tu ne vois rien.</span>
+    </h2>
+
+    <p class="hero-desc">
+      Scrollout capture ce qu'Instagram te montre vraiment et te rend visible
+      ce qui est invisible&nbsp;: les thèmes, la polarisation, les narratifs,
+      ta bulle de filtre.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#manifeste" class="btn btn-black btn-glow">Lire le manifeste</a>
+      <a href="#fonctionnement" class="btn btn-ghost">Comment ça marche</a>
+      <a href="https://gitlab.com/tordu-jardin/echafaud" class="btn btn-ghost" target="_blank" rel="noopener">Code source &rarr;</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+      <rect x="1" y="1" width="22" height="38" rx="11" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+      <circle class="scroll-dot" cx="12" cy="12" r="3" fill="currentColor"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Gradient orbs background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+    animation: orb-float 20s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--color-bleu-indigo);
+    top: -10%;
+    right: -10%;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-orange);
+    bottom: -5%;
+    left: -10%;
+    animation-delay: -7s;
+  }
+
+  .orb-3 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-violet);
+    top: 40%;
+    left: 50%;
+    animation-delay: -14s;
+  }
+
+  @keyframes orb-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-top-label {
+    color: var(--text-grey);
+    margin-bottom: 24px;
+    animation: fade-in-up 0.8s var(--ease-out-expo) both;
+    animation-delay: 0.2s;
+  }
+
+  .logo-text {
+    font-size: clamp(4.5rem, 16vw, 10rem);
+    margin-bottom: 0;
+    letter-spacing: -0.03em;
+    animation: fade-in-up 0.8s var(--ease-out-expo) both;
+    animation-delay: 0.4s;
+  }
+
+  .logo-text span {
+    display: inline-block;
+    animation: letter-pop 0.6s var(--ease-out-back) both;
+  }
+
+  .logo-s { animation-delay: 0.5s; }
+  .logo-c { animation-delay: 0.55s; }
+  .logo-r { animation-delay: 0.6s; }
+  .logo-o1 { animation-delay: 0.65s; color: var(--color-bleu-indigo); }
+  .logo-l { animation-delay: 0.7s; }
+  .logo-l2 { animation-delay: 0.75s; }
+  .logo-o2 { animation-delay: 0.8s; color: var(--color-violet); }
+  .logo-u { animation-delay: 0.85s; }
+  .logo-t { animation-delay: 0.9s; }
+
+  @keyframes letter-pop {
+    0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-hook {
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    margin: 40px 0 32px;
+    font-weight: 900;
+    line-height: 1.35;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hook-line {
+    display: block;
+    animation: fade-in-up 0.7s var(--ease-out-expo) both;
+  }
+
+  .hook-line:nth-child(1) { animation-delay: 1.0s; }
+  .hook-line:nth-child(2) { animation-delay: 1.15s; }
+  .hook-line:nth-child(3) { animation-delay: 1.3s; }
+
+  .hook-line.highlight {
+    color: var(--color-orange);
+    background: linear-gradient(90deg, var(--color-orange), var(--color-rouge));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    max-width: 580px;
+    color: var(--text-grey);
+    font-size: 1.15rem;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    animation: fade-in-up 0.8s var(--ease-out-expo) both;
+    animation-delay: 1.5s;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fade-in-up 0.8s var(--ease-out-expo) both;
+    animation-delay: 1.7s;
+  }
+
+  .btn-glow {
+    box-shadow: 0 4px 24px rgba(17, 17, 17, 0.2);
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 8px 32px rgba(107, 107, 255, 0.3);
+  }
+
+  .scroll-indicator {
+    margin-top: 60px;
+    color: var(--text-grey);
+    animation: fade-in-up 0.8s var(--ease-out-expo) both;
+    animation-delay: 2.2s;
+  }
+
+  .scroll-dot {
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-bounce {
+    0%, 100% { cy: 12; opacity: 1; }
+    50% { cy: 26; opacity: 0.3; }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: auto;
+      padding: 60px 16px 40px;
+    }
+
+    .logo-text {
+      font-size: clamp(3rem, 14vw, 5rem);
+    }
+
+    .hero-hook {
+      font-size: 1.4rem;
+      margin: 28px 0 24px;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scroll-indicator {
+      margin-top: 40px;
+    }
+
+    .hero-orb { filter: blur(60px); opacity: 0.08; }
+    .orb-1 { width: 300px; height: 300px; }
+    .orb-2 { width: 250px; height: 250px; }
+    .orb-3 { width: 200px; height: 200px; }
+  }
+</style>

@@ -1,0 +1,49 @@
+node_modules/
+dist/
+.env
+.env.*
+*.apk
+.turbo/
+.nuxt/
+.output/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+data/
+.claude/
+
+/src/generated/prisma
+*.db
+*.db-journal
+
+# Screenshots & debug dumps (use data/ or docs/assets/)
+*.png
+*.xml
+!prisma/**
+!echa-app/**/*.xml
+!scrollout-site/**/*.png
+
+# Temp files
+tmp-*
+gemini.html
+AGENTS.md
+
+# Vite build artifacts (bundled JS may contain env secrets)
+echa-app/www/assets/index-*.js
+
+# CI artifacts
+ci-logs/
+public/
+
+# Keystore (ne JAMAIS commit)
+*.keystore
+*.keystore.b64
+*.jks
+
+# Android build artifacts
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/

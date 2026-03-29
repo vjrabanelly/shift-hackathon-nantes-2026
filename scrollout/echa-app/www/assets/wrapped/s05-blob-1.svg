@@ -1,0 +1,30 @@
+<svg preserveAspectRatio="xMidYMid meet" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 3">
+<g id="Ellipse 6" filter="url(#filter0_g_0_16)">
+<circle cx="32.5" cy="32.5" r="25.5" fill="var(--fill-0, #DF6CEB)" fill-opacity="0.4"/>
+</g>
+<g id="Ellipse 9" filter="url(#filter1_g_0_16)">
+<ellipse cx="47.4721" cy="17.1008" rx="2.09404" ry="4.50186" transform="rotate(-34.2688 47.4721 17.1008)" fill="var(--fill-0, white)" fill-opacity="0.3"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_g_0_16" x="0" y="0" width="65" height="65" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.0099999997764825821 0.0099999997764825821" numOctaves="3" seed="9256" />
+<feDisplacementMap in="shape" scale="14" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_0_16">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+<filter id="filter1_g_0_16" x="40.4025" y="9.19701" width="14.1391" height="15.8076" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.015625 0.015625" numOctaves="3" seed="673" />
+<feDisplacementMap in="shape" scale="8" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_0_16">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+</defs>
+</svg>

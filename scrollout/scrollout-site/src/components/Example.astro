@@ -1,0 +1,368 @@
+---
+const posts = [
+  {
+    user: '@bfrancetv',
+    text: 'Réforme des retraites : sixième journée de mobilisation, les syndicats durcissent le ton',
+    type: 'Reel',
+    time: '12s',
+    attention: 'Engagé',
+    attColor: 'var(--color-vert-menthe)',
+    pol: 3,
+    polLabel: 'Politique explicite',
+    polar: 0.52,
+    narrative: 'mobilisation',
+    themes: ['politique', 'société'],
+  },
+  {
+    user: '@topchefm6',
+    text: 'La recette du risotto parfait en 3 étapes',
+    type: 'Vidéo',
+    time: '45s',
+    attention: 'Engagé',
+    attColor: 'var(--color-vert-menthe)',
+    pol: 0,
+    polLabel: 'Apolitique',
+    polar: 0.0,
+    narrative: 'aspiration',
+    themes: ['food'],
+  },
+  {
+    user: '@compte_inconnu',
+    text: 'ILS NE VEULENT PAS QUE VOUS SACHIEZ LA VÉRITÉ. Partagez avant suppression !!',
+    type: 'Photo',
+    time: '2s',
+    attention: 'Vu',
+    attColor: 'var(--color-jaune)',
+    pol: 4,
+    polLabel: 'Militant',
+    polar: 0.91,
+    narrative: 'révélation',
+    themes: ['politique', 'complot'],
+    flagged: true,
+  },
+  {
+    user: '@nike',
+    text: 'Just Do It. Nouvelle collection printemps.',
+    type: 'Sponsorisé',
+    time: '0.3s',
+    attention: 'Scrollé',
+    attColor: '#BBB',
+    pol: 0,
+    polLabel: 'Apolitique',
+    polar: 0.0,
+    narrative: 'aspiration',
+    themes: ['pub', 'mode'],
+    sponsored: true,
+  },
+  {
+    user: '@hugodecrypte',
+    text: 'Pourquoi le prix de l\'électricité explose en 2025 (thread)',
+    type: 'Carrousel',
+    time: '28s',
+    attention: 'Engagé',
+    attColor: 'var(--color-vert-menthe)',
+    pol: 2,
+    polLabel: 'Enjeu public',
+    polar: 0.25,
+    narrative: 'décryptage',
+    themes: ['économie', 'énergie'],
+  },
+];
+---
+
+<section id="exemple">
+  <span class="section-label mono">Exemple concret</span>
+  <h2 class="example-title" data-reveal>Voilà ce que Scrollout te montre<br/><span class="accent">sur 5 posts de ton feed.</span></h2>
+
+  <div class="feed-analysis">
+    <div class="feed-side" data-reveal="left">
+      <div class="feed-label mono">Ton feed Instagram</div>
+      <div class="feed-cards">
+        {posts.map((p, i) => (
+          <div class={`feed-card ${p.flagged ? 'flagged' : ''} ${p.sponsored ? 'sponsored' : ''}`} style={`animation-delay: ${i * 100}ms`}>
+            <div class="fc-header">
+              <span class="fc-user">{p.user}</span>
+              <span class="fc-type">{p.type}</span>
+            </div>
+            <div class="fc-text">{p.text}</div>
+            <div class="fc-time">
+              <span class="fc-dot" style={`background: ${p.attColor}`}></span>
+              {p.attention} · {p.time}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="analysis-side" data-reveal="right">
+      <div class="feed-label mono">Ce que Scrollout révèle</div>
+
+      <div class="analysis-summary">
+        <div class="summary-card">
+          <div class="sc-label">Polarisation moyenne</div>
+          <div class="sc-gauge">
+            <div class="sc-gauge-track">
+              <div class="sc-gauge-fill" style="width: 34%;"></div>
+              <div class="sc-gauge-marker" style="left: 34%;"></div>
+            </div>
+          </div>
+          <div class="sc-val">0.34 <span class="sc-verdict">— modérée</span></div>
+        </div>
+
+        <div class="summary-card">
+          <div class="sc-label">Part politique</div>
+          <div class="sc-big">3/5 <span>posts</span></div>
+          <div class="sc-val sc-warn">60% de ton feed est politique</div>
+        </div>
+
+        <div class="summary-card">
+          <div class="sc-label">Narratifs détectés</div>
+          <div class="sc-chips">
+            <span class="sc-chip" style="background: rgba(232,139,232,0.12); color: var(--color-rose);">mobilisation</span>
+            <span class="sc-chip" style="background: rgba(255,34,34,0.08); color: var(--color-rouge);">révélation</span>
+            <span class="sc-chip" style="background: rgba(107,232,139,0.1); color: #2a9d4e;">aspiration</span>
+          </div>
+        </div>
+
+        <div class="summary-card alert">
+          <div class="sc-alert-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="sc-label">Alerte</div>
+            <div class="sc-alert-text">
+              1 contenu à <strong>polarisation extrême</strong> (0.91) détecté.
+              Vocabulaire de type "révélation" + désignation d'ennemi.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-posts">
+        {posts.map((p) => (
+          <div class={`ap-row ${p.flagged ? 'ap-flagged' : ''}`}>
+            <span class="ap-user">{p.user}</span>
+            <div class="ap-scores">
+              <span class="ap-pol" style={`background: ${p.pol >= 3 ? 'var(--color-orange)' : p.pol >= 1 ? 'var(--color-jaune)' : '#E8E8E8'}`}>{p.pol}</span>
+              <span class="ap-polar-bar">
+                <span class="ap-polar-fill" style={`width: ${p.polar * 100}%; background: ${p.polar > 0.7 ? 'var(--color-rouge)' : p.polar > 0.3 ? 'var(--color-orange)' : 'var(--color-vert-menthe)'};`}></span>
+              </span>
+              <span class="ap-narrative">{p.narrative}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .example-title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 48px;
+    line-height: 1.25;
+  }
+
+  .accent { color: var(--color-orange); }
+
+  .feed-analysis {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 900px) {
+    .feed-analysis {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .feed-label {
+    color: var(--text-grey);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #EEE;
+  }
+
+  /* --- Feed --- */
+  .feed-cards { display: flex; flex-direction: column; gap: 10px; }
+
+  .feed-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    border: 1px solid #F0F0F0;
+    transition: all 0.3s var(--ease-out-expo);
+  }
+
+  .feed-card:hover { transform: translateX(6px); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .feed-card.flagged { border-left: 3px solid var(--color-rouge); background: #FFFBFB; }
+  .feed-card.sponsored { opacity: 0.6; }
+
+  .fc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .fc-user { font-weight: 700; font-size: 0.85rem; color: var(--color-bleu-indigo); }
+  .fc-type { font-size: 0.65rem; color: var(--text-grey); background: var(--bg-grey-light); padding: 3px 10px; border-radius: 6px; font-weight: 500; }
+  .fc-text { font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; color: #333; }
+
+  .fc-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-grey);
+  }
+
+  .fc-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* --- Analysis --- */
+  .analysis-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    border: 1px solid #F0F0F0;
+    transition: border-color 0.3s;
+  }
+
+  .summary-card:hover {
+    border-color: #E0E0E0;
+  }
+
+  .summary-card.alert {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #FFF5F5, #FFF0F6);
+    border: 1px solid rgba(255,34,34,0.1);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .sc-alert-icon {
+    color: var(--color-rouge);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .sc-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-grey);
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .sc-gauge-track {
+    height: 8px;
+    background: linear-gradient(to right, var(--color-vert-menthe), var(--color-jaune), var(--color-rouge));
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .sc-gauge-marker {
+    position: absolute;
+    top: -4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--color-orange);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transform: translateX(-50%);
+    transition: left 1s var(--ease-out-expo);
+  }
+
+  .sc-val { font-size: 0.85rem; font-weight: 600; }
+  .sc-verdict { font-weight: 400; color: var(--text-grey); }
+  .sc-warn { color: var(--color-orange); }
+
+  .sc-big {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .sc-big span { font-size: 0.9rem; font-weight: 400; color: var(--text-grey); }
+
+  .sc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sc-chip { padding: 5px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; }
+
+  .sc-alert-text { font-size: 0.85rem; color: var(--color-rouge); line-height: 1.5; }
+
+  /* --- Posts détail --- */
+  .analysis-posts { display: flex; flex-direction: column; gap: 6px; }
+
+  .ap-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #F5F5F5;
+    transition: all 0.2s;
+  }
+
+  .ap-row:hover { border-color: #E0E0E0; }
+  .ap-row.ap-flagged { background: #FFF8F8; border-left: 2px solid var(--color-rouge); }
+
+  .ap-user { font-size: 0.8rem; font-weight: 600; color: var(--text-black); min-width: 120px; }
+  .ap-scores { display: flex; align-items: center; gap: 10px; }
+
+  .ap-pol {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+  .ap-polar-bar {
+    width: 50px;
+    height: 6px;
+    background: #EEE;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .ap-polar-fill { display: block; height: 100%; border-radius: 3px; transition: width 0.8s var(--ease-out-expo); }
+
+  .ap-narrative {
+    font-size: 0.65rem;
+    color: var(--text-grey);
+    font-style: italic;
+    min-width: 80px;
+    text-align: right;
+  }
+
+  @media (max-width: 600px) {
+    .analysis-summary { grid-template-columns: 1fr; }
+    .ap-narrative { display: none; }
+    .feed-card { padding: 12px 14px; }
+    .fc-text { font-size: 0.8rem; }
+    .ap-user { min-width: 90px; font-size: 0.7rem; }
+    .ap-polar-bar { width: 36px; }
+    .sc-big { font-size: 1.6rem; }
+    .summary-card { padding: 14px; }
+    .sc-alert-text { font-size: 0.75rem; }
+  }
+</style>

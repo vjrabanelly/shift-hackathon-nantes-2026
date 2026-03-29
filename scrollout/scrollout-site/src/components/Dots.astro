@@ -1,0 +1,52 @@
+---
+interface Props {
+  animated?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { animated = false, size = 'md' } = Astro.props;
+
+const colors = [
+  'var(--color-jaune)',
+  'var(--color-vert-menthe)',
+  'var(--color-bleu-indigo)',
+  'var(--color-orange)',
+  'var(--color-rose)',
+  'var(--color-violet)',
+  'var(--color-rouge)',
+  'var(--color-bleu-ciel)',
+  'var(--color-vert-eau)',
+];
+
+const sizeClass = `dots-${size}`;
+---
+
+<div class={`dots-row ${sizeClass} ${animated ? 'dots-animated' : ''}`}>
+  {colors.map((c, i) => (
+    <div
+      class="dot"
+      style={`background: ${c}; ${animated ? `animation-delay: ${i * 120}ms` : ''}`}
+    />
+  ))}
+</div>
+
+<style>
+  .dots-sm .dot { width: 10px; height: 10px; }
+  .dots-md .dot { width: 20px; height: 20px; }
+  .dots-lg .dot { width: 28px; height: 28px; }
+
+  .dots-animated .dot {
+    animation: dot-bounce 2.4s ease-in-out infinite;
+  }
+
+  @keyframes dot-bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-6px) scale(1.15); }
+  }
+
+  @media (max-width: 640px) {
+    .dots-sm .dot { width: 8px; height: 8px; }
+    .dots-md .dot { width: 14px; height: 14px; }
+    .dots-lg .dot { width: 20px; height: 20px; }
+  }
+</style>
