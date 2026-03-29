@@ -1,0 +1,3 @@
+# Fichier de lot pour scripts/generate_tts.py
+demo/synthese-annonce.wav	Une tempête exceptionnelle est en cours, avec des rafales dépassant les 300 kilomètres heure. Ne sortez pas.
+demo/regles-securite.wav	Ne sortez pas sauf nécessité absolue. Ne déplacez pas votre voiture même si elle est sous des arbres.

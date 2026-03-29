@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+
+# Kokoro TTS model files (338 Mo)
+backend/models/*.onnx
+backend/models/*.bin
+
+# Data files
+data/
+
+# ChromaDB local storage
+backend/chromadb_data/
+
+# Runtime memory state
+backend/data/
