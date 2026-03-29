@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ballad</string>
+    <string name="send">Send</string>
+    <string name="notification_channel_name">Ballad Service</string>
+    <string name="notification_title">Ballad Active</string>
+    <string name="notification_text">Location service is running in background.</string>
+    <string name="notification_action_stop">Stop</string>
+    <string name="permission_rationale">Location permission is required to send your coordinates.</string>
+    <string name="permission_denied">Permission denied. Cannot fetch location.</string>
+    <string name="location_null">Location unavailable.</string>
+</resources>

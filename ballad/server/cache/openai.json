@@ -1,0 +1,16 @@
+{
+    "entries": {
+        "80afa97cc50b21ee": {
+            "key": "80afa97cc50b21ee",
+            "value": {
+                "text": "Nous voici devant un château breton, un beau point d'arrêt pour admirer l'architecture locale et prendre un moment de repos avant de continuer notre randonnée.",
+                "modelInfo": {
+                    "provider": "openai",
+                    "model": "gpt-4.1-mini-2025-04-14",
+                    "responseId": "resp_02bd20abc466d1df0069c7ee0a293481909993ce8b5f7b2db8"
+                }
+            },
+            "cachedAt": "2026-03-28T15:04:43.854542Z"
+        }
+    }
+}

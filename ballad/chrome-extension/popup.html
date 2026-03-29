@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ballad GPS Tracker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Ballad</h1>
+
+    <div class="coords-box">
+      <div class="label">Position actuelle</div>
+      <div id="coords" class="coords">En attente de Google Maps…</div>
+    </div>
+
+    <div class="settings">
+      <label>
+        Serveur
+        <input type="text" id="serverUrl" placeholder="http://localhost:8081" />
+      </label>
+      <label>
+        Rayon (m)
+        <input type="number" id="radius" value="50" min="10" max="5000" />
+      </label>
+    </div>
+
+    <button id="toggleBtn" class="btn btn-start">Démarrer le tracking</button>
+
+    <div id="status" class="status"></div>
+
+    <div id="pois-section" class="pois-section hidden">
+      <div class="label">Points d'intérêt (<span id="poi-count">0</span>)</div>
+      <ul id="poi-list"></ul>
+    </div>
+
+    <div class="poi-test-section">
+      <div class="label">Test POI audio</div>
+      <div class="poi-test-form">
+        <input type="text" id="poiName" placeholder="Nom du POI (ex: Tour Eiffel)" />
+        <input type="text" id="poiLat" placeholder="Latitude (ex: 48.8584)" />
+        <input type="text" id="poiLon" placeholder="Longitude (ex: 2.2945)" />
+        <select id="poiLang">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+        </select>
+        <button id="generateBtn" class="btn btn-generate">Générer description + audio</button>
+      </div>
+      <div id="poi-test-status" class="status"></div>
+      <div id="poi-result" class="poi-result hidden">
+        <div class="label">Description générée</div>
+        <div id="poi-text" class="poi-text"></div>
+        <audio id="poi-audio" controls class="poi-audio"></audio>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

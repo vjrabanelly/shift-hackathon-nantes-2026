@@ -1,0 +1,10 @@
+{
+  "tone": "warm",
+  "energy": "calm",
+  "likes_history": true,
+  "likes_nature": true,
+  "max_length_sentences": 3,
+  "poi_selection_mode": "balanced",
+  "intervention_detail_level": "balanced",
+  "user_age_range": "adult"
+}

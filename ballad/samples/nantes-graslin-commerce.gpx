@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="HikeBuddy"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+  <metadata>
+    <name>Place Graslin → Place Royale</name>
+    <desc>Walk through central Nantes with an audio waypoint</desc>
+    <author>
+      <name>HikeBuddy</name>
+    </author>
+    <time>2026-03-28T12:00:00Z</time>
+  </metadata>
+
+  <!-- Audio-only waypoint at midpoint -->
+  <wpt lat="47.16871" lon="-1.56048">
+    <ele>8</ele>
+    <name>Audio Point</name>
+    <desc>Midway point with audio content</desc>
+    <link href="https://i1.theportalwiki.net/img/8/8b/Turret_turret_protect_humans01.wav">
+      <text>Audio: Turret Protection Protocol</text>
+      <type>audio/wav</type>
+    </link>
+    <sym>Flag, Blue</sym>
+  </wpt>
+
+  <rte>
+    <name>Graslin to Royale</name>
+    <rtept lat="47.21299" lon="-1.56224">
+      <ele>10</ele>
+      <name>Place Graslin</name>
+      <desc>Start — Place Graslin, 44000 Nantes</desc>
+    </rtept>
+    <rtept lat="47.19085" lon="-1.56136">
+      <ele>9</ele>
+      <name>Intermediate (north)</name>
+    </rtept>
+    <rtept lat="47.16871" lon="-1.56048">
+      <ele>8</ele>
+      <name>Midpoint</name>
+    </rtept>
+    <rtept lat="47.14656" lon="-1.55960">
+      <ele>7</ele>
+      <name>Intermediate (south)</name>
+    </rtept>
+    <rtept lat="47.12442" lon="-1.55872">
+      <ele>6</ele>
+      <name>Place Royale</name>
+      <desc>End — Place Royale, 44000 Nantes</desc>
+    </rtept>
+  </rte>
+
+  <trk>
+    <name>Graslin to Royale</name>
+    <trkseg>
+      <trkpt lat="47.21299" lon="-1.56224"><ele>10</ele></trkpt>
+      <trkpt lat="47.19085" lon="-1.56136"><ele>9</ele></trkpt>
+      <trkpt lat="47.16871" lon="-1.56048"><ele>8</ele></trkpt>
+      <trkpt lat="47.14656" lon="-1.55960"><ele>7</ele></trkpt>
+      <trkpt lat="47.12442" lon="-1.55872"><ele>6</ele></trkpt>
+    </trkseg>
+  </trk>
+
+</gpx>

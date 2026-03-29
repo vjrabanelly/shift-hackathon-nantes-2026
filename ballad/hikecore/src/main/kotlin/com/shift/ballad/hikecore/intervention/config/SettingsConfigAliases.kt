@@ -1,0 +1,8 @@
+package com.shift.ballad.hikecore.intervention.config
+
+typealias ExperiencePreferencesJson = com.shift.ballad.settings.ExperiencePreferencesJson
+typealias FileInterventionConfigProvider = com.shift.ballad.settings.FileInterventionConfigProvider
+typealias InMemoryInterventionConfigProvider = com.shift.ballad.settings.InMemoryInterventionConfigProvider
+typealias InterventionConfigProvider = com.shift.ballad.settings.InterventionConfigProvider
+typealias InterventionSettingsSnapshot = com.shift.ballad.settings.InterventionSettingsSnapshot
+typealias SnapshotInterventionConfigProvider = com.shift.ballad.settings.SnapshotInterventionConfigProvider
