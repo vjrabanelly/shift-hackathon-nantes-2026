@@ -32,9 +32,9 @@
 
 🧨 **Blindspot** (hack of news websites): An app embedded in news sites that analyzes an article and flags what's omitted or biased according to different newspapers, helping readers form their own opinion.
 
-🧨 **Mythomètre** (hack of content platforms): The Mythometer is a tool that analyzes audio/video content in real time (YouTube, radio, debates) to fact-check claims, source figures, and assign a credibility score to what's being said.
+🧨 **Mythomètre** (hack of Youtube): The Mythometer is a tool that analyzes audio/video content in real time (YouTube, radio, debates) to fact-check claims, source figures, and assign a credibility score to what's being said.
 
-🧨 **Any** (hack of xxx): Amy is an intelligent voice assistant that enables blind or digitally uncomfortable people to browse the web and complete administrative tasks using only their voice, with true semantic understanding of pages.
+🧨 **Ami** (hack of browsers): Ami is an intelligent voice assistant that enables blind or digitally uncomfortable people to browse the web and complete administrative tasks using only their voice, with true semantic understanding of pages.
 
 🧨 **Marie** (hack of SMS app, WhatsApp...): Marie is an intelligent copilot powered by gen AI that analyzes suspicious text messages, detects manipulation signals (phishing, smishing), and guides the user toward immediate protective actions.
 
