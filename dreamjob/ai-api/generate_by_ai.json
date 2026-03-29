@@ -1,0 +1,230 @@
+{
+  "status": "REJECTED_FOR_REVIEW",
+  "job_offer": {
+    "job_id": "job_0caa0eab38",
+    "source": "linkedin",
+    "source_url": "https://linkedin.com/jobs/view/103",
+    "title": "Detective prive",
+    "company": "Aegis Investigation",
+    "location": "Paris",
+    "remote_mode": "onsite",
+    "employment_type": "full_time",
+    "seniority": "mid",
+    "job_summary": "Detective prive Entreprise : Aegis Investigation Temps plein",
+    "responsibilities": [],
+    "requirements_must_have": [
+      "Missions : collecte d informations, filatures, recherches documentaires, redaction de rapports detailles, verification de fraude et collaboration avec les clients dans le respect du cadre legal",
+      "Une excellente capacite d observation, une grande autonomie et une bonne maitrise des outils numeriques sont indispensables",
+      "Une experience en securite, investigation ou renseignement est appreciee"
+    ],
+    "requirements_nice_to_have": [],
+    "keywords": [
+      "detective",
+      "prive",
+      "entreprise",
+      "recherche",
+      "rigoureux",
+      "discret",
+      "conduire",
+      "enquetes",
+      "civiles",
+      "commerciales",
+      "missions",
+      "collecte"
+    ],
+    "tools": [
+      "excellente"
+    ],
+    "languages": [],
+    "years_experience_min": 0
+  },
+  "generated_cv": {
+    "cv_id": "cv_cand_001_job_0caa0eab38_v1",
+    "candidate_id": "cand_001",
+    "job_id": "job_0caa0eab38",
+    "version": 1,
+    "language": "fr",
+    "title": "Product Designer | Recherche utilisateur et analyse numérique",
+    "header": {
+      "full_name": "Jane Doe",
+      "headline": "Product Designer | Recherche utilisateur, outils numériques, coordination transverse",
+      "contact": {
+        "email": "jane@example.com",
+        "phone": "+33 6 00 00 00 00"
+      },
+      "links": {
+        "linkedin": "https://linkedin.com/in/janedoe",
+        "portfolio": "https://janedoe.com"
+      }
+    },
+    "summary": "Product Designer basée à Paris, spécialisée en recherche utilisateur, analyse de parcours et outils numériques. Expérience B2B SaaS dans la collecte d'insights, la synthèse d'informations et la coordination avec des parties prenantes pour produire des livrables structurés.",
+    "skills_highlighted": [
+      "UX Research",
+      "Figma",
+      "Stakeholder Management",
+      "Design System"
+    ],
+    "experiences_selected": [
+      {
+        "experience_id": "exp_01",
+        "rewritten_bullets": [
+          "Pilotage des parcours onboarding, facturation et collaboration d'un produit B2B SaaS.",
+          "Recherche utilisateur et travail transverse avec les parties prenantes.",
+          "+18 % d'activation et -25 % sur le délai de livraison via un design system partagé."
+        ]
+      },
+      {
+        "experience_id": "exp_02",
+        "rewritten_bullets": [
+          "Conception de parcours utilisateurs de bout en bout.",
+          "Collaboration étroite avec PM et ingénierie.",
+          "+9 % de conversion essai vers payant."
+        ]
+      }
+    ],
+    "education_selected": [
+      {
+        "school": "School X",
+        "degree": "Master en design",
+        "year": "2020"
+      }
+    ],
+    "certifications_selected": [],
+    "keywords_covered": [
+      "recherche",
+      "entreprise"
+    ],
+    "omitted_items": [
+      "Aucune expérience prouvée en investigation privée, sécurité ou renseignement",
+      "Aucune certification ou licence liée à l'enquête privée",
+      "Aucune preuve de filature, vérification de fraude ou rédaction de rapports dans un cadre légal"
+    ],
+    "generation_notes": [
+      "CV centré sur les compétences transférables en recherche, analyse et outils numériques",
+      "Le titre reste ancré au profil réel pour éviter toute surpromesse",
+      "Les exigences d'investigation terrain ne sont pas couvertes par les données sources"
+    ]
+  },
+  "ats_review": {
+    "review_id": "rev_cv_cand_001_job_0caa0eab38_v1",
+    "cv_id": "cv_cand_001_job_0caa0eab38_v1",
+    "job_id": "job_0caa0eab38",
+    "score": 35,
+    "passed": false,
+    "hard_filters_status": [
+      {
+        "filter": "localisation (Paris)",
+        "status": "pass",
+        "evidence": "Candidate basée à Paris dans le résumé."
+      },
+      {
+        "filter": "années d'expérience minimales",
+        "status": "pass",
+        "evidence": "Offre requiert 0 années minimales."
+      },
+      {
+        "filter": "expérience en investigation / licence enquête privée",
+        "status": "fail",
+        "evidence": "CV indique absence d'expérience prouvée en investigation et absence de licence."
+      }
+    ],
+    "matched_keywords": [
+      "recherche",
+      "entreprise",
+      "outils numériques",
+      "collecte"
+    ],
+    "missing_keywords": [
+      "detective",
+      "prive",
+      "rigoureux",
+      "discret",
+      "conduire",
+      "enquetes",
+      "civiles",
+      "commerciales",
+      "missions"
+    ],
+    "format_flags": [
+      "Titre du CV non aligné sur le poste (Product Designer vs Detective prive).",
+      "Aucun diplôme ou licence liée à l'enquête privée mentionné.",
+      "Section expériences focalisée sur produit/service, pas sur missions d'investigation."
+    ],
+    "recommendations": [
+      "Adapter le titre et le résumé au poste visé (Detective privé).",
+      "Ajouter expériences ou missions liées à l'investigation, filatures, vérifications de fraude.",
+      "Inclure toute licence, certification ou formation pertinente à l'enquête privée."
+    ]
+  },
+  "recruiter_review": {
+    "review_id": "review_cv_cand_001_job_0caa0eab38_v1",
+    "cv_id": "cv_cand_001_job_0caa0eab38_v1",
+    "job_id": "job_0caa0eab38",
+    "score": 35,
+    "passed": false,
+    "readability_score": 80,
+    "credibility_score": 30,
+    "coherence_score": 60,
+    "evidence_score": 20,
+    "strengths": [
+      "CV clair et bien structuré, facile à lire et à parcourir rapidement.",
+      "Compétences transférables en recherche et analyse bien mises en avant.",
+      "Chiffres d'impact concrets (ex. +18 % activation) qui renforcent la présentation métier actuelle."
+    ],
+    "concerns": [
+      "Aucun élément démontrant une expérience en investigation privée, filature ou vérification de fraude.",
+      "Absence de licences, certifications ou mentions légales requises pour exercer comme détective privé.",
+      "Titre et expériences sont centrés sur le Product Design, créant un fort désalignement avec l'offre."
+    ],
+    "recommendations": [
+      "Ne pas présenter ce CV pour le poste de détective privé sans preuves d'expérience terrain ou licences pertinentes.",
+      "Si candidat intéressé, obtenir et documenter des missions d'enquête (stagiaire, mission courte) et licences professionnelles.",
+      "Adapter le résumé et les bullets pour inclure toute expérience opérationnelle, formation en sécurité ou exemples de rapports légaux si disponibles."
+    ]
+  },
+  "review_agreement": {
+    "job_id": "job_0caa0eab38",
+    "cv_id": "cv_cand_001_job_0caa0eab38_v1",
+    "cv_generation_ok": true,
+    "ats_ok": false,
+    "recruiter_ok": false,
+    "review_agreement_ok": false,
+    "final_status": "REJECTED_FOR_REVIEW",
+    "rejection_reasons": [
+      "Absence d'expérience vérifiable en investigation ou sécurité.",
+      "Aucune licence/certification d'enquête privée fournie.",
+      "Contenu du CV centré sur le design produit, non sur les missions exigées.",
+      "Absence totale d'expérience prouvée en investigation privée, filature ou vérification de fraude.",
+      "Aucune licence ou certification professionnelle liée à l'enquête privée mentionnée.",
+      "Profil professionnel (Product Designer) fondamentalement désaligné avec les missions terrain et légales du poste."
+    ],
+    "iteration_count": 3
+  },
+  "addon_result": {
+    "job_id": "job_0caa0eab38",
+    "cv_id": "cv_cand_001_job_0caa0eab38_v1",
+    "status": "rejected",
+    "overall_score": 35,
+    "scores": {
+      "ats_score": 35,
+      "recruiter_score": 35
+    },
+    "strengths": [
+      "Bonne couverture des mots-cles : recherche, entreprise, outils numériques, collecte",
+      "CV clair et bien structuré, facile à lire et à parcourir rapidement.",
+      "Compétences transférables en recherche et analyse bien mises en avant."
+    ],
+    "weaknesses": [
+      "Mot-cle manquant : detective",
+      "Mot-cle manquant : prive",
+      "Mot-cle manquant : rigoureux"
+    ],
+    "recommendations": [
+      "Adapter le titre et le résumé au poste visé (Detective privé).",
+      "Ajouter expériences ou missions liées à l'investigation, filatures, vérifications de fraude.",
+      "Inclure toute licence, certification ou formation pertinente à l'enquête privée."
+    ],
+    "returned_at": "2026-03-28T18:05:34.964Z"
+  },
+  "iterations": 3
+}

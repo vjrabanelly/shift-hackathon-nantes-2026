@@ -1,0 +1,26 @@
+.popup-root {
+  width: 360px;
+  min-height: 280px;
+  padding: 1rem;
+}
+
+.popup-card {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(19, 34, 56, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.popup-card h1 {
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.popup-topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}

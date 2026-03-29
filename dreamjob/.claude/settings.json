@@ -1,0 +1,60 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.prisma.io)",
+      "WebFetch(domain:fastify.dev)",
+      "WebFetch(domain:expressjs.com)",
+      "WebFetch(domain:www.better-auth.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:pptr.dev)",
+      "WebFetch(domain:zod.dev)",
+      "WebFetch(domain:www.postgresql.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:docs.docker.com)",
+      "WebFetch(domain:developer.mozilla.org)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebSearch",
+      "mcp__playwright__*",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(docker compose up*)",
+      "Bash(docker compose build*)",
+      "Bash(docker compose exec*)",
+      "Bash(docker compose ps*)",
+      "Bash(docker compose logs*)",
+      "Bash(docker compose restart*)",
+      "Bash(docker compose pull*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git stash*)",
+      "Bash(curl http://localhost*)",
+      "Bash(curl http://127.0.0.1*)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)"
+    ],
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(rm -rf /*)",
+      "Read(./.env)",
+      "Read(~/.ssh/**)"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(git reset*)",
+      "Bash(docker compose down*)",
+      "Bash(rm *)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}

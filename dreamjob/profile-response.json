@@ -1,0 +1,92 @@
+{
+    "id": "profile_01",
+    "createdAt": "2026-03-29T10:00:00.000Z",
+    "updatedAt": "2026-03-28T23:40:38.195Z",
+    "data": {
+        "identity": {
+            "name": "Jean Dupont",
+            "headline": "Senior Backend Engineer",
+            "email": "jean.dupont@example.com",
+            "phone": "+33 6 12 34 56 78",
+            "location": "Paris, France"
+        },
+        "targetRoles": [
+            "Senior Backend Engineer"
+        ],
+        "professionalSummaryMaster": "Ingenieur backend avec experience en Node.js, TypeScript, PostgreSQL et AWS.",
+        "experiences": [
+            {
+                "experienceId": "exp_01",
+                "title": "Backend Engineer",
+                "company": "TechCorp",
+                "location": "Paris",
+                "startDate": "2021-01",
+                "endDate": "2024-12",
+                "description": "Developpement de services backend",
+                "achievements": [
+                    {
+                        "text": "Developpement et maintenance d APIs REST",
+                        "metric": "30% improvement",
+                        "proofLevel": "high"
+                    }
+                ],
+                "skillsUsed": [
+                    "Node.js",
+                    "TypeScript",
+                    "PostgreSQL",
+                    "Docker",
+                    "AWS",
+                    "REST API"
+                ]
+            }
+        ],
+        "education": [
+            {
+                "school": "EPITA",
+                "degree": "Master",
+                "field": "Informatique",
+                "year": 2018
+            }
+        ],
+        "skills": [
+            {
+                "name": "Node.js",
+                "years": 6
+            },
+            {
+                "name": "TypeScript",
+                "years": 5
+            },
+            {
+                "name": "PostgreSQL",
+                "years": 4
+            },
+            {
+                "name": "Docker",
+                "years": 4
+            },
+            {
+                "name": "AWS",
+                "years": 3
+            }
+        ],
+        "certifications": [],
+        "languages": [
+            {
+                "name": "Francais",
+                "level": "natif"
+            },
+            {
+                "name": "Anglais",
+                "level": "professionnel"
+            }
+        ],
+        "projects": [],
+        "references": [],
+        "constraints": {
+            "preferredCvLanguage": "fr",
+            "maxCvPages": 2,
+            "mustNotClaim": []
+        }
+    }
+}
