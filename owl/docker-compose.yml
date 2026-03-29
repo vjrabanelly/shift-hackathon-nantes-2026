@@ -1,0 +1,38 @@
+services:
+  mariadb:
+    env_file:
+      - .env
+    image: mariadb:11
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: unless-stopped
+
+  moodle:
+    build:
+      context: .
+      dockerfile: Dockerfile.moodle
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    volumes:
+      - moodle_data:/var/www/moodledata
+      - ./moodle:/var/www/html:delegated
+      - ./plugin/block:/var/www/html/public/blocks/owl
+      - ./plugin/mod:/var/www/html/public/mod/owl
+      - ./docker/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+    ports:
+      - "8089:80"
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mariadb_data:
+  moodle_data:
+  redis_data:

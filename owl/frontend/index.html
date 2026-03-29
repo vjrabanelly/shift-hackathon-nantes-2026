@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OWL • AI Studio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+
+<body class="studio-layout">
+    <div class="overlay"></div>
+
+    <nav class="sidebar">
+        <div class="sidebar-logo">🦉 OWL <span>Studio</span></div>
+        <ul class="nav-links">
+            <li class="active" data-feature="podcast">
+                <span class="icon">🎙️</span>
+                <span class="label">Podcast</span>
+            </li>
+            <li data-feature="summary">
+                <span class="icon">📝</span>
+                <span class="label">Résumé</span>
+            </li>
+            <li data-feature="exercises">
+                <span class="icon">🧠</span>
+                <span class="label">QCM</span>
+            </li>
+            <li data-feature="chat">
+                <span class="icon">💬</span>
+                <span class="label">Chat Cours</span>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="status-badge"><span class="dot"></span> Systèmes en ligne</div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header>
+            <div id="feature-title">Podcast <span>Duo</span></div>
+            <div class="file-status" id="file-status-header">Aucun PDF sélectionné</div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="panel glass config-panel">
+                <h2>1. Configuration</h2>
+
+                <div id="config-chat" class="feature-config hidden">
+                    <div class="form-group">
+                        <label>Questions rapides</label>
+                        <p class="hint-text">Pose tes questions sur le cours ci-dessous.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Fichier PDF source</label>
+                    <div id="drop-zone" class="drop-zone">
+                        <span class="icon">📄</span>
+                        <p>Dépose tes fichiers ici (PDF, PPTX, DOCX, TXT)</p>
+                        <input type="file" id="pdf-input" accept=".pdf,.pptx,.docx,.doc,.txt" multiple hidden />
+                    </div>
+                    <div id="file-info" class="file-info hidden">
+                        <span class="file-name"></span>
+                        <button id="remove-file">×</button>
+                    </div>
+                </div>
+
+                <button id="generate-btn" class="primary-btn" disabled>Lancer OWL AI</button>
+            </div>
+
+            <div class="panel glass results-panel">
+                <h2>2. Résultat</h2>
+
+                <div id="loading" class="loading-state hidden">
+                    <div class="spinner"></div>
+                    <p id="loading-text">Analyse du PDF...</p>
+                </div>
+
+                <div id="empty-state" class="empty-state">
+                    <p>En attente de génération...</p>
+                </div>
+
+                <div id="result-podcast" class="result-outlet hidden">
+                    <div class="audio-card">
+                        <audio id="audio-player" controls></audio>
+                        <div class="actions">
+                            <a id="download-link" href="#" download class="secondary-btn">Télécharger MP3</a>
+                        </div>
+                    </div>
+                    <div id="script-content" class="script-lines"></div>
+                </div>
+
+                <div id="result-summary" class="result-outlet hidden">
+                    <div class="markdown-view" id="summary-content"></div>
+                </div>
+
+                <div id="result-exercises" class="result-outlet hidden">
+                    <div class="markdown-view" id="exercises-content"></div>
+                </div>
+
+                <div id="result-chat" class="result-outlet hidden">
+                    <div class="chat-container">
+                        <div id="chat-history" class="chat-history"></div>
+                        <div class="chat-input-area">
+                            <input type="text" id="chat-input" placeholder="Pose une question sur le cours..." />
+                            <button id="send-chat-btn" class="icon-btn">🚀</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
