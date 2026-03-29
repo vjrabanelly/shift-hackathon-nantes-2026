@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Marie</string>
+    <string name="title_activity_main">Marie</string>
+    <string name="package_name">com.shift.marie</string>
+    <string name="custom_url_scheme">com.shift.marie</string>
+    <string name="accessibility_service_label">Marie Overlay</string>
+    <string name="accessibility_service_description">Affiche un point d\'exclamation rouge sur les messages Google Messages contenant SHIFT-hackaton.</string>
+    <string name="accessibility_service_summary">Overlay prototype pour marquer les messages contenant SHIFT-hackaton.</string>
+</resources>

@@ -1,0 +1,8 @@
+{
+	"appId": "com.shift.marie",
+	"appName": "Marie",
+	"webDir": "../web/dist",
+	"server": {
+		"androidScheme": "https"
+	}
+}

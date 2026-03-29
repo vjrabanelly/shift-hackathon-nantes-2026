@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#1e40af"/>
+  <path d="M256 96 L368 140 L368 272 C368 340 320 388 256 416 C192 388 144 340 144 272 L144 140 Z" fill="white" opacity="0.15"/>
+  <path d="M256 112 L356 152 L356 272 C356 332 313 376 256 402 C199 376 156 332 156 272 L156 152 Z" fill="none" stroke="white" stroke-width="12" stroke-linejoin="round"/>
+  <text x="256" y="300" text-anchor="middle" font-size="140" font-family="system-ui">🛡️</text>
+</svg>
