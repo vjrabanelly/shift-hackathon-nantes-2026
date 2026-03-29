@@ -1,0 +1,39 @@
+{
+    "source": "Les Echos",
+    "title": "Arm, AMD, Broadcom… Face à Nvidia, la nouvelle ruée vers l'or des puces IA",
+    "authors": ["Joséphine Boone"],
+    "sections": [
+        {
+            "paragraphs": [
+                "Alors que les géants de l'IA investissent toujours plus de capitaux dans des capacités de calcul pour leurs modèles, la bataille des semi-conducteurs fait rage sur un marché très concurrentiel et incroyablement lucratif.",
+                "Une petite révolution est en marche chez Arm. Le concepteur britannique de puces, historiquement spécialisé dans les composants pour smartphones, s'apprête à s'attaquer au marché très convoité des processeurs pour l'intelligence artificielle (IA) avec une nouvelle gamme de CPU (« central processor unit », unité centrale de calcul).",
+                "Arm, qui détient 98 % du marché des puces pour smartphones, a longtemps concédé des licences de son architecture à d'autres acteurs. Mais l'entreprise de Rene Haas compte désormais grignoter une plus grande part du gâteau des semi-conducteurs en vendant ses propres puces, produites par le taïwanais TSMC."
+            ]
+        },
+        {
+            "heading": "Répondre à la demande",
+            "paragraphs": [
+                "Grâce à ce virage, Arm espère faire grimper ses marges en vendant des produits à plus forte valeur ajoutée, alors que les composants pour smartphones se vendent peu cher en comparaison des puces pour l'IA. Des clients très sérieux comme Meta (Facebook, Instagram, WhatsApp) et OpenAI, derrière ChatGPT, ont déjà passé commande au britannique.",
+                "L'entreprise entrée en Bourse il y a trois ans vise un chiffre d'affaires total d'environ 25 milliards de dollars d'ici cinq ans, soit cinq fois le niveau actuel. Le titre Arm a grimpé de 8 % à Wall Street au lendemain de cette annonce. Le fonds japonais SoftBank, qui possède 87 % du capital de la société, a gagné près de 10 % à la Bourse de Tokyo.",
+                "Selon Rene Haas, aux manettes depuis près d'un quart de siècle, cette stratégie répond à une demande croissante de ses clients. En outre, de nombreux acteurs des semi-conducteurs se sont récemment tournés vers la conception de puces IA maison pour se positionner sur un marché en pleine expansion."
+            ]
+        },
+        {
+            "heading": "Ruée vers l'IA agentique",
+            "paragraphs": [
+                "Le virage d'Arm tombe à point nommé, au moment où les CPU deviennent stratégiques. Ces puces permettent d'acheminer rapidement les données vers les GPU (« graphic processor unit », processeur graphique), indispensables lors de la face d'inférence des modèles d'IA - lorsqu'un modèle tourne pour répondre à une requête. Elles sont aussi de plus en plus utilisées pour orchestrer le fonctionnement des agents IA, ces algorithmes autonomes permettant d'automatiser certaines tâches.",
+                "Si certains acteurs de la tech, comme Microsoft, Google ou AWS, conçoivent leurs propres CPU (sur la base de licences Arm), ils ne les vendent pas à d'autres clients. Ainsi, l'arrivée d'un nouvel acteur pourrait assouvir la demande d'entreprises qui parient sur l'agentique. Entraînement, inférence, agentique… « Le marché est très vaste, plusieurs acteurs peuvent trouver leur place », affirmait le PDG d'Arm devant les analystes mercredi."
+            ]
+        },
+        {
+            "heading": "Bataille de l'inférence",
+            "paragraphs": [
+                "Sur le marché des processeurs graphiques, considéré comme l'un des plus lucratifs de la décennie, Nvidia est ultradominant pour la phase d'entraînement des modèles. En revanche, pour l'inférence, la bataille est davantage disputée, les clients cherchant à faire baisser la facture et à diversifier leur chaîne d'approvisionnement.",
+                "« L'inférence est désormais au centre de l'attention : tous ces investissements colossaux ont été réalisés pour développer l'infrastructure de l'IA, et la seule façon d'en tirer un retour sur investissement est d'attirer davantage d'utilisateurs », souligne John Lorenz, directeur mémoire et compute chez Yole Group.",
+                "Dernièrement, AMD s'est mué en sérieux concurrent de Nvidia, signant des contrats avec les grands fournisseurs de modèles OpenAI et Anthropic. Broadcom essaie, lui aussi, de transformer l'essai. Alors que les prix restent élevés, les géants de la tech Google, Microsoft et Amazon font eux-mêmes le pari de développer leurs propres puces et de les louer aux start-up d'IA.",
+                "« On constate qu'il n'y a plus un seul type de puces qui correspond à tous les besoins. On se dirige vers plus de complexité. De plus en plus d'entreprises tentent de se spécialiser pour améliorer les performances sur des travaux d'inférence spécifiques pour aboutir à une solution qui soit la plus puissante et la plus performante du marché », ajoute Hugo Antoine, analyste technologie et marché chez Yole Group.",
+                "Ainsi, Nvidia a dévoilé la semaine dernière une nouvelle puce pour l'inférence basée sur les technologies de la start-up Groq, dont le géant a racheté la propriété intellectuelle et les ingénieurs en janvier dernier. Dans la même optique, des start-up comme Ampere et Cerebras et des acteurs chinois comme Huawei et Alibaba tentent aussi de se faire une place sur ce marché qui devrait passer la barre des 1.000 milliards de dollars."
+            ]
+        }
+    ]
+}
