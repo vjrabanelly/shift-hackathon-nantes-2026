@@ -1,0 +1,43 @@
+moodledata/
+moodle/
+.env 
+
+# Venv
+backend/.venv
+
+# Credentials
+backend/.env
+
+backend/static
+
+# Sys files
+.DS_Store
+Thumbs.db
+
+# IDE 
+.idea/
+.vscode/
+*.swp
+*.swo
+
+README.md.local
+
+# Data & Databases
+backend/data/
+*.bin
+*.db
+*.sqlite
+
+# Logs
+backend/server.log
+*.log
+
+static/
+
+*.pyc
+*.mp3
+*.pdf
+
+__pycache__/
+
+*.Identifier
