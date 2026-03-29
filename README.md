@@ -28,7 +28,7 @@
 
 🧨 **DreamJob** (hack of LinkedIn): DreamJob centralizes job searching on LinkedIn by automating applications, CV optimization, and direct outreach to recruiters, all tracked through a dashboard.
 
-🧨 **DJ Dépanne** (hack of xxx): An AI that analyzes the context of a dance floor (people's age, vibe, current music) to automatically suggest the ideal next song at family parties.
+🧨 **DJ Dépanne** (hack of Spotify): An AI that analyzes the context of a dance floor (people's age, vibe, current music) to automatically suggest the ideal next song at family parties.
 
 🧨 **Blindspot** (hack of news websites): An app embedded in news sites that analyzes an article and flags what's omitted or biased according to different newspapers, helping readers form their own opinion.
 
