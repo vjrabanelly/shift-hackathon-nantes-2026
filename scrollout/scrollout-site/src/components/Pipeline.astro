@@ -1,0 +1,165 @@
+---
+const steps = [
+  {
+    num: '01',
+    color: 'var(--color-bleu-ciel)',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    title: 'Tu scrolles',
+    text: 'Scrollout tourne en arrière-plan pendant que tu utilises Instagram normalement. Rien ne change dans ton expérience. L\'app observe silencieusement ce que l\'algorithme te propose.',
+  },
+  {
+    num: '02',
+    color: 'var(--color-bleu-indigo)',
+    textColor: 'white',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+    title: 'On décrypte',
+    text: 'Chaque contenu est analysé automatiquement\u00a0: de quoi ça parle, quel récit ça porte, si c\'est politique, à quel point c\'est polarisant. Tout ça reste sur ton téléphone.',
+  },
+  {
+    num: '03',
+    color: 'var(--color-vert-menthe)',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+    title: 'Tu comprends',
+    text: 'Tu accèdes à ton profil d\'exposition. Pas un jugement, un miroir. Tu vois enfin ce que l\'algorithme a décidé de te montrer — et ce qu\'il a choisi de te cacher.',
+  },
+  {
+    num: '04',
+    color: 'var(--color-orange)',
+    icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
+    title: 'Ton Wrapped',
+    text: 'Comme un Spotify Wrapped de ton feed Instagram. 7 slides qui résument ta consommation : ton profil, ta bulle, tes biais, tes records de scroll, et des pistes pour en sortir.',
+  },
+];
+---
+
+<section id="fonctionnement">
+  <span class="section-label mono">Comment ça marche</span>
+  <div class="pipeline" data-stagger>
+    {steps.map((s, i) => (
+      <div class="step">
+        <div class="step-header">
+          <div class="step-icon" style={`background: ${s.color}; ${s.textColor ? `color: ${s.textColor}` : ''}`}>
+            <Fragment set:html={s.icon} />
+          </div>
+          {i < steps.length - 1 && (
+            <div class="step-connector">
+              <div class="step-connector-fill"></div>
+            </div>
+          )}
+        </div>
+        <div class="step-content">
+          <div class="step-num mono">{s.num}</div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .pipeline {
+    margin-top: 48px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    min-height: 160px;
+  }
+
+  .step-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+    transition: transform 0.4s var(--ease-out-back), box-shadow 0.4s ease;
+  }
+
+  .step:hover .step-icon {
+    transform: scale(1.1) rotate(-4deg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .step-connector {
+    width: 2px;
+    flex: 1;
+    background: #EEE;
+    margin: 8px 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+  }
+
+  .step-connector-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-bleu-indigo), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.2s var(--ease-out-expo);
+  }
+
+  .pipeline.revealed .step-connector-fill {
+    transform: scaleY(1);
+  }
+
+  .step-content {
+    padding-bottom: 40px;
+  }
+
+  .step-num {
+    font-size: 0.65rem;
+    color: var(--text-grey);
+    margin-bottom: 4px;
+    opacity: 0.5;
+  }
+
+  .step-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  .step-content p {
+    font-size: 1.1rem;
+    color: var(--text-grey);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  @media (max-width: 640px) {
+    .step {
+      grid-template-columns: 52px 1fr;
+      gap: 20px;
+    }
+
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+    }
+
+    .step-icon :global(svg) {
+      width: 20px;
+      height: 20px;
+    }
+
+    .step-content h3 {
+      font-size: 1.4rem;
+    }
+  }
+</style>

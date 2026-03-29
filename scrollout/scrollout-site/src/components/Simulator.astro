@@ -1,0 +1,375 @@
+---
+const profiles = {
+  normal: {
+    label: 'Feed diversifié',
+    posts: [
+      { user: '@natgeo', text: 'Les derniers glaciers d\'Islande en timelapse', cat: 'Nature', pol: 0 },
+      { user: '@konbini', text: 'Ce stand-upper a trouvé la blague parfaite sur les JO', cat: 'Humour', pol: 0 },
+      { user: '@leparisien', text: 'Paris : une nouvelle piste cyclable fait polémique', cat: 'Actualité', pol: 2 },
+      { user: '@zara', text: 'Collection été. Lien en bio.', cat: 'Mode', pol: 0, ad: true },
+      { user: '@braboricua', text: 'Recette arepas vénézuéliennes, facile !', cat: 'Food', pol: 0 },
+    ],
+  },
+  echo: {
+    label: 'Chambre d\'écho',
+    posts: [
+      { user: '@mediapart', text: 'Enquête : les lobbys de la grande distribution', cat: 'Politique', pol: 3 },
+      { user: '@blast_info', text: 'Ce que Macron ne vous dit pas sur la dette', cat: 'Politique', pol: 3 },
+      { user: '@osonscoura', text: 'Thread : pourquoi la réforme est un scandale', cat: 'Politique', pol: 3 },
+      { user: '@frustmag', text: 'L\'austérité, encore et toujours.', cat: 'Économie', pol: 2 },
+      { user: '@lemouv', text: 'Manif du 1er mai : le cortège s\'élance', cat: 'Politique', pol: 3 },
+    ],
+  },
+  polar: {
+    label: 'Feed polarisé',
+    posts: [
+      { user: '@verite_cache', text: 'ILS MENTENT. Partagez avant censure !!!', cat: 'Complot', pol: 4 },
+      { user: '@patriote_fr', text: 'Nos frontières passoires. Jusqu\'à quand ?', cat: 'Immigration', pol: 4 },
+      { user: '@eveilcitoyen', text: 'THREAD : Le plan secret de l\'UE contre les peuples', cat: 'Politique', pol: 4 },
+      { user: '@resist_now', text: 'Si tu ne partages pas tu es complice', cat: 'Militant', pol: 4 },
+      { user: '@infos_libres', text: 'Ce que les médias ne montrent JAMAIS', cat: 'Complot', pol: 4 },
+    ],
+  },
+};
+---
+
+<section id="demo" data-reveal="scale">
+  <div class="simulator">
+    <div class="sim-bg" aria-hidden="true">
+      <div class="sim-orb sim-orb-1"></div>
+      <div class="sim-orb sim-orb-2"></div>
+    </div>
+
+    <div class="sim-inner">
+      <div class="sim-header">
+        <h2>3 feeds. 3 réalités.</h2>
+        <p>Le même Instagram, 3 utilisateurs différents. Compare ce que l'algorithme fabrique.</p>
+      </div>
+
+      <div class="sim-controls">
+        <button class="sim-btn active" data-mode="normal">
+          <span class="sim-btn-dot" style="background: var(--color-vert-eau);"></span>
+          Feed diversifié
+        </button>
+        <button class="sim-btn" data-mode="echo">
+          <span class="sim-btn-dot" style="background: var(--color-orange);"></span>
+          Chambre d'écho
+        </button>
+        <button class="sim-btn" data-mode="polar">
+          <span class="sim-btn-dot" style="background: var(--color-rouge);"></span>
+          Feed polarisé
+        </button>
+      </div>
+
+      <div class="sim-body">
+        <div class="sim-feed" id="sim-feed">
+          {profiles.normal.posts.map((p) => (
+            <div class="sf-card" data-profile="normal">
+              <div class="sf-top">
+                <span class="sf-user">{p.user}</span>
+                <span class="sf-cat">{p.cat}{p.ad ? ' · Sponsorisé' : ''}</span>
+              </div>
+              <div class="sf-text">{p.text}</div>
+              <div class="sf-score">
+                <span class="sf-pol" style={`background: ${p.pol >= 3 ? 'var(--color-orange)' : p.pol >= 1 ? 'var(--color-jaune)' : '#333'}`}>{p.pol}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="sim-analysis">
+          <div class="sa-metric">
+            <div class="sa-label">Polarisation</div>
+            <div class="sa-bar"><div id="bar-polar" class="sa-fill" style="width: 15%; background: var(--color-violet);"></div></div>
+            <div class="sa-val" id="val-polar">Faible</div>
+          </div>
+          <div class="sa-metric">
+            <div class="sa-label">Part politique</div>
+            <div class="sa-bar"><div id="bar-poli" class="sa-fill" style="width: 20%; background: var(--color-orange);"></div></div>
+            <div class="sa-val" id="val-poli">1 post sur 5</div>
+          </div>
+          <div class="sa-metric">
+            <div class="sa-label">Diversité</div>
+            <div class="sa-bar"><div id="bar-div" class="sa-fill" style="width: 90%; background: var(--color-vert-eau);"></div></div>
+            <div class="sa-val" id="val-div">Élevée</div>
+          </div>
+          <div class="sa-verdict" id="sim-verdict">
+            Feed <strong>équilibré</strong>. Sujets variés, politique modérée, aucune alerte.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const data: Record<string, any> = {
+    normal: {
+      polar: 15, poli: 20, div: 90,
+      polarLabel: 'Faible', poliLabel: '1 post sur 5', divLabel: 'Élevée',
+      verdict: 'Feed <strong>équilibré</strong>. Sujets variés, politique modérée, aucune alerte.',
+      posts: [
+        { user: '@natgeo', text: 'Les derniers glaciers d\'Islande en timelapse', cat: 'Nature', pol: 0 },
+        { user: '@konbini', text: 'Ce stand-upper a trouvé la blague parfaite sur les JO', cat: 'Humour', pol: 0 },
+        { user: '@leparisien', text: 'Paris : une nouvelle piste cyclable fait polémique', cat: 'Actualité', pol: 2 },
+        { user: '@zara', text: 'Collection été. Lien en bio.', cat: 'Mode · Sponsorisé', pol: 0 },
+        { user: '@braboricua', text: 'Recette arepas vénézuéliennes !', cat: 'Food', pol: 0 },
+      ]
+    },
+    echo: {
+      polar: 48, poli: 80, div: 25,
+      polarLabel: 'Modérée', poliLabel: '4 posts sur 5', divLabel: 'Faible',
+      verdict: '<strong>Chambre d\'écho.</strong> Un seul angle politique, même sensibilité, zéro contradiction. L\'algorithme renforce ce que tu regardes déjà.',
+      posts: [
+        { user: '@mediapart', text: 'Enquête : les lobbys de la grande distribution', cat: 'Politique', pol: 3 },
+        { user: '@blast_info', text: 'Ce que Macron ne vous dit pas sur la dette', cat: 'Politique', pol: 3 },
+        { user: '@osonscoura', text: 'Thread : pourquoi la réforme est un scandale', cat: 'Politique', pol: 3 },
+        { user: '@frustmag', text: 'L\'austérité, encore et toujours.', cat: 'Économie', pol: 2 },
+        { user: '@lemouv', text: 'Manif du 1er mai : le cortège s\'élance', cat: 'Politique', pol: 3 },
+      ]
+    },
+    polar: {
+      polar: 92, poli: 100, div: 8,
+      polarLabel: 'Extrême', poliLabel: '5 posts sur 5', divLabel: 'Nulle',
+      verdict: '<strong>Tunnel de polarisation.</strong> Vocabulaire alarmiste, désignation d\'ennemis, appels au partage. La bulle est fermée.',
+      posts: [
+        { user: '@verite_cache', text: 'ILS MENTENT. Partagez avant censure !!!', cat: 'Complot', pol: 4 },
+        { user: '@patriote_fr', text: 'Nos frontières passoires. Jusqu\'à quand ?', cat: 'Immigration', pol: 4 },
+        { user: '@eveilcitoyen', text: 'THREAD : Le plan secret de l\'UE contre les peuples', cat: 'Politique', pol: 4 },
+        { user: '@resist_now', text: 'Si tu ne partages pas tu es complice', cat: 'Militant', pol: 4 },
+        { user: '@infos_libres', text: 'Ce que les médias ne montrent JAMAIS', cat: 'Complot', pol: 4 },
+      ]
+    },
+  };
+
+  function polColor(p: number) {
+    if (p >= 4) return 'var(--color-rouge)';
+    if (p >= 3) return 'var(--color-orange)';
+    if (p >= 1) return 'var(--color-jaune)';
+    return '#444';
+  }
+
+  function updateSim(mode: string) {
+    document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.sim-btn[data-mode="${mode}"]`)?.classList.add('active');
+
+    const d = data[mode];
+
+    document.getElementById('bar-polar')!.style.width = d.polar + '%';
+    document.getElementById('bar-poli')!.style.width = d.poli + '%';
+    document.getElementById('bar-div')!.style.width = d.div + '%';
+    document.getElementById('val-polar')!.innerText = d.polarLabel;
+    document.getElementById('val-poli')!.innerText = d.poliLabel;
+    document.getElementById('val-div')!.innerText = d.divLabel;
+    document.getElementById('sim-verdict')!.innerHTML = d.verdict;
+
+    const feed = document.getElementById('sim-feed')!;
+    feed.innerHTML = '';
+    for (const [i, p] of d.posts.entries()) {
+      const card = document.createElement('div');
+      card.className = 'sf-card';
+      card.style.animationDelay = `${i * 60}ms`;
+      card.innerHTML = `
+        <div class="sf-top">
+          <span class="sf-user">${p.user}</span>
+          <span class="sf-cat">${p.cat}</span>
+        </div>
+        <div class="sf-text">${p.text}</div>
+        <div class="sf-score">
+          <span class="sf-pol" style="background: ${polColor(p.pol)}">${p.pol}</span>
+        </div>
+      `;
+      feed.appendChild(card);
+    }
+  }
+
+  document.querySelectorAll('.sim-btn').forEach(btn => {
+    btn.addEventListener('click', () => updateSim((btn as HTMLElement).dataset.mode!));
+  });
+</script>
+
+<style>
+  .simulator {
+    background: #0a0a0a;
+    color: white;
+    border-radius: 24px;
+    padding: 56px 36px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sim-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .sim-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.08;
+  }
+
+  .sim-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-violet);
+    top: -20%;
+    right: -10%;
+  }
+
+  .sim-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-bleu-indigo);
+    bottom: -20%;
+    left: -10%;
+  }
+
+  .sim-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .sim-header { text-align: center; margin-bottom: 40px; }
+  .sim-header h2 { color: white; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; }
+  .sim-header p { color: #777; font-size: 1rem; }
+
+  .sim-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .sim-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s var(--ease-out-expo);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sim-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .sim-btn.active {
+    background: var(--color-bleu-indigo);
+    border-color: var(--color-bleu-indigo);
+    box-shadow: 0 4px 24px rgba(107, 107, 255, 0.3);
+  }
+
+  .sim-btn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .sim-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 800px) {
+    .sim-body { grid-template-columns: 1fr 1fr; }
+  }
+
+  .sim-feed { display: flex; flex-direction: column; gap: 8px; }
+</style>
+
+<style is:global>
+  .sf-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 14px 16px;
+    transition: all 0.3s var(--ease-out-expo);
+    animation: card-in 0.4s var(--ease-out-expo) both;
+  }
+
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .sf-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
+
+  .sf-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .sf-user { font-weight: 700; font-size: 0.8rem; color: var(--color-bleu-ciel); }
+  .sf-cat { font-size: 0.65rem; color: #555; }
+  .sf-text { font-size: 0.85rem; color: #AAA; line-height: 1.4; margin-bottom: 8px; }
+  .sf-score { display: flex; justify-content: flex-end; }
+
+  .sf-pol {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  .sim-analysis { display: flex; flex-direction: column; gap: 20px; }
+
+  .sa-metric { display: flex; flex-direction: column; gap: 6px; }
+  .sa-label { font-size: 0.8rem; color: #666; }
+  .sa-bar { height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden; }
+  .sa-fill { height: 100%; border-radius: 5px; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .sa-val { font-size: 0.75rem; color: #555; }
+
+  .sa-verdict {
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    font-size: 1rem;
+    color: #AAA;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .simulator {
+      padding: 32px 16px;
+      border-radius: 20px;
+      margin: 0 -16px;
+    }
+
+    .sim-header h2 { font-size: 1.5rem; }
+    .sim-header p { font-size: 0.85rem; }
+
+    .sim-btn {
+      padding: 10px 16px;
+      font-size: 0.75rem;
+    }
+
+    .sim-controls { gap: 8px; }
+
+    .sf-card { padding: 10px 12px; }
+    .sf-text { font-size: 0.75rem; }
+    .sf-user { font-size: 0.7rem; }
+
+    .sa-verdict {
+      padding: 14px;
+      font-size: 0.85rem;
+    }
+  }
+</style>

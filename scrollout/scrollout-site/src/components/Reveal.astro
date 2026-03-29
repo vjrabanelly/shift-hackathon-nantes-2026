@@ -1,0 +1,179 @@
+---
+const cards = [
+  {
+    color: 'var(--color-jaune)',
+    glow: 'rgba(255, 233, 74, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',
+    title: 'De quoi on te parle',
+    text: 'Politique, humour, lifestyle, actualité... Scrollout identifie les thèmes qui dominent ton feed.',
+  },
+  {
+    color: 'var(--color-orange)',
+    glow: 'rgba(255, 123, 51, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>',
+    title: 'Le poids du politique',
+    text: 'Quelle part de ton feed est politique ? Est-ce que l\'algorithme te pousse du contenu engagé sans que tu l\'aies demandé ?',
+  },
+  {
+    color: 'var(--color-violet)',
+    glow: 'rgba(139, 68, 232, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    title: 'Le niveau de polarisation',
+    text: 'Les contenus qu\'on te montre opposent-ils des camps ? Scrollout mesure la charge conflictuelle de ton feed.',
+  },
+  {
+    color: 'var(--color-rose)',
+    glow: 'rgba(232, 139, 232, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
+    title: 'Les récits qu\'on te répète',
+    text: 'Déclin, urgence, injustice... Quand le même revient en boucle, ce n\'est plus de l\'info — c\'est du conditionnement.',
+  },
+  {
+    color: 'var(--color-bleu-indigo)',
+    glow: 'rgba(107, 107, 255, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
+    title: 'Le spectre idéologique',
+    text: 'Au-delà du gauche/droite simpliste. Où se situe ce que tu consommes sur les grands clivages.',
+  },
+  {
+    color: 'var(--color-vert-eau)',
+    glow: 'rgba(136, 238, 187, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" stroke-dasharray="4 2"/><circle cx="12" cy="12" r="2"/></svg>',
+    title: 'Ta bulle de filtre',
+    text: 'Ton feed est-il divers ou enfermé dans une boucle ? Moins c\'est varié, plus la bulle est épaisse.',
+  },
+  {
+    color: 'var(--color-vert-menthe)',
+    glow: 'rgba(107, 232, 139, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    title: 'Ton profil de consommation',
+    text: 'Engagé, Zappeur, Vigilant... Scrollout détecte ton style parmi 8 profils.',
+  },
+  {
+    color: 'var(--color-bleu-ciel)',
+    glow: 'rgba(136, 204, 255, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    title: 'La carte cognitive',
+    text: 'Visualise tes thèmes en bulles, barres ou radar. Tout raconte comment ton attention se répartit.',
+  },
+  {
+    color: 'var(--color-rouge)',
+    glow: 'rgba(255, 34, 34, 0.06)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>',
+    title: 'Le paysage émotionnel',
+    text: 'Colère, joie, peur, espoir... Scrollout détecte les émotions que l\'algorithme te sert.',
+  },
+];
+---
+
+<section id="revele">
+  <span class="section-label mono">Ce qu'on te montre</span>
+  <h2 class="reveal-title" data-reveal>Ton feed raconte une histoire.<br/><span class="accent">Tu ne la connais pas encore.</span></h2>
+
+  <div class="reveal-grid" data-stagger>
+    {cards.map((c) => (
+      <div class="reveal-card" style={`--card-glow: ${c.glow}`}>
+        <div class="card-icon" style={`color: ${c.color}`}>
+          <Fragment set:html={c.icon} />
+        </div>
+        <h3>{c.title}</h3>
+        <p>{c.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .reveal-title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 48px;
+    line-height: 1.25;
+  }
+
+  .accent {
+    color: var(--color-orange);
+    background: linear-gradient(90deg, var(--color-orange), var(--color-rouge));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .reveal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .reveal-card {
+    background: var(--bg-white);
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    border: 1px solid #F0F0F0;
+    transition: all 0.4s var(--ease-out-expo);
+    position: relative;
+  }
+
+  .reveal-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: var(--card-glow);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .reveal-card:hover {
+    transform: translateY(-6px);
+    border-color: #E0E0E0;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+  }
+
+  .reveal-card:hover::after {
+    opacity: 1;
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--bg-grey-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    transition: transform 0.4s var(--ease-out-back);
+  }
+
+  .reveal-card:hover .card-icon {
+    transform: scale(1.1) rotate(-4deg);
+  }
+
+  .reveal-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .reveal-card p {
+    font-size: 0.95rem;
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 720px) {
+    .reveal-grid { grid-template-columns: 1fr; }
+
+    .reveal-card {
+      padding: 20px;
+    }
+
+    .reveal-card h3 {
+      font-size: 1.1rem;
+    }
+
+    .reveal-card p {
+      font-size: 0.9rem;
+    }
+  }
+</style>

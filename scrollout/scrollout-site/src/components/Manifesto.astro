@@ -1,0 +1,168 @@
+---
+---
+
+<section id="manifeste">
+  <div class="manifesto-grid">
+    <div class="manifesto-sidebar">
+      <span class="mono">Manifeste</span>
+    </div>
+    <div class="manifesto-content">
+      <h2 class="manifesto-title" data-reveal>
+        L'algorithme te connaît.<br />
+        <span class="accent">Toi, tu ne le connais pas.</span>
+      </h2>
+
+      <div class="blocks" data-stagger>
+        <div class="block">
+          <div class="block-num" style="background: var(--color-orange);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div>
+            <h3>Le feed n'est pas neutre</h3>
+            <p>Chaque post a été choisi pour toi. Pas par tes amis — par un algorithme qui optimise ton temps d'écran.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-num" style="background: var(--color-violet); color: white;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" stroke-dasharray="4 2"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div>
+            <h3>La bulle est invisible</h3>
+            <p>Les mêmes récits, les mêmes angles, répétés jusqu'à devenir ta normalité. La polarisation n'a pas besoin que tu sois d'accord. Elle a juste besoin que tu regardes.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-num" style="background: var(--color-bleu-indigo); color: white;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h3>Exposition &ne; conviction</h3>
+            <p>On mesure ce qu'on te montre, pas ce que tu penses. L'un est un fait. L'autre serait de la spéculation.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-num" style="background: var(--color-vert-menthe);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <h3>Reprends le contrôle</h3>
+            <p>Avec ces données, tu peux décider en connaissance de cause.</p>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="quote" data-reveal>
+        "On ne peut pas combattre ce qu'on ne peut pas voir."
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .manifesto-grid {
+      grid-template-columns: 180px 1fr;
+      gap: 60px;
+    }
+    .manifesto-sidebar {
+      position: sticky;
+      top: 40px;
+      height: fit-content;
+    }
+    .manifesto-sidebar .mono {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      opacity: 0.15;
+      font-size: 0.85rem;
+    }
+  }
+
+  .manifesto-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .accent {
+    color: var(--color-orange);
+    background: linear-gradient(90deg, var(--color-orange), var(--color-rouge));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .block {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    transition: all 0.4s var(--ease-out-expo);
+    border: 1px solid transparent;
+  }
+
+  .block:hover {
+    background: var(--bg-grey-light);
+    border-color: #E8E8E8;
+    transform: translateX(8px);
+  }
+
+  .block-num {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: transform 0.4s var(--ease-out-back);
+  }
+
+  .block:hover .block-num {
+    transform: scale(1.1) rotate(-4deg);
+  }
+
+  .block h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+
+  .block p {
+    font-size: 1.05rem;
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+
+  .quote {
+    border-left: 6px solid var(--color-orange);
+    background: linear-gradient(135deg, rgba(255, 123, 51, 0.06), rgba(139, 68, 232, 0.03));
+    padding: 32px 36px;
+    margin-top: 40px;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 600;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    line-height: 1.4;
+    font-style: italic;
+    transition: border-color 0.3s;
+  }
+
+  .quote:hover {
+    border-left-color: var(--color-violet);
+  }
+</style>

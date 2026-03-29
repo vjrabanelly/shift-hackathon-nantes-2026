@@ -1,0 +1,25 @@
+{
+  "name": "echa-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "presync": "node -e \"const fs=require('fs'),path=require('path'),p='www/assets';fs.existsSync(p)&&fs.readdirSync(p).forEach(f=>{const fp=path.join(p,f);fs.statSync(fp).isDirectory()?fs.rmSync(fp,{recursive:true}):fs.unlinkSync(fp)});console.log('Cleaned www/assets/')\"",
+    "sync": "npm run presync && vite build && npx cap sync android"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.3.0",
+    "@capacitor/cli": "^8.3.0",
+    "@capacitor/core": "^8.3.0",
+    "lit": "^3.3.2",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3"
+  }
+}

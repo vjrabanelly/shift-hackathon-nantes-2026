@@ -1,0 +1,10 @@
+import './app-shell.js';
+import './screens/screen-home.js';
+import './screens/screen-scrollout.js';
+import './screens/screen-cognition.js';
+import './screens/screen-enrichment.js';
+import './screens/screen-knowledge.js';
+import './screens/screen-posts.js';
+import './screens/screen-settings.js';
+import './screens/screen-wrapped.js';
+import './screens/screen-transparence.js';

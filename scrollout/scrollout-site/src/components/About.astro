@@ -1,0 +1,156 @@
+---
+const values = [
+  {
+    color: 'var(--color-vert-menthe)',
+    bg: 'rgba(107, 232, 139, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    title: '100% local',
+    text: 'Tes données ne quittent jamais ton téléphone.',
+  },
+  {
+    color: 'var(--color-bleu-indigo)',
+    bg: 'rgba(107, 107, 255, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>',
+    title: 'Open source',
+    text: 'Tout le code est public. Tu peux vérifier, modifier, contribuer.',
+  },
+  {
+    color: 'var(--color-orange)',
+    bg: 'rgba(255, 123, 51, 0.08)',
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    title: 'Sans pub, sans compte',
+    text: 'Pas d\'inscription, pas de tracking, pas de monétisation.',
+  },
+];
+---
+
+<section class="about" data-reveal>
+  <div class="about-inner">
+    <div class="about-badge mono">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-bleu-indigo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      Projet citoyen
+    </div>
+    <h2>Un projet citoyen,<br/>pas une startup.</h2>
+    <p class="about-desc">
+      Scrollout est né d'un constat simple&nbsp;: personne ne sait ce que l'algorithme lui montre vraiment.
+      Pas de levée de fonds, pas de business model, pas de données collectées.
+      Juste du code open source et la conviction que la transparence algorithmique
+      est un droit, pas un luxe.
+    </p>
+    <div class="about-values" data-stagger>
+      {values.map((v) => (
+        <div class="av" style={`--av-bg: ${v.bg}`}>
+          <div class="av-icon" style={`color: ${v.color}; background: ${v.bg}`}>
+            <Fragment set:html={v.icon} />
+          </div>
+          <div>
+            <strong>{v.title}</strong>
+            <span>{v.text}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: 100px 24px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+  }
+
+  .about-inner {
+    max-width: 640px;
+  }
+
+  .about-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    background: rgba(107, 107, 255, 0.06);
+    color: var(--color-bleu-indigo);
+    font-size: 0.7rem;
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+
+  .about h2 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .about-desc {
+    font-size: 1.1rem;
+    color: var(--text-grey);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .about-values {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .av {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 16px;
+    transition: all 0.3s var(--ease-out-expo);
+    border: 1px solid transparent;
+  }
+
+  .av:hover {
+    background: var(--av-bg);
+    border-color: #F0F0F0;
+  }
+
+  .av-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--ease-out-back);
+  }
+
+  .av:hover .av-icon {
+    transform: scale(1.1) rotate(-4deg);
+  }
+
+  .av strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .av span {
+    font-size: 0.95rem;
+    color: var(--text-grey);
+  }
+
+  @media (max-width: 640px) {
+    .about {
+      padding: 60px 16px;
+    }
+
+    .about-desc {
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+
+    .av { padding: 16px; }
+    .av strong { font-size: 0.9rem; }
+    .av span { font-size: 0.85rem; }
+  }
+</style>

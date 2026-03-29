@@ -1,0 +1,139 @@
+---
+import Dots from './Dots.astro';
+---
+
+<section class="cta" data-reveal>
+  <div class="cta-bg" aria-hidden="true">
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+  </div>
+
+  <div class="cta-content">
+    <h2>Scrollout est open source.</h2>
+    <p class="cta-sub">L'algorithme ne changera pas tout seul.</p>
+
+    <Dots animated={true} />
+
+    <div class="cta-buttons">
+      <a href="https://gitlab.com/api/v4/projects/tordu-jardin%2Fechafaud/packages/generic/scrollout-apk/latest/scrollout-latest.apk" class="btn btn-cta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Installer sur Android
+      </a>
+      <a href="https://gitlab.com/tordu-jardin/echafaud" class="btn btn-ghost-light" target="_blank" rel="noopener">Voir le code source</a>
+      <a href="https://gitlab.com/tordu-jardin/echafaud/-/issues" class="btn btn-ghost-light" target="_blank" rel="noopener">Contribuer</a>
+    </div>
+
+    <p class="cta-privacy mono">
+      Scrollout ne collecte aucune donnée. Tout reste sur ton téléphone. Zero tracking, zero cloud, zero bullshit.
+    </p>
+  </div>
+</section>
+
+<style>
+  .cta {
+    text-align: center;
+    padding: 120px 24px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-grey-light) 100%);
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .cta-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.06;
+  }
+
+  .cta-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-bleu-indigo);
+    top: -20%;
+    left: 20%;
+  }
+
+  .cta-orb-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-orange);
+    bottom: -20%;
+    right: 20%;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    margin-bottom: 12px;
+  }
+
+  .cta-sub {
+    font-size: 1.3rem;
+    color: var(--text-grey);
+    margin-bottom: 8px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .btn-cta {
+    background: var(--color-bleu-indigo);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 24px rgba(107, 107, 255, 0.25);
+  }
+
+  .btn-cta:hover {
+    box-shadow: 0 8px 32px rgba(107, 107, 255, 0.4);
+    transform: translateY(-3px);
+  }
+
+  .btn-ghost-light {
+    background: transparent;
+    border: 2px solid #E0E0E0;
+    color: var(--text-black);
+  }
+
+  .btn-ghost-light:hover {
+    border-color: var(--text-black);
+    background: var(--bg-grey-light);
+    transform: translateY(-3px);
+  }
+
+  .cta-privacy {
+    color: var(--text-grey);
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 640px) {
+    .cta { padding: 60px 16px; }
+    .cta-sub { font-size: 1.05rem; }
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+</style>

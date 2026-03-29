@@ -1,0 +1,264 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Session {
+  id          String   @id // timestamp-based
+  capturedAt  DateTime
+  durationSec Float
+  totalEvents Int
+  totalPosts  Int
+  captureMode String   @default("accessibility") // accessibility | adb | webview
+  device      String?
+  sourceFile  String?  // chemin JSON source
+  createdAt   DateTime @default(now())
+
+  posts   Post[]
+  metrics SessionMetrics?
+}
+
+// Métriques de qualité par session — historique debug
+model SessionMetrics {
+  id        String @id @default(cuid())
+  sessionId String @unique
+
+  // Parsing
+  totalLines   Int   @default(0)
+  parsedEvents Int   @default(0)
+  parseErrors  Int   @default(0)
+  parseRate    Float @default(0) // 0-100
+
+  // Chunks
+  chunkSuccess Int @default(0)
+  chunkFails   Int @default(0)
+
+  // Bridge
+  bridgeEvents Int @default(0)
+  bridgeErrors Int @default(0)
+
+  // MLKit
+  mlkitResults Int @default(0)
+
+  // Enrichissement
+  enrichedPosts    Int   @default(0)
+  avgPoliticalScore Float @default(0)
+  avgPolarization  Float @default(0)
+  avgConfidence    Float @default(0)
+
+  // Erreurs détaillées (JSON array of {timestamp, message, context})
+  errorLog String @default("[]")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  session Session @relation(fields: [sessionId], references: [id])
+}
+
+model Post {
+  id             String   @id // session_id:username:hash
+  sessionId      String
+  username       String
+  displayName    String   @default("")
+  caption        String   @default("")
+  hashtags       String   @default("[]") // JSON array
+  imageDesc      String   @default("")
+  imageUrls      String   @default("[]") // JSON array — URLs CDN si dispo
+  mediaType      String   @default("photo") // photo | video | carousel | reel
+  likeCount      Int      @default(0)
+  commentCount   Int      @default(0)
+  shareCount     String   @default("")
+  saveCount      String   @default("")
+  dateLabel      String   @default("") // "il y a 2 jours"
+  isSponsored    Boolean  @default(false)
+  isSuggested    Boolean  @default(false)
+  audioTrack     String   @default("")
+  mentioned      String   @default("[]") // JSON array
+  allText        String   @default("") // blob complet pour full-text search
+  ocrText        String   @default("") // texte détecté par MLKit (overlay/sous-titres brûlés)
+  mlkitLabels    String   @default("[]") // JSON [{text, confidence}] — labels MLKit vision
+  subtitles      String   @default("") // sous-titres Instagram auto-générés
+  videoUrl       String   @default("") // URL CDN vidéo (depuis WebView tracker)
+  dwellTimeMs    Int      @default(0)
+  attentionLevel String   @default("skipped") // skipped | glanced | viewed | engaged
+  category       String   @default("non classifié")
+  firstSeenAt    Int      @default(0) // timestamp ms
+  lastSeenAt     Int      @default(0)
+  seenCount      Int      @default(1)
+  createdAt      DateTime @default(now())
+
+  session      Session       @relation(fields: [sessionId], references: [id])
+  enrichment   PostEnriched?
+  observations Observation[]
+
+  @@index([sessionId])
+  @@index([username])
+  @@index([category])
+  @@index([attentionLevel])
+  @@index([isSponsored])
+  @@index([isSuggested])
+}
+
+// Phase 2 : enrichissement sémantique LLM — spec post_enriched (ROADMAP §6)
+model PostEnriched {
+  id     String @id @default(cuid())
+  postId String @unique
+
+  // ── Méta enrichissement ──
+  provider String // openai | ollama | rules
+  model    String // gpt-4o-mini | llama3 | rules-v1
+  version  String @default("1") // version des règles/prompts
+
+  // ── Texte consolidé (couche 4) ──
+  normalizedText  String @default("") // fusion caption+OCR+allText nettoyé
+  semanticSummary String @default("") // résumé LLM
+  keywordTerms    String @default("[]") // JSON array
+
+  // ── Catégorisation sémantique (taxonomie 5 niveaux) ──
+  domains         String @default("[]") // JSON array — niveau 1 (~6 domaines)
+  mainTopics      String @default("[]") // JSON array — niveau 2 (~24 thèmes)
+  secondaryTopics String @default("[]") // JSON array — niveau 2 secondaire
+  subjects        String @default("[]") // JSON array — niveau 3 (~150 sujets) [{id, themeId, label}]
+  preciseSubjects String @default("[]") // JSON array — niveau 4 (sujets précis) [{id, statement, position, confidence}]
+  contentDomain   String @default("") // ex: "actualité", "divertissement" (legacy, déduit de domains)
+  audienceTarget  String @default("") // ex: "grand public", "militant"
+
+  // ── Entités et objets du discours ──
+  persons         String @default("[]") // JSON array
+  organizations   String @default("[]") // JSON array
+  institutions    String @default("[]") // JSON array
+  countries       String @default("[]") // JSON array
+  locations       String @default("[]") // JSON array
+  politicalActors String @default("[]") // JSON array
+
+  // ── Tonalité et émotion ──
+  tone             String @default("neutral") // informatif | émotionnel | sarcastique | militant | neutre
+  primaryEmotion   String @default("") // colère | joie | peur | tristesse | dégoût | surprise | neutre
+  emotionIntensity Float  @default(0) // 0-1
+
+  // ── Portée politique (§6.5 A) ──
+  politicalExplicitnessScore Int    @default(0) // 0=apolitique, 1=social, 2=indirect, 3=explicite, 4=militant
+  politicalIssueTags         String @default("[]") // JSON array — immigration, sécurité, etc.
+  publicPolicyTags           String @default("[]") // JSON array
+  institutionalReferenceScore Float @default(0) // 0-1
+  activismSignal             Boolean @default(false)
+
+  // ── Polarisation (§6.5 B) ──
+  polarizationScore      Float   @default(0) // 0-1
+  ingroupOutgroupSignal  Boolean @default(false)
+  conflictSignal         Boolean @default(false)
+  moralAbsoluteSignal    Boolean @default(false)
+  enemyDesignationSignal Boolean @default(false)
+
+  // ── Axes politiques (political compass) ──
+  axisEconomic  Float   @default(0) // -1 gauche → +1 droite
+  axisSocietal  Float   @default(0) // -1 progressiste → +1 conservateur
+  axisAuthority Float   @default(0) // -1 libertaire → +1 autoritaire
+  axisSystem    Float   @default(0) // -1 anti-système → +1 institutionnel
+  dominantAxis  String  @default("") // economic | societal | authority | system | ""
+
+  // ── Catégorie média ──
+  mediaCategory String @default("") // divertissement | information | opinion | intox | pub | education
+  mediaQuality  String @default("") // factuel | émotionnel | sensationnel | trompeur | neutre
+
+  // ── Narratif (§6.4) ──
+  narrativeFrame       String @default("") // déclin | urgence | injustice | révélation | etc.
+  callToActionType     String @default("aucun") // aucun | commenter | partager | s'indigner | etc.
+  problemSolutionPattern String @default("")
+
+  // ── Qualité ──
+  confidenceScore Float   @default(0) // 0-1
+  reviewFlag      Boolean @default(false)
+  reviewReason    String  @default("")
+
+  // ── Analyse vidéo (EPIC-012) ──
+  audioTranscription String @default("") // transcription audio Whisper
+  mediaMessage       String @default("") // message principal du média (inféré LLM)
+  mediaIntent        String @default("") // informer|divertir|vendre|convaincre|émouvoir|éduquer|provoquer
+
+  // ── Embedding optionnel ──
+  embedding Bytes? // vector pour similarity search
+
+  // ── Timestamps ──
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post Post @relation(fields: [postId], references: [id])
+
+  @@index([postId])
+  @@index([provider])
+  @@index([politicalExplicitnessScore])
+  @@index([polarizationScore])
+  @@index([narrativeFrame])
+  @@index([confidenceScore])
+  @@index([reviewFlag])
+}
+
+// ─── Couche ontologique : Graphe de connaissances ───────────────────
+
+model KnowledgeEntity {
+  id            String   @id @default(cuid())
+  canonicalName String   @unique // "emmanuel macron", "immigration", "déclin"
+  type          String   // Person | Organization | Institution | Theme | Subject | PreciseSubject | Narrative | Emotion | Country | Location
+  aliases       String   @default("[]") // JSON array: ["macron", "e.macron", "président"]
+  metadata      String   @default("{}") // JSON: propriétés libres
+
+  // Métriques agrégées (dénormalisées pour perf)
+  mentionCount Int      @default(0)
+  lastSeenAt   DateTime?
+  avgSentiment Float    @default(0) // -1 à +1
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  outgoingEdges KnowledgeEdge[] @relation("source")
+  incomingEdges KnowledgeEdge[] @relation("target")
+  observations  Observation[]
+
+  @@index([type])
+  @@index([mentionCount])
+}
+
+model KnowledgeEdge {
+  id       String @id @default(cuid())
+  sourceId String
+  targetId String
+  relation String // belongsTo | affiliatedWith | opposedTo | relatedTo | subTopicOf
+  weight   Float  @default(1) // force de la relation
+  metadata String @default("{}") // JSON
+
+  createdAt DateTime @default(now())
+
+  source KnowledgeEntity @relation("source", fields: [sourceId], references: [id])
+  target KnowledgeEntity @relation("target", fields: [targetId], references: [id])
+
+  @@unique([sourceId, targetId, relation])
+  @@index([relation])
+  @@index([sourceId])
+  @@index([targetId])
+}
+
+model Observation {
+  id         String @id @default(cuid())
+  postId     String
+  entityId   String
+  relation   String // mentions | isAbout | takesPosition | evokes | uses | targets
+  stance     String @default("") // pour | contre | neutre | ambigu
+  intensity  Float  @default(0) // 0-1
+  confidence Float  @default(0) // 0-1
+  evidence   String @default("") // extrait justificatif
+  source     String // rules | llm | manual
+
+  createdAt DateTime @default(now())
+
+  post   Post            @relation(fields: [postId], references: [id])
+  entity KnowledgeEntity @relation(fields: [entityId], references: [id])
+
+  @@index([postId])
+  @@index([entityId])
+  @@index([relation])
+}
