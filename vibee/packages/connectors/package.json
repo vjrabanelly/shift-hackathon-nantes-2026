@@ -1,0 +1,13 @@
+{
+  "name": "@partyjam/connectors",
+  "version": "0.1.0",
+  "main": "dist/connectors/src/index.js",
+  "types": "dist/connectors/src/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.37",
+    "typescript": "^5.4.5"
+  }
+}

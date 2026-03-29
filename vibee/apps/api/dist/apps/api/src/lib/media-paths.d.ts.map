@@ -1,0 +1,1 @@
+{"version":3,"file":"media-paths.d.ts","sourceRoot":"","sources":["../../../../../src/lib/media-paths.ts"],"names":[],"mappings":"AAGA,eAAO,MAAM,UAAU,QAAwE,CAAA;AAC/F,eAAO,MAAM,SAAS,QAAiC,CAAA;AACvD,eAAO,MAAM,YAAY,QAA+B,CAAA;AACxD,eAAO,MAAM,eAAe,QAAuC,CAAA;AAEnE,wBAAgB,iBAAiB,CAAC,OAAO,EAAE,MAAM,GAAG,MAAM,CAEzD;AAED,wBAAgB,oBAAoB,CAAC,OAAO,EAAE,MAAM,GAAG,MAAM,CAE5D"}

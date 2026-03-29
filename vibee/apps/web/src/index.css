@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&display=swap');
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Manrope', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  background:
+    radial-gradient(circle at 16% 14%, rgba(63, 224, 138, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at 84% 12%, rgba(255,255,255,0.05) 0%, transparent 24%),
+    radial-gradient(circle at 50% 110%, rgba(63, 224, 138, 0.04) 0%, transparent 36%),
+    linear-gradient(180deg, #16181b 0%, #111317 52%, #0c0d10 100%);
+  background-attachment: fixed;
+}
+
+/* Subtle grid noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 3px 3px, 4px 4px;
+}
+
+/* Drifting dot overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(63, 224, 138, 0.1) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 16%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 34% 72%, rgba(63, 224, 138, 0.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 78%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px);
+  background-size: 240px 240px, 280px 280px, 260px 260px, 300px 300px;
+  animation: drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(10px, -14px, 0); }
+  100% { transform: translate3d(-8px, 10px, 0); }
+}
