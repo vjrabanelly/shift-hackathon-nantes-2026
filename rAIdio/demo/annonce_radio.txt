@@ -1,0 +1,18 @@
+
+Demo scripté pour la présentation
+
+*Annonce Radio d'urgence*
+
+<radio - joué pour l'auditoire>
+Le texte pour le deuxième audio: Nous interrompons notre programme pour vous informer d’une alerte météo ! Des rafales de vents dépassant les 300 km/h, place toute la région en vigilance noire. Les réseau mobile et internet sont actuellement coupés. Les autorités vous demande de rester chez vous pour éviter tout danger. Gardez la radio allumée, nous vous tiendrons informés en direct.
+<utilisateur>(double clic)
+Pour ecouter un resumé de l'annonce précédente.
+
+<radio>
+Voici un resumé de l'annonce précédente des informations importantes à retenir : une tempête d’une rare intensité est en cours, avec des rafales de vent dépassant les 120 km/h. Les autorités recommandent de rester chez soi et d’éviter tout déplacement non indispensable. Si vous devez sortir, soyez extrêmement prudents et informez-vous sur les routes praticables.
+
+<utilisateur>(PTT)
+Ma voiture est sous les arbres, puis-je sortir pour la déplacer ?
+
+<radio>
+Nous vous déconseillons fortement de sortir pour déplacer votre voiture, surtout si elle est sous des arbres. Votre sécurité est la priorité absolue.

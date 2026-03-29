@@ -1,0 +1,6 @@
+# One sentence per line => auto-generated filenames in --output-dir
+Message de test pour la radio d'urgence.
+Evacuez calmement la zone et suivez les consignes.
+
+# Or explicit output_path<TAB>text
+/tmp/alerte-prioritaire.wav	Alerte prioritaire sur le secteur ouest.

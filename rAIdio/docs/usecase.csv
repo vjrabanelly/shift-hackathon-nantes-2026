@@ -1,0 +1,43 @@
+Thème,Situations,Prompts
+NantesTempête,Plus d’électricité,L’électricité a sauté chez moi pendant la tempête et le réseau est coupé. C'est la galère
+NantesTempête,Plus de réseau mobile / internet,Le tel capte plus. Je n'arrive plus à joindre ma compagne. Ça me stress.
+NantesTempête,Batterie de téléphone très faible,Mon téléphone est presque déchargé et je n’ai plus de courant. Comment économiser la batterie et quelles fonctions garder actives ?
+NantesTempête,Fenêtre cassée / vitre soufflée,Une fenêtre s’est brisée avec le vent. Je fais quoi pour éviter que l'eau ne rentre ?
+NantesTempête,Infiltration d’eau par le toit ou les fenêtres,De l’eau entre par le toit ou les fenêtres. Que dois-je faire tout de suite et quelles zones éviter ?
+NantesTempête,Cave ou rez-de-chaussée qui commence à inonder,L’eau monte dans la cave ou au rez-de-chaussée. Est-ce qu'il y a un risque électrique ?
+NantesTempête,Chauffage arrêté / logement qui refroidit,Je n’ai plus de chauffage et il fait froid.
+NantesTempête,Odeur de brûlé / suspicion de problème électrique,Je sens une odeur de brûlé après une coupure de courant. Il se passe quoi là ?
+NantesTempête,Odeur de gaz,Je crois sentir du gaz pendant la tempête.
+NantesTempête,Arbre ou objet tombé près de la maison,Un arbre ou un gros objet est tombé près de la maison.
+NantesTempête,Toiture / volets / structure qui claquent fortement,J’entends la toiture ou les volets claquer très fort.
+NantesTempête,Plus d’eau au robinet ou pression très faible,Je n’ai presque plus d’eau au robinet.
+NantesTempête,Réfrigérateur / congélateur hors service,Le courant est coupé depuis un moment. Combien de temps garder le frigo fermé et quels aliments risquent de ne plus être sûrs ?
+NantesTempête,Enfant / personne âgée / animal paniqué,Je suis avec un enfant et une personne âgée paniqué
+NantesTempête,Besoin d’un kit d’urgence avec ce qu’il y a à la maison,Le réseau est coupé et la tempête dure. Fais-moi une checklist d’urgence avec ce que je peux trouver à la maison.
+NantesTempête,Impossible de joindre des proches,Je ne peux joindre personne. Est-ce que je peux sortir ?
+NantesTempête,Décider s’il faut évacuer ou rester confiné,Je pense devoir quitter la maison. Est-ce que je peux sortir sans risque ?
+NantesTempête,Rue bloquée / voiture potentiellement dangereuse à déplacer,Un arbre bloque ma rue et je ne sais pas si je peux déplacer la voiture.
+NantesTempête,Immeuble dans le noir / ascenseur hors service,"Je suis en immeuble, l’ascenseur est arrêté et les parties communes sont dans le noir."
+NantesTempête,Cuisiner ou se chauffer sans électricité,Je n’ai plus de courant et je veux manger ou me réchauffer.
+NantesTempête,Après la tempête : premières vérifications avant de ressortir,"Le vent baisse un peu. Quelles vérifications faire avant de sortir, toucher les installations ou rebrancher des appareils ?"
+BateauTempête,Rafales très fortes / mer très formée,"Je suis sur un bateau en pleine tempête, le réseau est coupé et les rafales se renforcent. Quelles sont les priorités immédiates pour l’équipage et le bateau ?"
+BateauTempête,Moteur en panne,Le moteur vient de tomber en panne dans la tempête. Quelles actions faire tout de suite pour garder le contrôle du bateau ?
+BateauTempête,Plus de GPS / AIS / cartographie,"Je n’ai plus le GPS, l’AIS ou la cartographie. Comment naviguer prudemment avec les moyens de secours à bord ?"
+BateauTempête,Plus de VHF ou de communication,Je n’ai plus de réseau ni de VHF fonctionnelle. Comment me signaler et préparer une demande d’aide si l’électronique revient ?
+BateauTempête,Batteries faibles / instruments qui s’éteignent,Les batteries baissent vite et certains instruments s’éteignent. Que faut-il alimenter en priorité ?
+BateauTempête,Ancre qui chasse,Je suis au mouillage et l’ancre chasse avec les rafales. Comment réagir sans paniquer ?
+BateauTempête,Voie d’eau,On prend de l’eau à bord. Aide-moi à faire une checklist immédiate pour localiser la fuite et garder le bateau à flot.
+BateauTempête,Pompe de cale en panne,La pompe de cale ne marche plus pendant la tempête. Quelles solutions de secours improviser immédiatement ?
+BateauTempête,Voile déchirée / gréement endommagé,Une voile est déchirée ou le gréement semble touché. Quelle manœuvre est la plus prudente pour sécuriser le bateau ?
+BateauTempête,Barre ou gouvernail endommagé,La barre répond mal ou le gouvernail semble abîmé. Quelles solutions de secours puis-je essayer ?
+BateauTempête,Pilote automatique hors service,Le pilote automatique a lâché et l’équipage fatigue. Comment répartir les tâches et ménager tout le monde ?
+BateauTempête,Visibilité quasi nulle / nuit / pluie,Je n’y vois presque plus rien avec la pluie et la nuit. Comment réduire les risques de collision ou d’échouement ?
+BateauTempête,Dérive vers la côte ou des hauts-fonds,Le bateau dérive vers la côte ou des hauts-fonds. Comment prioriser mes actions dans les prochaines minutes ?
+BateauTempête,Équipier blessé ou en hypothermie,"Un équipier est blessé ou en hypothermie. Comment le protéger, le surveiller et organiser le bord ?"
+BateauTempête,Homme à la mer,Une personne est tombée à l’eau pendant la tempête. Donne-moi l’ordre des actions vitales à lancer immédiatement.
+BateauTempête,Équipage paniqué ou épuisé,"L’équipage panique et fatigue. Comment organiser les rôles, les pauses et les consignes les plus simples ?"
+BateauTempête,"Choisir entre tenir la mer, mouiller ou se mettre à l’abri","Je dois choisir entre tenir la mer, me mettre à l’abri ou mouiller. Quels critères concrets regarder à bord ?"
+BateauTempête,Feux de navigation ou éclairage du pont hors service,Les feux de navigation ou l’éclairage du pont ne fonctionnent plus. Quelles solutions de secours improviser ?
+BateauTempête,Amarres qui souffrent au port / bateau qui tape,Je suis au port et les amarres prennent des chocs énormes. Comment protéger le bateau et éviter de tomber à l’eau ?
+BateauTempête,Préparer un abandon possible du bateau,J’ai peur qu’il faille abandonner le bateau. Quels signes doivent me faire préparer le radeau et les gilets sans perdre de temps ?
+BateauTempête,Après la tempête : inspection avant retour au port ou reprise de route,Le plus gros de la tempête semble passer. Quelles vérifications faire avant d’entrer au port ou de repartir ?

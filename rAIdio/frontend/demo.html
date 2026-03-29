@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rAIdio — Demo Pilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+  :root {
+    --bg-dark: #1a1a18;
+    --bg-panel: #2a2b26;
+    --bg-inset: #1e1f1a;
+    --metal-light: #3a3b35;
+    --metal-mid: #2e2f29;
+    --metal-dark: #222320;
+    --amber: #e8a524;
+    --amber-dim: #7a5a1a;
+    --amber-glow: #ffbf40;
+    --red: #e83a2a;
+    --red-glow: #ff5544;
+    --green: #4ae84a;
+    --green-dim: #1a6a1a;
+    --cyan: #4ad4d4;
+    --text-primary: #d4c8a0;
+    --text-dim: #6a6450;
+    --text-stencil: #8a8470;
+    --rivet: #4a4b44;
+    --border-groove: #1a1b16;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-y: auto;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(232,165,36,0.03) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px),
+      var(--bg-dark);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+
+  /* === HEADER === */
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 2rem;
+    color: var(--amber);
+    text-shadow: 0 0 20px rgba(232,165,36,0.4);
+    letter-spacing: 3px;
+  }
+  .header .subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-stencil);
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  /* === STATUS BAR === */
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+  }
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red-glow);
+    transition: all 0.3s;
+  }
+  .status-dot.connected {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+  }
+  .status-label {
+    color: var(--text-dim);
+  }
+
+  /* === MAIN CONTAINER === */
+  .container {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* === PANEL === */
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--metal-light);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 4px 12px rgba(0,0,0,0.4);
+  }
+  .panel-header {
+    background: var(--metal-dark);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-groove);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .panel-header h2 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--amber);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .panel-header .icon {
+    font-size: 1.1rem;
+  }
+  .panel-body {
+    padding: 16px;
+  }
+
+  /* === ALERT BUTTONS === */
+  .alert-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-critical {
+    background: linear-gradient(180deg, #c0302a 0%, #8a1a16 100%);
+    color: #fff;
+    border: 1px solid #e03a30;
+    box-shadow: 0 0 12px rgba(224,58,48,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .btn-critical:hover {
+    background: linear-gradient(180deg, #d43a34 0%, #a02018 100%);
+    box-shadow: 0 0 20px rgba(224,58,48,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-critical.active {
+    animation: pulse-red 0.6s ease-in-out;
+  }
+
+  .btn-warning {
+    background: linear-gradient(180deg, #b88a20 0%, #7a5a10 100%);
+    color: #fff;
+    border: 1px solid #d4a020;
+    box-shadow: 0 0 12px rgba(212,160,32,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .btn-warning:hover {
+    background: linear-gradient(180deg, #c89a28 0%, #8a6a14 100%);
+    box-shadow: 0 0 20px rgba(212,160,32,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-warning.active {
+    animation: pulse-amber 0.6s ease-in-out;
+  }
+
+  .btn-play {
+    background: linear-gradient(180deg, var(--metal-light) 0%, var(--metal-dark) 100%);
+    color: var(--text-primary);
+    border: 1px solid var(--metal-light);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+  .btn-play:hover {
+    background: linear-gradient(180deg, #4a4b44 0%, var(--metal-mid) 100%);
+    color: var(--amber);
+  }
+  .btn-play.playing {
+    color: var(--green);
+    border-color: var(--green-dim);
+    box-shadow: 0 0 8px rgba(74,232,74,0.2);
+  }
+
+  .btn-stop {
+    background: linear-gradient(180deg, #6a2020 0%, #3a1010 100%);
+    color: var(--red);
+    border: 1px solid #8a3030;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+  .btn-stop:hover {
+    background: linear-gradient(180deg, #7a2828 0%, #4a1818 100%);
+    color: var(--red-glow);
+  }
+
+  .btn-browser {
+    background: linear-gradient(180deg, #1a4a3a 0%, #0a2a1a 100%);
+    color: var(--green);
+    border: 1px solid #2a6a4a;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+  .btn-browser:hover {
+    background: linear-gradient(180deg, #2a5a4a 0%, #1a3a2a 100%);
+  }
+
+  /* === SOUND FILES LIST === */
+  .sound-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .sound-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-groove);
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .sound-item:hover {
+    border-color: var(--metal-light);
+  }
+  .sound-item .filename {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    flex: 1;
+  }
+  .sound-item .filesize {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .sound-item .actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  /* === LOG === */
+  .log-area {
+    background: var(--bg-inset);
+    border: 1px solid var(--border-groove);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    height: 140px;
+    overflow-y: auto;
+    line-height: 1.6;
+  }
+  .log-area .log-entry {
+    margin-bottom: 2px;
+  }
+  .log-area .log-entry .ts {
+    color: var(--text-dim);
+  }
+  .log-area .log-entry.alert {
+    color: var(--red);
+  }
+  .log-area .log-entry.info {
+    color: var(--green);
+  }
+  .log-area .log-entry.play {
+    color: var(--cyan);
+  }
+
+  /* Scrollbar */
+  .log-area::-webkit-scrollbar { width: 6px; }
+  .log-area::-webkit-scrollbar-track { background: var(--bg-inset); }
+  .log-area::-webkit-scrollbar-thumb {
+    background: var(--amber-dim);
+    border-radius: 3px;
+  }
+  .log-area::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+  /* === DEMO SCRIPT === */
+  .script-area {
+    background: var(--bg-inset);
+    border: 1px solid var(--border-groove);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  .script-area .step {
+    margin-bottom: 8px;
+    padding-left: 8px;
+    border-left: 2px solid var(--metal-light);
+  }
+  .script-area .step-label {
+    color: var(--amber);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .script-area .step-radio { border-left-color: var(--cyan); }
+  .script-area .step-user { border-left-color: var(--green); }
+  .script-area .step-ai { border-left-color: var(--amber); }
+
+  .script-area::-webkit-scrollbar { width: 6px; }
+  .script-area::-webkit-scrollbar-track { background: var(--bg-inset); }
+  .script-area::-webkit-scrollbar-thumb { background: var(--amber-dim); border-radius: 3px; }
+
+  /* === ANIMATIONS === */
+  @keyframes pulse-red {
+    0% { box-shadow: 0 0 12px rgba(224,58,48,0.3); }
+    50% { box-shadow: 0 0 30px rgba(224,58,48,0.7), 0 0 60px rgba(224,58,48,0.3); }
+    100% { box-shadow: 0 0 12px rgba(224,58,48,0.3); }
+  }
+  @keyframes pulse-amber {
+    0% { box-shadow: 0 0 12px rgba(212,160,32,0.3); }
+    50% { box-shadow: 0 0 30px rgba(212,160,32,0.7), 0 0 60px rgba(212,160,32,0.3); }
+    100% { box-shadow: 0 0 12px rgba(212,160,32,0.3); }
+  }
+
+  /* === LOADING === */
+  .loading {
+    text-align: center;
+    color: var(--text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>rAIdio</h1>
+  <div class="subtitle">// DEMO PILOT CONSOLE //</div>
+</div>
+
+<div class="status-bar">
+  <div class="status-dot" id="statusDot"></div>
+  <span class="status-label" id="statusLabel">Connexion...</span>
+</div>
+
+<div class="container">
+
+  <!-- ALERTES -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="icon">🚨</span>
+      <h2>Alertes</h2>
+    </div>
+    <div class="panel-body">
+      <div class="alert-buttons">
+        <button class="btn btn-critical" onclick="triggerAlert('critical')">
+          ⚠ Alerte Critique
+        </button>
+        <button class="btn btn-warning" onclick="triggerAlert('warning')">
+          🔔 Alerte Warning
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FICHIERS AUDIO -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="icon">🎵</span>
+      <h2>Fichiers Audio</h2>
+    </div>
+    <div class="panel-body">
+      <div class="sound-list" id="soundList">
+        <div class="loading">Chargement...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DEMO -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="icon">📋</span>
+      <h2>Script Demo</h2>
+    </div>
+    <div class="panel-body">
+      <div class="script-area">
+        <div class="step step-radio">
+          <div class="step-label">1. Radio — Annonce d'urgence</div>
+          Lancer l'annonce radio (annonce_radio.mp3) via le bouton ▶ Speaker
+        </div>
+        <div class="step step-user">
+          <div class="step-label">2. Utilisateur — Double-clic PTT</div>
+          Double-clic pour ecouter le resume de l'annonce precedente
+        </div>
+        <div class="step step-ai">
+          <div class="step-label">3. rAIdio — Synthese vocale</div>
+          Jouer synthese-annonce.wav pour simuler la reponse IA
+        </div>
+        <div class="step step-user">
+          <div class="step-label">4. Utilisateur — Question PTT</div>
+          "Ma voiture est sous les arbres, puis-je sortir pour la deplacer ?"
+        </div>
+        <div class="step step-ai">
+          <div class="step-label">5. rAIdio — Reponse IA</div>
+          Jouer regles-securite.wav pour simuler la reponse
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="icon">📡</span>
+      <h2>Log</h2>
+    </div>
+    <div class="panel-body">
+      <div class="log-area" id="logArea"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ---- State ----
+let ws = null;
+let audioCtx = null;
+let speakerPlaying = null;  // filename currently playing on speaker
+
+// ---- WebSocket ----
+function connectWS() {
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  ws = new WebSocket(`${proto}//${location.host}/ws`);
+
+  ws.onopen = () => {
+    document.getElementById('statusDot').classList.add('connected');
+    document.getElementById('statusLabel').textContent = 'Connecte';
+    addLog('info', 'WebSocket connecte');
+  };
+
+  ws.onclose = () => {
+    document.getElementById('statusDot').classList.remove('connected');
+    document.getElementById('statusLabel').textContent = 'Deconnecte';
+    addLog('alert', 'WebSocket deconnecte — reconnexion dans 2s...');
+    setTimeout(connectWS, 2000);
+  };
+
+  ws.onmessage = (ev) => {
+    try {
+      const data = JSON.parse(ev.data);
+      if (data.type === 'alert') {
+        addLog('alert', `Alerte ${data.severity} declenchee`);
+      } else if (data.type === 'playing') {
+        addLog('play', `Speaker: ${data.filename}`);
+        setSpeakerState(data.filename);
+      } else if (data.type === 'stopped') {
+        addLog('info', 'Lecture arretee');
+        setSpeakerState(null);
+      }
+    } catch(e) {}
+  };
+}
+
+// ---- Audio Context (for browser playback) ----
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+// ---- Alert ----
+async function triggerAlert(severity) {
+  const btn = event.target.closest('.btn');
+  btn.classList.add('active');
+  setTimeout(() => btn.classList.remove('active'), 600);
+
+  addLog('alert', `Declenchement alerte ${severity}...`);
+
+  try {
+    const resp = await fetch(`/api/alert/${severity}`, { method: 'POST' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+    // Also play in browser
+    const arrayBuf = await resp.arrayBuffer();
+    const ctx = ensureAudioCtx();
+    const audioBuf = await ctx.decodeAudioData(arrayBuf);
+    const source = ctx.createBufferSource();
+    source.buffer = audioBuf;
+    source.connect(ctx.destination);
+    source.start();
+
+    addLog('alert', `Alerte ${severity} OK`);
+  } catch(e) {
+    addLog('alert', `Erreur: ${e.message}`);
+  }
+}
+
+// ---- Sound files ----
+async function loadSounds() {
+  try {
+    const resp = await fetch('/api/sounds');
+    const data = await resp.json();
+    renderSounds(data.sounds);
+  } catch(e) {
+    document.getElementById('soundList').innerHTML =
+      '<div class="loading">Erreur chargement</div>';
+  }
+}
+
+function renderSounds(sounds) {
+  const container = document.getElementById('soundList');
+  if (!sounds.length) {
+    container.innerHTML = '<div class="loading">Aucun fichier audio dans demo/</div>';
+    return;
+  }
+
+  container.innerHTML = sounds.map(s => `
+    <div class="sound-item" id="sound-${CSS.escape(s.filename)}">
+      <span class="filename">${s.filename}</span>
+      <span class="filesize">${s.size_kb} KB</span>
+      <div class="actions">
+        <button class="btn btn-browser" onclick="playInBrowser('${s.filename}')" title="Ecouter dans le navigateur">
+          🎧
+        </button>
+        <button class="btn btn-play" onclick="playOnSpeaker('${s.filename}')" title="Jouer sur le speaker du Pi">
+          ▶ Speaker
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function playInBrowser(filename) {
+  addLog('play', `Navigateur: ${filename}`);
+  try {
+    const resp = await fetch(`/api/sounds/${encodeURIComponent(filename)}`);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const arrayBuf = await resp.arrayBuffer();
+    const ctx = ensureAudioCtx();
+    const audioBuf = await ctx.decodeAudioData(arrayBuf);
+    const source = ctx.createBufferSource();
+    source.buffer = audioBuf;
+    source.connect(ctx.destination);
+    source.start();
+
+    // Highlight
+    const item = document.getElementById(`sound-${CSS.escape(filename)}`);
+    if (item) {
+      item.style.borderColor = 'var(--green-dim)';
+      source.onended = () => { item.style.borderColor = ''; };
+    }
+  } catch(e) {
+    addLog('alert', `Erreur lecture navigateur: ${e.message}`);
+  }
+}
+
+function setSpeakerState(filename) {
+  // Reset all speaker buttons
+  document.querySelectorAll('.btn-play').forEach(btn => {
+    btn.classList.remove('playing');
+    btn.textContent = '▶ Speaker';
+  });
+  speakerPlaying = filename;
+  if (filename) {
+    const item = document.getElementById(`sound-${CSS.escape(filename)}`);
+    if (item) {
+      const btn = item.querySelector('.btn-play');
+      if (btn) {
+        btn.classList.add('playing');
+        btn.textContent = '⏹ Stop';
+      }
+    }
+  }
+}
+
+async function playOnSpeaker(filename) {
+  // Toggle: if already playing this file, stop it
+  if (speakerPlaying === filename) {
+    try {
+      await fetch('/api/stop', { method: 'POST' });
+      addLog('info', `Stop: ${filename}`);
+      setSpeakerState(null);
+    } catch(e) {
+      addLog('alert', `Erreur stop: ${e.message}`);
+    }
+    return;
+  }
+
+  // If something else is playing, stop it first
+  if (speakerPlaying) {
+    await fetch('/api/stop', { method: 'POST' });
+  }
+
+  addLog('play', `Speaker: ${filename}`);
+  try {
+    const resp = await fetch(`/api/play/${encodeURIComponent(filename)}`, { method: 'POST' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    addLog('info', `Lecture lancee: ${filename}`);
+    setSpeakerState(filename);
+  } catch(e) {
+    addLog('alert', `Erreur lecture speaker: ${e.message}`);
+  }
+}
+
+// ---- Log ----
+function addLog(type, message) {
+  const logArea = document.getElementById('logArea');
+  const now = new Date();
+  const ts = now.toLocaleTimeString('fr-FR', { hour12: false }) +
+    '.' + String(now.getMilliseconds()).padStart(3, '0');
+
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  entry.innerHTML = `<span class="ts">[${ts}]</span> ${message}`;
+  logArea.appendChild(entry);
+  logArea.scrollTop = logArea.scrollHeight;
+}
+
+// ---- Init ----
+connectWS();
+loadSounds();
+addLog('info', 'Demo Pilot initialise');
+</script>
+</body>
+</html>
