@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,600;1,200&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-marie-dark: #29246a;
+  --color-marie-light: #f4f3ef;
+  --color-marie-blue: #1e3cae;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-marie-light text-marie-dark font-sans font-light;
+  }
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg rounded-3xl;
+}
+
+.btn-primary {
+  @apply bg-marie-blue/20 text-marie-dark border-2 border-marie-blue px-6 py-3 rounded-full font-semibold transition-all hover:bg-marie-blue/30 active:scale-95 disabled:opacity-50;
+}
+
+.btn-secondary {
+  @apply border-2 border-marie-dark text-marie-dark px-6 py-3 rounded-full font-semibold transition-all hover:bg-marie-dark/5;
+}
+
+@keyframes progress-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-progress {
+  animation: progress-pulse 1.5s infinite;
+}
