@@ -18,10 +18,6 @@
 
 ❤️ **DDD**: blabla
 
-### Secret price:
-
-🏴‍☠️ **EEE**: blabla
-
 ### Other projects
 
 🧨 **XXX**: blabla
