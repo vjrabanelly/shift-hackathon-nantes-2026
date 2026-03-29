@@ -1,0 +1,68 @@
+services:
+  odoo:
+    image: odoo:17.0
+    container_name: homeops-odoo
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./odoo_addons:/mnt/extra-addons
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    container_name: homeops-db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: homeops-telegram-bot
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      SQLITE_PATH: /data/hodoor.db
+      API_PORT: "8000"
+    volumes:
+      - hodoor-data:/data
+    restart: unless-stopped
+
+  jeedom:
+    image: jeedom/jeedom:latest
+    container_name: homeops-jeedom
+    ports:
+      - "9080:80"
+    volumes:
+      - jeedom-data:/var/www/html
+      - jeedom-db:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  odoo-data:
+  pg-data:
+  odoo-addons:
+  hodoor-data:
+  jeedom-data:
+  jeedom-db:
