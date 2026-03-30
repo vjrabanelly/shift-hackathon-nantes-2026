@@ -1,0 +1,15 @@
+.git
+.clever.json
+.env
+.env.*
+node_modules
+**/node_modules
+docs
+scripts
+supabase
+_bmad
+__pycache__
+**/__pycache__
+*.log
+docker-compose.yml
+apps/api/Dockerfile.dev

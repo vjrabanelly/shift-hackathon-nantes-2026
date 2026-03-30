@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.env.local
+.clever.json
+*.log
+/services/__pycache__
+*.pyc
