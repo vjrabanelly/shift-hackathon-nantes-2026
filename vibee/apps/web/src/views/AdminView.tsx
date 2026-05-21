@@ -120,7 +120,11 @@ export function AdminView() {
   }
 
   const nowPlayingTrack = eventState?.now_playing
-    ? { ...eventState.now_playing, elapsed_seconds: eventState.now_playing.elapsed_seconds ?? 0 }
+    ? {
+        ...eventState.now_playing,
+        elapsed_seconds: eventState.now_playing.elapsed_seconds ?? 0,
+        essentia_features: eventState.now_playing.essentia_features ?? null,
+      }
     : null
 
   const browserPlayerUrl = eventId && nowPlayingTrack

@@ -106,9 +106,9 @@ export class TrackResolver {
     }
 
     try {
-      await QueueEngine.getInstance().reorder(eventId)
+      await QueueEngine.getInstance().insertAtBestPosition(eventId, trackId)
     } catch (err) {
-      console.error('[TrackResolver] Queue reorder failed:', err)
+      console.error('[TrackResolver] Queue insert failed:', err)
     }
 
     try {

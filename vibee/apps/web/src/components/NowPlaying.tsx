@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
+import { toCamelotCode } from '../lib/camelot'
 
 interface NowPlayingTrack {
   id: string
   title: string
   artist: string
   cover_url: string | null
-  duration: number | null       // seconds
-  elapsed_seconds: number       // seconds since track started
+  duration: number | null
+  elapsed_seconds: number
+  essentia_features?: { bpm?: number; key?: string } | null
 }
 
 interface Props {
@@ -17,12 +19,10 @@ interface Props {
 export function NowPlaying({ nowPlaying, audioUrl }: Props) {
   const [elapsed, setElapsed] = useState(nowPlaying?.elapsed_seconds ?? 0)
 
-  // Reset elapsed when track changes
   useEffect(() => {
     setElapsed(nowPlaying?.elapsed_seconds ?? 0)
   }, [nowPlaying?.id])
 
-  // Tick every second
   useEffect(() => {
     if (!nowPlaying) return
     const interval = setInterval(() => {
@@ -51,6 +51,9 @@ export function NowPlaying({ nowPlaying, audioUrl }: Props) {
     return `${m}:${s.toString().padStart(2, '0')}`
   }
 
+  const bpm = nowPlaying.essentia_features?.bpm
+  const camelotCode = toCamelotCode(nowPlaying.essentia_features?.key)
+
   return (
     <div className="flex flex-col items-center gap-4 py-4">
       {/* Cover Art */}
@@ -75,6 +78,20 @@ export function NowPlaying({ nowPlaying, audioUrl }: Props) {
       <div className="text-center px-4">
         <h2 className="text-white text-xl font-bold truncate max-w-xs">{nowPlaying.title}</h2>
         <p className="text-white/60 text-sm mt-1 truncate max-w-xs">{nowPlaying.artist || 'Unknown Artist'}</p>
+        {(bpm || camelotCode) && (
+          <div className="flex items-center justify-center gap-1.5 mt-2">
+            {bpm && (
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/50">
+                {Math.round(bpm)} BPM
+              </span>
+            )}
+            {camelotCode && (
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white/50">
+                {camelotCode}
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Progress Bar or Audio Player */}

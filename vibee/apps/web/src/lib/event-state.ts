@@ -1,3 +1,11 @@
+export interface EssentiaFeatures {
+  bpm?: number
+  key?: string
+  energy?: number
+  valence?: number
+  mood?: string
+}
+
 export interface ViewTrack {
   id: string
   title: string
@@ -10,6 +18,7 @@ export interface ViewTrack {
   added_by_display: string
   file_path: string | null
   elapsed_seconds?: number
+  essentia_features?: EssentiaFeatures | null
 }
 
 export interface ViewEventState {
@@ -51,6 +60,7 @@ export function normalizeNowPlaying(input: any): ViewTrack | null {
       typeof input.elapsed_seconds === 'number'
         ? input.elapsed_seconds
         : (track.elapsed_seconds ?? 0),
+    essentia_features: track.essentia_features ?? null,
   }
 }
 
@@ -68,6 +78,7 @@ export function normalizeQueuedTrack(input: any): ViewTrack {
     added_by_display: input.added_by_display ?? track.added_by_display ?? '',
     file_path: track.file_path ?? null,
     elapsed_seconds: track.elapsed_seconds,
+    essentia_features: track.essentia_features ?? null,
   }
 }
 

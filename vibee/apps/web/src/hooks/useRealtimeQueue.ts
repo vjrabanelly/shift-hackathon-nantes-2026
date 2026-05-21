@@ -13,6 +13,7 @@ export interface Track {
   added_by_display: string
   file_path: string | null
   elapsed_seconds?: number
+  essentia_features?: { bpm?: number; key?: string } | null
 }
 
 export interface QueueState {

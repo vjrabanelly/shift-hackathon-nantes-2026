@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toCamelotCode } from '../lib/camelot'
 
 const cssToRgba = (color: string, alpha: number) => {
   const m = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
@@ -7,20 +8,15 @@ const cssToRgba = (color: string, alpha: number) => {
 }
 
 interface Props {
-  /** Track title to display (editable in prototype mode) */
   trackName?: string
-  /** Artist / subtitle */
   artist?: string
-  /** Cover image URL */
   coverUrl?: string
-  /** Duration in seconds */
   durationSeconds?: number
-  /** Elapsed seconds (auto-ticks if not provided) */
   elapsedSeconds?: number
-  /** CSS color string for progress bar */
   accentColor?: string
-  /** Whether the track is currently playing */
   isPlaying?: boolean
+  bpm?: number | null
+  musicalKey?: string | null
 }
 
 export function NowPlayingCard({
@@ -31,23 +27,22 @@ export function NowPlayingCard({
   elapsedSeconds: elapsedProp,
   accentColor = '#3FE08A',
   isPlaying = true,
+  bpm,
+  musicalKey,
 }: Props) {
   const [trackName, setTrackName] = useState(initialTrackName)
   const [playbackSeconds, setPlaybackSeconds] = useState(
     isPlaying ? (elapsedProp ?? 0) : 0
   )
 
-  // Keep name in sync with prop changes (e.g. real track loaded later)
   useEffect(() => {
     setTrackName(initialTrackName)
   }, [initialTrackName])
 
-  // If elapsedSeconds is controlled, sync it
   useEffect(() => {
     if (elapsedProp !== undefined) setPlaybackSeconds(elapsedProp)
   }, [elapsedProp])
 
-  // Auto-tick when uncontrolled
   useEffect(() => {
     if (!isPlaying || elapsedProp !== undefined) return
     const intervalId = window.setInterval(() => {
@@ -69,6 +64,8 @@ export function NowPlayingCard({
     return `${minutes}:${String(seconds).padStart(2, '0')}`
   }
 
+  const camelotCode = toCamelotCode(musicalKey)
+
   return (
     <div className="p-2.5 transition-all duration-700" style={{ background: 'transparent' }}>
       <div className="flex items-center gap-2.5">
@@ -89,7 +86,6 @@ export function NowPlayingCard({
               animation: isPlaying ? 'vinyl-spin 5.8s linear infinite' : 'none',
             }}
           >
-            {/* Vinyl grooves overlay */}
             <div
               className="absolute inset-0 rounded-full"
               style={{
@@ -99,7 +95,6 @@ export function NowPlayingCard({
                 `,
               }}
             />
-            {/* Center hole */}
             <div className="absolute inset-[45%] rounded-full bg-[#111215]" />
           </div>
         </div>
@@ -114,9 +109,27 @@ export function NowPlayingCard({
             style={{ fontSize: 'clamp(16px, 4.2vw, 21px)' }}
             placeholder="Nom du morceau"
           />
-          {artist && (
-            <p className="mt-0.5 truncate text-[11px] text-white/50">{artist}</p>
-          )}
+          <div className="mt-0.5 flex items-center gap-2 flex-wrap">
+            {artist && (
+              <p className="truncate text-[11px] text-white/50">{artist}</p>
+            )}
+            {(bpm || camelotCode) && (
+              <div className="flex items-center gap-1 flex-shrink-0">
+                {bpm && (
+                  <span className="text-[9px] font-['Space_Mono'] tracking-wider px-1.5 py-0.5 rounded"
+                    style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.45)' }}>
+                    {Math.round(bpm)} BPM
+                  </span>
+                )}
+                {camelotCode && (
+                  <span className="text-[9px] font-['Space_Mono'] tracking-wider px-1.5 py-0.5 rounded"
+                    style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.45)' }}>
+                    {camelotCode}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
           {/* Time display */}
           <div className="mt-1 flex justify-between text-[10px] font-['Manrope'] uppercase tracking-[0.14em] text-white/52">
             <span>{formatTime(playbackSeconds)}</span>
