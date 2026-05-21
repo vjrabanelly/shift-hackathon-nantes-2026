@@ -10,6 +10,7 @@ interface NowPlayingTrack {
   duration: number | null
   started_at?: string | null
   elapsed_seconds?: number
+  essentia_features?: { bpm?: number; key?: string } | null
 }
 
 /**

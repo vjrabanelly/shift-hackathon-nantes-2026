@@ -1,28 +1,6 @@
 import type { FastifyInstance } from 'fastify'
 import { supabase } from '../lib/supabase'
-import { QueueEngine } from '../services/queue-engine'
-import { StreamManager } from '../services/stream-manager'
 import { computeCollective } from '../lib/compute-collective'
-
-// Simple debounce map per event (one global timer per event)
-const reorderTimers = new Map<string, ReturnType<typeof setTimeout>>()
-
-function debouncedReorder(eventId: string) {
-  const existing = reorderTimers.get(eventId)
-  if (existing) clearTimeout(existing)
-
-  const timer = setTimeout(async () => {
-    reorderTimers.delete(eventId)
-    try {
-      await QueueEngine.getInstance().reorder(eventId)
-      await StreamManager.getInstance().syncEventStream(eventId)
-    } catch (err) {
-      console.error('[joystick] reorder error:', err)
-    }
-  }, 5000)
-
-  reorderTimers.set(eventId, timer)
-}
 
 export async function joystickRoutes(app: FastifyInstance) {
   app.patch<{
@@ -62,14 +40,11 @@ export async function joystickRoutes(app: FastifyInstance) {
 
     const collective = computeCollective(positions ?? [])
 
-    // Broadcast collective to all subscribers on this event channel
     await supabase.channel(`event:${eventId}:joystick`).send({
       type: 'broadcast',
       event: 'collective',
       payload: { collective },
     })
-
-    debouncedReorder(eventId)
 
     return reply.status(200).send({ collective })
   })

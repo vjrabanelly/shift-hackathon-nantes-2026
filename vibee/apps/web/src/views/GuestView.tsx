@@ -215,6 +215,8 @@ export function GuestView() {
           elapsedSeconds={nowPlaying?.elapsed_seconds}
           accentColor={accentColor}
           isPlaying={Boolean(nowPlaying)}
+          bpm={nowPlaying?.essentia_features?.bpm}
+          musicalKey={nowPlaying?.essentia_features?.key}
         />
 
         <section className="relative overflow-hidden rounded-[20px] border border-white/8 bg-white/[0.03] p-3 sm:rounded-[24px] sm:p-4">
